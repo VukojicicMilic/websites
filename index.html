@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-08-28 Sun 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Milić Vukojičić's Personal Site</title>
+<meta name="author" content="Milić Vukojičić" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Milić Vukojičić's Personal Site</h1>
+<p>
+<b>This site contains teaching materials, technical papers, essays, reports, software, opinions and other materials by Milić Vukojičić.</b>
+</p>
+<ul class="org-ul">
+<li>(Be aware GitHub is using nonfree JS see <a href="https://www.gnu.org/philosophy/javascript-trap.en.html">The JavaScript Trap</a> of <b>FingerPrints!</b> and <b>Trackers!</b> (use LibreJS and Privacy Badger)</li>
+<li>All text is released under CC-BY 4.0 license</li>
+<li>All code is released under GNU General Public License v3.0</li>
+</ul>
+
+
+<div id="outline-container-orgc3089dc" class="outline-2">
+<h2 id="orgc3089dc">Contact Information</h2>
+<div class="outline-text-2" id="text-orgc3089dc">
+<p>
+<b>Milić Vukojičić</b>
+</p>
+<ul class="org-ul">
+<li><a href="https://rs.linkedin.com/in/mili%C4%87-vukoji%C4%8Di%C4%87-9b2124222?original_referer=">LinkedIn</a> - But be aware LinkedIn is full of <b>FingerPrints!</b> and <b>Trackers!</b></li>
+<li>Computer Science Teacher and IT Coordinator at <a href="https://www.international-school.edu.rs/">ISS</a> <b>(But be aware website is full of FingerPrints! and Trackers!)</b></li>
+<li><b>Email</b>: vukojicic.milic@gmail.com, milic.vukojicic@iss.edu.rs</li>
+<li>If you want to communicate with me in a safe way, please use my public GPG key.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7035ec3" class="outline-2">
+<h2 id="org7035ec3">Recommendations</h2>
+<div class="outline-text-2" id="text-org7035ec3">
+<ol class="org-ol">
+<li>Say <a href="https://www.gnu.org/philosophy/javascript-trap.html">NO to proprietary JS!</a></li>
+<li>Use <a href="https://www.gnu.org/software/librejs/">LibreJS</a></li>
+<li>Surfing on the internet can be a pleasant thing. But please be safe! <a href="https://jshelter.org/">JShelter</a> |<a href="https://www.eff.org/https-everywhere">HTTPS Everywhere</a> |<a href="https://privacybadger.org/"> Privacy Badger</a></li>
+<li>Use FREE software in <a href="https://www.gnu.org/software/free-software-for-education.html">education</a>.</li>
+<li>Communication without Google Meet, Zoom, Skype, Viber, Whatsapp, Telegram&#x2026; Safe and ethical alternatives: <a href="https://meet.jit.si/">Jitsi</a> and <a href="https://jami.net/">Jami</a></li>
+<li>Encrypt and sign your data and communications <a href="https://gnupg.org/">GnuPG</a> | Easy setup for Windows users: <a href="https://www.gpg4win.org/download.html">Gpg4win</a></li>
+<li>Operating systems that respects your FREEDOM: <a href="https://www.gnu.org/distros/free-distros.html">GNU/Linux</a> distros | Easy to use: <a href="https://trisquel.info/">Trisquel</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org5a961c3" class="outline-2">
+<h2 id="org5a961c3">Publications</h2>
+<div class="outline-text-2" id="text-org5a961c3">
+<ul class="org-ul">
+<li><a href="https://www.researchgate.net/profile/Milic-Vukojicic">Researchgate</a></li>
+<li><a href="https://scholar.google.com/citations?user=fzqfqzwAAAAJ&amp;hl=sr&amp;oi=ao">GoogleScholar</a></li>
+</ul>
+</div>
+<div id="outline-container-org27f917e" class="outline-4">
+<h4 id="org27f917e">Papers</h4>
+<div class="outline-text-4" id="text-org27f917e">
+<ol class="org-ol">
+<li><a href="https://singipedia.singidunum.ac.rs/izdanje/43370-apparent-personality-analysis-based-on-aggregation-model">Apparent Personality Analysis Based on Aggregation Model</a> , The International Scientific Conference Sinteza 2021, Milić Vukojičić, Mladen Veinović</li>
+<li><a href="https://conferences.ulbsibiu.ro/icdd/2021/abstracts.php">Apparent Personality Analysis Based on Robust Estimation</a>, International Conference on Applied Informatics: Imagination, Creativity, Design, Development - ICDD 2021, Milić Vukojičić, Mladen Veinović</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc82cd15" class="outline-2">
+<h2 id="orgc82cd15"><a href="https://vukojicicmilic.github.io/websites/essays.html">Essays / Writings</a></h2>
+<div class="outline-text-2" id="text-orgc82cd15">
+<ol class="org-ol">
+<li><a href="https://vukojicicmilic.github.io/websites/essays.html#orgc0659a3">Slobodni softver u 2022. godini</a></li>
+<li><a href="https://vukojicicmilic.github.io/websites/essays.html#orgdc3eb1a">MIND and CONSCIOUSNESS</a></li>
+<li><a href="https://vukojicicmilic.github.io/websites/essays.html#orgdc3eb1a">"Sentient" AI called LaMDA</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org2879bb0" class="outline-2">
+<h2 id="org2879bb0">Interesting blogs and websites</h2>
+<div class="outline-text-2" id="text-org2879bb0">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name / Author</th>
+<th scope="col" class="org-left">Link to blogs and websites</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Stephen Wolfram</td>
+<td class="org-left"><a href="https://blog.wolfram.com/">https://blog.wolfram.com/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Scott Aaronson</td>
+<td class="org-left"><a href="https://scottaaronson.blog/">https://scottaaronson.blog/</a> / <a href="https://www.scottaaronson.com/">https://www.scottaaronson.com/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Richard Stallman</td>
+<td class="org-left"><a href="https://stallman.org/">https://stallman.org/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Peter Norvig</td>
+<td class="org-left"><a href="https://norvig.com/">https://norvig.com/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Donald Knuth</td>
+<td class="org-left"><a href="https://www-cs-faculty.stanford.edu/~knuth/">https://www-cs-faculty.stanford.edu/~knuth/</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org91a7b19" class="outline-2">
+<h2 id="org91a7b19">Free Software</h2>
+<div class="outline-text-2" id="text-org91a7b19">
+<ul class="org-ul">
+<li>The Free Software Foundation (FSF) : <a href="https://www.fsf.org/">https://www.fsf.org/</a></li>
+</ul>
+
+<p>
+Free software means that the users have the freedom to run, edit, contribute to, and share the software.
+</p>
+
+<ul class="org-ul">
+<li>Electronic Frontier Foundation : <a href="https://www.eff.org/">https://www.eff.org/</a></li>
+</ul>
+
+<p>
+The leading nonprofit defending digital privacy, free speech, and innovation.
+</p>
+
+<p>
+<b><b>First read -  <a href="https://www.gnu.org/philosophy/open-source-misses-the-point.html+*">Why Open Source Misses the Point of Free Software</a></b></b>
+</p>
+<ul class="org-ul">
+<li>Open Source Initiative : <a href="https://opensource.org/">https://opensource.org/</a></li>
+</ul>
+
+<p>
+Non-profit corporation with global scope formed to educate about and advocate for the benefits of open source and to build bridges among different constituencies in the open source community.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc94b960" class="outline-2">
+<h2 id="orgc94b960">GPG key</h2>
+<div class="outline-text-2" id="text-orgc94b960">
+<p>
+–—BEGIN PGP PUBLIC KEY BLOCK–—
+</p>
+
+<p>
+Comment: User-ID: Milić Vukojičić &lt;vukojicic.milic@gmail.com&gt;
+</p>
+
+<p>
+Comment: Created: 8/23/2022 12:46 PM
+</p>
+
+<p>
+Comment: Type: 4,096-bit RSA (secret key available)
+</p>
+
+<p>
+Comment: Usage: Signing, Encryption, Certifying User-IDs
+</p>
+
+<p>
+Comment: Fingerprint: 4675556C65169975949E65F8CBD55AED6D10841F
+</p>
+
+<p>
+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 9Iwv2ywHPQ8KdjgrzIE= =yuKs
+</p>
+
+<p>
+–—END PGP PUBLIC KEY BLOCK–—
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Milić Vukojičić</p>
+<p class="date">Created: 2022-08-28 Sun 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

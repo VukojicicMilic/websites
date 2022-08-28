@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-08-28 Sun 11:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Milić Vukojičić's Essays / Writings</title>
+<meta name="author" content="Milić Vukojičić" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Milić Vukojičić's Essays / Writings</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org85c51ba">1. Slobodni softver u 2022. godini</a></li>
+<li><a href="#orgb7b2498">2. MIND and CONSCIOUSNESS</a></li>
+<li><a href="#org9977472">3. "Sentient" AI called LaMDA</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org85c51ba" class="outline-2">
+<h2 id="org85c51ba"><span class="section-number-2">1.</span> Slobodni softver u 2022. godini</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Ideja Slobodnog softvera postoji još pre nego što je Ričard Stalman 1985. godine napravio Fondaciju za Slobodan softver (eng. Free Software Foundation). Ovaj esej ima ulogu da pojasni zašto su ove ideje danas možda još bitnije nego osamdesetih godina i da upozna čitaoce sa konceptom i idejama koje stoje iza ideje “Slobodnog softvera”.
+</p>
+
+<p>
+Šta je to Slobodni softver?
+</p>
+
+<p>
+Slobodni softver nije teško definisati, možemo reći da je softver “slobodan” ako korisniku daje određene mogućnosti, tj. određene slobode: 
+</p>
+
+
+<ul class="org-ul">
+<li>Sloboda 0. Slobodu pokretanja programa po vašoj želji, za bilo koju svrhu (sloboda broj 0).</li>
+<li>Sloboda 1. Slobodu proučavanja načina rada programa i prilagođavanja programa vašim potrebama (sloboda broj 1). Preduslov za ovo jeste obezbeđivanje pristupa izvornom kodu.</li>
+<li>Sloboda 2. Slobodu deljenja primeraka programa, kako biste mogli da pomognete bližnjem (sloboda broj 2).</li>
+<li>Sloboda 3. Sloboda da delite kopije vaših izmena drugima (sloboda broj 3). Radeći ovo dajete priliku da napreduje celoj zajednici kroz vaše izmene. Preduslov za ovo je pristup izvornom kodu.</li>
+</ul>
+
+<p>
+Kao što vidimo Slobodni softver je softver koji poštuje prava i daje mogućnosti i
+slobode korisniku softvera koje ostali načini licenciranja softvera ne dozvoljavaju
+(kao npr. Softver otvorenog koda (eng. Open Source Software)). Ovo ne znači da je
+softver besplatan, trik je u engleskom nazivu (eng. Free software) što u bukvalnom
+prevodu znači besplatan, Slobodni softver se može naplaćivati ali i kao takav on i
+dalje poštuje slobode svojih korisnika.
+</p>
+
+<p>
+Zašto je Slobodan softver važan danas?
+</p>
+
+<p>
+Svesni smo da su informacione tehnologije i digitalni aspekt društva sve prisutniji
+u našim životima. Probajte da podignete platu bez korišćenja softvera, ili da idete
+u školu u toku pandemije, da platite račune. Sve ovo je sedamdesetih i osamdesetih
+godina već naslutio Ričard Stalman. Zbog čega je on i dalje aktuelan, da li je on
+mogao da predvidi sve što se danas dešava i što će se u budućnosti dešavati.
+Verovatno NE. Ali ono što je bitno jeste da je on uvideo problem sa samim softverom
+i sa mogućnošću da umesto da korisnik kontroliše softver, softver kontroliše korisnika.
+Kompanije kao Meta, Epl, Majkrosoft, Tesla, Gugl, Amazon uvidele su da softver, ne samo
+da može biti isplativ, već i da može kontrolisati korisnike, njihovo ponašanje, kao i
+sugestivno uticati na samo odlučivanje korisnika. Te zbog toga što je softver sve
+prisutniji u našim životima, Stalman postaje sve aktuelniji.
+</p>
+
+<p>
+Kako softver koji nije slobodan ugrožava same korisnike i zašto je slobodni softver društveno odgovoran?
+</p>
+
+<p>
+Softver koji nije slobodan može da ugrozi ljude samo ukoliko ga oni koriste.
+Ovo je naravno veoma smešna rečenica ali to je sušta istina. Ukoliko ne koristiš
+softver koji nije slobodan onda ti on ne može nauditi. Naravno, ovo je zbog digitalizacije i
+modernih tehnologija sve teže i teže uraditi. Pogledajmo primer bilo koje države, ona građanima
+može omogućiti npr. softver koji služi za glasanje, zakazivanje lekara, plaćanje računa. Pošto građani
+nemaju uvid u sam kod softvera i ne mogu da vide da li ih država ugrožava na bilo koji način onda su i sami
+građani ugroženi. Dozvolite da objasnim, ovde možemo čuti komentare da građanin treba da veruje svojoj državi,
+ali ovo je klasično izbegavanje same istine. Nije bitno da li država ugrožava građane, bitno je da ona to može da uradi,
+jer joj to softver koji nije slobodan omogućava. Naravno nije samo država korisnik softvera koji nije slobodan,
+vaša banka je jedna od korisnika, vaš prodavac itd. Tako da sam softver prelazi iz polja digitalnog i nečeg
+apstraktnog u samo polje društva i društvenih normi. Softver utiče na društvo i podstiče i oblikuje njegov razvoj.
+</p>
+
+<p>
+<b>Slodobni softver je jedini društveno odgovoran softver, i treba postati društvena norma, slobodnom društvu treba slobodan softver.</b>
+</p>
+
+<p>
+Released under CC-BY 4.0 license 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb7b2498" class="outline-2">
+<h2 id="orgb7b2498"><span class="section-number-2">2.</span> MIND and CONSCIOUSNESS</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+There are multiple definitions of consciousness (Merriam-Webster):
+the quality or state of being aware especially of something within oneself
+the state of being characterized by sensation, emotion, volition, and thought: mind:
+the element or complex of elements in an individual that feels, perceives, thinks, wills, and mainly reasons&#x2026;
+</p>
+
+<p>
+Two very different ideas/opinions about Mind/Consciousness/AI are coming from two significant mathematicians Marvin Minsky and Roger Penrose:
+</p>
+
+<p>
+Marvin Minsky wrote two very important books about the Mind and the complexity of the computer systems and that mind can occur from the complexity of the systems:
+</p>
+
+<ol class="org-ol">
+<li>The society of mind (<a href="https://www.amazon.com/Society-Mind-Marvin-Minsky/dp/0671657135">https://www.amazon.com/Society-Mind-Marvin-Minsky/dp/0671657135</a>);</li>
+<li>The emotion machine (<a href="https://www.amazon.com/Emotion-Machine-Commonsense-Artificial-Intelligence/dp/0743276647">https://www.amazon.com/Emotion-Machine-Commonsense-Artificial-Intelligence/dp/0743276647</a>).</li>
+</ol>
+<p>
+WHY PEOPLE THINK COMPUTERS CAN'T (<a href="https://web.media.mit.edu/~minsky/papers/ComputersCantThink.txt">https://web.media.mit.edu/~minsky/papers/ComputersCantThink.txt</a>)
+</p>
+
+<p>
+Roger Penrose also wrote two very important books about his argument/reimplementations of Gödel's theorem (Penrose–Lucas argument) and connections with his ideas that from higher complexity and more computation Mind cannot occur:
+</p>
+
+<ol class="org-ol">
+<li>The emperor's new mind: concerning computers, minds, and the laws of physics (<a href="https://www.amazon.com/Emotion-Machine-Commonsense-Artificial-Intelligence/dp/0743276647">https://www.amazon.com/Emotion-Machine-Commonsense-Artificial-Intelligence/dp/0743276647</a>);</li>
+<li>Shadows of the mind (<a href="https://www.amazon.com/Emperors-New-Mind-Concerning-Computers/dp/0192861980">https://www.amazon.com/Emperors-New-Mind-Concerning-Computers/dp/0192861980</a>).</li>
+</ol>
+
+<p>
+Of course, there are many other very important scientists who have given their ideas and answers to some of the questions that are represented in the work of Minsky and Penrose:
+</p>
+
+<ol class="org-ol">
+<li>Scott Aaronson - “Can computers become conscious?”: My reply to Roger Penrose (<a href="https://scottaaronson.blog/?p=2756">https://scottaaronson.blog/?p=2756</a>);</li>
+<li>Drew McDermott - "Penrose is Wrong" (<a href="https://www.calculemus.org/MathUniversalis/NS/10/09mcdermott.html">https://www.calculemus.org/MathUniversalis/NS/10/09mcdermott.html</a>);</li>
+<li>Selmer Bringsjord &amp; Hong Xiao - "A refutation of Penrose's Gödelian case against artificial intelligence" (<a href="https://www.tandfonline.com/doi/abs/10.1080/09528130050111455">https://www.tandfonline.com/doi/abs/10.1080/09528130050111455</a>);</li>
+<li>Andrew Ross - "Roads to Reality: Penrose and Wolfram Compared Contenders" (<a href="https://www.researchgate.net/publication/233584394_Roads_to_Reality_Penrose_and_Wolfram_Compared_Contenders">https://www.researchgate.net/publication/233584394_Roads_to_Reality_Penrose_and_Wolfram_Compared_Contenders</a>)</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9977472" class="outline-2">
+<h2 id="org9977472"><span class="section-number-2">3.</span> "Sentient" AI called LaMDA</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Google engineer Blake Lemoine "claims that LaMDA AI is sentient".
+</p>
+
+<p>
+<a href="https://www.washingtonpost.com/technology/2022/06/11/google-ai-lamda-blake-lemoine/">https://www.washingtonpost.com/technology/2022/06/11/google-ai-lamda-blake-lemoine/</a>
+</p>
+
+<p>
+We can agree that this statement "Sentient AI" is a very very important one for computer scientists, neuroscientists, psychologists, philosophers, and mathematicians&#x2026; So, claims like this one can be very important for the human race. If we use the term "Sentient AI" just like a buzzword, this can do harm to all of the fields above and lead to many misunderstandings and many loose definitions of the words. 
+</p>
+
+<p>
+First, we need to understand what is behind the curtain. Let's cite the part of text from the LaMDA webpage: 
+</p>
+
+<p>
+"LaMDA’s conversational skills have been years in the making. Like many recent language models, including BERT and GPT-3, it’s built on Transformer&#x2026;
+</p>
+
+<p>
+<a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a>
+</p>
+
+<p>
+That architecture produces a model that can be trained to read many words (a sentence or paragraph, for example), pay attention to how those words relate to one another, and then predict what words it thinks will come next&#x2026;"
+</p>
+
+<p>
+Based on the claims we can see that the technology behind the LaMDA is based on the Transformer - Neural Network Architecture for Language Understanding(AI-Language Models (<a href="https://www.youtube.com/watch?v=rURRYI66E54">https://www.youtube.com/watch?v=rURRYI66E54</a>) Transformers, No, it's not Sentient (<a href="https://www.youtube.com/watch?v=iBouACLc-hw&amp;t=1s">https://www.youtube.com/watch?v=iBouACLc-hw&amp;t=1s</a>)), this means that input to the model contains only words and the output from the model contains only words. 
+</p>
+
+<p>
+The main question is can we define this model as "sentient"? 
+Can we define the model that just takes words as an input, does some computation over these words, and outputs words, a "sentient" model?
+</p>
+
+<p>
+The answer is very strange, if we define sentient as one way (minimalistic) to define consciousness according to Antonio Damasio, a leading neuroscientist, this means that claiming that AI is "sentient" is the same to claim that AI is conscious and has a mind.
+</p>
+
+<p>
+So, in the end, LaMDA AI can not be categorized as sentient.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Milić Vukojičić</p>
+<p class="date">Created: 2022-08-28 Sun 11:30</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
