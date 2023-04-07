@@ -1,905 +1,811 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2023-04-07 пет 20:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0." />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
 
 
-
-
-	
-  
-  
-  
-  <meta name="&ETH;&oelig;&ETH;&cedil;&ETH;&raquo;&ETH;&cedil;&Ntilde;&rsaquo; &ETH;&rsquo;&Ntilde;&fnof;&ETH;&ordm;&ETH;&frac34;&Ntilde;&tilde;&ETH;&cedil;&Ntilde;&Dagger;&ETH;&cedil;&Ntilde;&rsaquo; &ETH;&rsaquo;&ETH;&cedil;&Ntilde;&Dagger;&ETH;&frac12;&ETH;&cedil; &ETH;&iexcl;&ETH;&deg;&Ntilde;&tilde;&Ntilde;&sbquo;" content="Milic Vukojicic's Personal Site - This site contains teaching materials, technical papers, essays, reports, software, opinions and other materials by Milic Vukojicic">
-
-
-
-
-
-
-	
-  
-  
-  
-  <title>Milić Vukojičić Lični Sajt</title>
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
 </head>
-
-
 <body>
+<div id="content">
+<h1 class="title">ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА</h1>
+<div class="org-center">
+<p>
+<a href="https://www.милићвукојичић.од.срб/enindex.html">ENG</a> | <a href="https://www.милићвукојичић.од.срб/index.html">СРБ</a>
+</p>
 
-
-
-
-
-
-<div style="text-align: center;"><br>
-
-
-
-
-
-
+<p>
+Овај сајт садржи материјал за наставу, техничке папире,
+есеје, извештаје, софтверска решења, мишљења и дуге материјале креиране од стране Милића Вукојичића.
+</p>
 </div>
 
+<p>
+<br />
+<br />
+</p>
+
+<p>
+Ово је лични сајт Милића Вукојичића..
+Ставови изнети овде су моји лични ставови, а не ставови фондације или ставови послодавца код ког радим.
+</p>
+
+<p>
+Ако желите да разговарате са мном, а да притом комуникација буде сигурна можете наћи мој мој кључ на <a href="https://vukojicicmilic.github.io/websites/gpg.html">gpg.html</a>.
+</p>
 
 
+<p>
+<br />
+<br />
+</p>
 
+<div id="outline-container-orgbbf60a7" class="outline-2">
+<h2 id="orgbbf60a7">Контакт информације</h2>
+<div class="outline-text-2" id="text-orgbbf60a7">
+<ul class="org-ul">
+<li><a href="https://rs.linkedin.com/in/mili%C4%87-vukoji%C4%8Di%C4%87-9b2124222?original_referer=">LinkedIn</a> - Пре уласка на сајт морате знати да овај сајт не поштује вашу приватност и прати своје кориснике!</li>
+<li>Наставник рачунарских наука и Координатор информационих система <a href="https://www.international-school.edu.rs/">International School</a> (сајт не поштује вашу приватност!)</li>
+<li>Мејл: (приватни) vukojicic.milic@gmail.com, (пословни) milic.vukojicic@iss.edu.rs</li>
+<li>Ако желите да комуницирате са мном сигурно користите ГПГ/ПГП кључ.</li>
+</ul>
 
-
-<h1 style="text-align: center;">&#1051;&#1080;&#1095;&#1085;&#1080; &#1089;&#1072;&#1112;&#1090; &#1052;&#1080;&#1083;&#1080;&#1115;&#1072; &#1042;&#1091;&#1082;&#1086;&#1112;&#1080;&#1095;&#1080;&#1115;&#1072;</h1>
-
-
-
-<div style="text-align: center;"><br>
-
-
-
-<big><big><big><a href="https://vukojicicmilic.github.io./websites/enindex.html">ENG</a> | <a href="https://vukojicicmilic.github.io./websites/index.html">&#1057;&#1056;&#1041;</a><br>
-
-<br>
-
- </big></big></big></div>
-
-
-
-<span style="font-weight: bold;"></span>
-
-
-<div style="text-align: center;"><big><big>&#1054;&#1074;&#1072;&#1112; &#1089;&#1072;&#1112;&#1090; &#1089;&#1072;&#1076;&#1088;&#1078;&#1080; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1112;&#1072;&#1083; &#1079;&#1072; &#1085;&#1072;&#1089;&#1090;&#1072;&#1074;&#1091;, &#1090;&#1077;&#1093;&#1085;&#1080;&#1095;&#1082;&#1077; &#1087;&#1072;&#1087;&#1080;&#1088;&#1077;,</big></big><br>
-
-
-
-
-
-
+<p>
+<br />
+<br />
+</p>
+</div>
 </div>
 
+<div id="outline-container-orgda445ee" class="outline-2">
+<h2 id="orgda445ee">Текстови</h2>
+<div class="outline-text-2" id="text-orgda445ee">
+<hr />
+<p>
+Драге колеге едукатори схватите да ЧетГПТ и калкулатор нису исто!
+</p>
 
+<p>
+У последње време доста едукатора, наставника, професора на друштвеним мрежама поставља чланак о томе “да су се математичари бунили ….. при увођењу калкулатора у образовање” и праве паралелу са тим што се неки од едукатора буне при увођењу ЛЛМ (енг. large language models) софтвера у образовање. Увођење ЧетГПТ софтвера и калкулатора се  драстично разликује и у овом тексту ћемо покушати да разумемо зашто ове две ствари нису једнаке (калкулатор и софтвер као што је ЧетГПТ).
+</p>
 
+<p>
+&#x2026;
+</p>
 
+<p>
+прочитај више на : <a href="https://www.xn--b1alabakegx2c7b8m8ai.xn--d1at.xn--90a3ac/kalkulatorgpt.html">https://www.xn--b1alabakegx2c7b8m8ai.xn--d1at.xn--90a3ac/kalkulatorgpt.html</a>
+</p>
 
-
-<div style="text-align: center;"><big><big>&#1077;&#1089;&#1077;&#1112;&#1077;, &#1080;&#1079;&#1074;&#1077;&#1096;&#1090;&#1072;&#1112;&#1077;, &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;&#1089;&#1082;&#1072; &#1088;&#1077;&#1096;&#1077;&#1114;&#1072;, &#1084;&#1080;&#1096;&#1113;&#1077;&#1114;&#1072; &#1080; &#1076;&#1091;&#1075;&#1077; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1112;&#1072;&#1083;&#1077; &#1082;&#1088;&#1077;&#1076;&#1080;&#1088;&#1072;&#1085;&#1077; &#1086;&#1076; &#1089;&#1090;&#1088;&#1072;&#1085;&#1077; &#1052;&#1080;&#1083;&#1080;&#1115;&#1072; &#1042;&#1091;&#1082;&#1086;&#1112;&#1080;&#1095;&#1080;&#1115;&#1072;.</big></big><br>
-
-
-
-
-
-
+<p>
+Остали текстови се преводе и могу се наћи на енглеској верзији сајта <a href="https://vukojicicmilic.github.io./websites/enindex.html">ENG</a>.
+</p>
+<hr />
+</div>
 </div>
 
-
-
-
-
-
-<br>
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-<div style="margin-left: 80px; text-align: justify;">&#1054;&#1074;&#1086; &#1112;&#1077; &#1083;&#1080;&#1095;&#1085;&#1080; &#1089;&#1072;&#1112;&#1090; &#1052;&#1080;&#1083;&#1080;&#1115;&#1072; &#1042;&#1091;&#1082;&#1086;&#1112;&#1080;&#1095;&#1080;&#1115;&#1072;..<br>
-
-
-&#1057;&#1090;&#1072;&#1074;&#1086;&#1074;&#1080; &#1080;&#1079;&#1085;&#1077;&#1090;&#1080; &#1086;&#1074;&#1076;&#1077; &#1089;&#1091; &#1084;&#1086;&#1112;&#1080; &#1083;&#1080;&#1095;&#1085;&#1080; &#1089;&#1090;&#1072;&#1074;&#1086;&#1074;&#1080;, &#1072; &#1085;&#1077; &#1089;&#1090;&#1072;&#1074;&#1086;&#1074;&#1080; &#1092;&#1086;&#1085;&#1076;&#1072;&#1094;&#1080;&#1112;&#1077; &#1080;&#1083;&#1080; &#1089;&#1090;&#1072;&#1074;&#1086;&#1074;&#1080; &#1087;&#1086;&#1089;&#1083;&#1086;&#1076;&#1072;&#1074;&#1094;&#1072; &#1082;&#1086;&#1076; &#1082;&#1086;&#1075; &#1088;&#1072;&#1076;&#1080;&#1084;. <br>
-
-
-<br>
-
-
-&#1040;&#1082;&#1086; &#1078;&#1077;&#1083;&#1080;&#1090;&#1077; &#1076;&#1072; &#1088;&#1072;&#1079;&#1075;&#1086;&#1074;&#1072;&#1088;&#1072;&#1090;&#1077; &#1089;&#1072; &#1084;&#1085;&#1086;&#1084;, &#1072; &#1076;&#1072; &#1087;&#1088;&#1080;&#1090;&#1086;&#1084; &#1082;&#1086;&#1084;&#1091;&#1085;&#1080;&#1082;&#1072;&#1094;&#1080;&#1112;&#1072; &#1073;&#1091;&#1076;&#1077; &#1089;&#1080;&#1075;&#1091;&#1088;&#1085;&#1072; &#1084;&#1086;&#1078;&#1077;&#1090;&#1077; &#1085;&#1072;&#1115;&#1080; &#1084;&#1086;&#1112; &#1084;&#1086;&#1112; &#1082;&#1113;&#1091;&#1095; &#1085;&#1072; <a href="https://vukojicicmilic.github.io/websites/gpg.html">gpg.html</a>.<br>
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-<h3>&#1050;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1112;&#1077;</h3>
-
-
-
-
-
-
-<ul>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; <a href="https://rs.linkedin.com/in/mili%C4%87-vukoji%C4%8Di%C4%87-9b2124222?original_referer=">LinkedIn</a> - &#1055;&#1088;&#1077; &#1091;&#1083;&#1072;&#1089;&#1082;&#1072; &#1085;&#1072; &#1089;&#1072;&#1112;&#1090; &#1084;&#1086;&#1088;&#1072;&#1090;&#1077; &#1079;&#1085;&#1072;&#1090;&#1080; &#1076;&#1072; &#1086;&#1074;&#1072;&#1112; &#1089;&#1072;&#1112;&#1090; <span style="font-weight: bold;">&#1085;&#1077; &#1087;&#1086;&#1096;&#1090;&#1091;&#1112;&#1077; &#1074;&#1072;&#1096;&#1091; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1086;&#1089;&#1090; &#1080; &#1087;&#1088;&#1072;&#1090;&#1080; &#1089;&#1074;&#1086;&#1112;&#1077; &#1082;&#1086;&#1088;&#1080;&#1089;&#1085;&#1080;&#1082;&#1077;!</span></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1053;&#1072;&#1089;&#1090;&#1072;&#1074;&#1085;&#1080;&#1082; &#1088;&#1072;&#1095;&#1091;&#1085;&#1072;&#1088;&#1089;&#1082;&#1080;&#1093; &#1085;&#1072;&#1091;&#1082;&#1072; &#1080; &#1050;&#1086;&#1086;&#1088;&#1076;&#1080;&#1085;&#1072;&#1090;&#1086;&#1088; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1080;&#1093; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1072; <a href="https://www.international-school.edu.rs/">International School</a> <span style="font-weight: bold;">(&#1089;&#1072;&#1112;&#1090; &#1085;&#1077; &#1087;&#1086;&#1096;&#1090;&#1091;&#1112;&#1077; &#1074;&#1072;&#1096;&#1091; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1086;&#1089;&#1090;!)</span></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">&#1052;&#1077;&#1112;&#1083;</span>: (&#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1080;) vukojicic.milic@gmail.com, (&#1087;&#1086;&#1089;&#1083;&#1086;&#1074;&#1085;&#1080;) milic.vukojicic@iss.edu.rs</li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1040;&#1082;&#1086; &#1078;&#1077;&#1083;&#1080;&#1090;&#1077; &#1076;&#1072; &#1082;&#1086;&#1084;&#1091;&#1085;&#1080;&#1094;&#1080;&#1088;&#1072;&#1090;&#1077; &#1089;&#1072; &#1084;&#1085;&#1086;&#1084; &#1089;&#1080;&#1075;&#1091;&#1088;&#1085;&#1086; &#1082;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080;&#1090;&#1077;<span style="font-style: italic;"> </span>&#1043;&#1055;&#1043;/&#1055;&#1043;&#1055; &#1082;&#1113;&#1091;&#1095;.</li>
-
-
-
-
-  <br>
-
-
-
-
-</ul>
-
-
-
-
-<h3>&#1055;&#1088;&#1077;&#1087;&#1086;&#1088;&#1091;&#1095;&#1077;&#1085;&#1080; &#1080;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090; &#1087;&#1088;&#1077;&#1090;&#1088;&#1072;&#1078;&#1080;&#1074;&#1072;&#1095;&#1080; &#1080; &#1076;&#1086;&#1076;&#1072;&#1094;&#1080; &#1079;&#1072; &#1087;&#1088;&#1077;&#1090;&#1088;&#1072;&#1078;&#1080;&#1074;&#1072;&#1095;&#1077;</h3>
-
-
-
-
-<ul>
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">&#1048;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090; &#1087;&#1088;&#1077;&#1090;&#1088;&#1072;&#1078;&#1080;&#1074;&#1072;&#1095;&#1080;:</span></li>
-
-
-
-
-  
-  
-  
-  
-  <ul>
-
-
-
-
-    <li>&#1040;&#1112;&#1089;&#1082;&#1077;&#1090; (&#1077;&#1085;&#1075;. IceCat)<span style="font-weight: bold;"> </span><a href="https://www.gnu.org/software/gnuzilla/">https://www.gnu.org/software/gnuzilla/</a></li>
-
-
-
-
-    <li>&#1058;&#1086;&#1088; &#1087;&#1088;&#1077;&#1090;&#1088;&#1072;&#1078;&#1080;&#1074;&#1072;&#1095; (&#1077;&#1085;&#1075;. Tor Browser) <a href="https://www.torproject.org/download/">https://www.torproject.org/download/</a></li>
-
-
-
-
-    <li>&#1060;&#1072;&#1112;&#1077;&#1088;&#1092;&#1086;&#1082;&#1089; (&#1077;&#1085;&#1075;. Mozila Firefox)&nbsp; <a href="https://www.mozilla.org/en-US/firefox/new/">https://www.mozilla.org/en-US/firefox/new/</a></li>
-
-
-
-
-    <li>&#1047;&#1073;&#1086;&#1075; &#1089;&#1074;&#1086;&#1112;&#1077; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1086;&#1089;&#1090;&#1080; &#1091;&#1074;&#1077;&#1082; &#1082;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080;&#1090;&#1077; <span style="font-weight: bold;">&#1058;&#1054;&#1056;</span>!</li>
-
-
-
-
-  
-  
-  
-  
-  </ul>
-
-
-
-
-  <li>&nbsp; &nbsp; <span style="font-weight: bold;">&#1044;&#1086;&#1076;&#1072;&#1094;&#1080; &#1079;&#1072; &#1087;&#1088;&#1077;&#1090;&#1088;&#1072;&#1078;&#1080;&#1074;&#1072;&#1095;&#1077; (&#1087;&#1086;&#1096;&#1090;&#1091;&#1112;&#1091; &#1074;&#1072;&#1096;&#1091; &#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1086;&#1089;&#1090; &#1080; &#1089;&#1080;&#1075;&#1091;&#1088;&#1085;&#1086;&#1089;&#1090;)</span></li>
-
-
-
-
-  
-  
-  
-  
-  <ul>
-
-
-
-
-    <li>&#1057;&#1083;&#1086;&#1073;&#1086;&#1085;&#1080; &#1032;&#1072;&#1074;&#1072;&#1089;&#1082;&#1088;&#1080;&#1087;&#1090; (&#1077;&#1085;&#1075;. LibreJS) <a href="https://www.gnu.org/software/librejs/">https://www.gnu.org/software/librejs/</a></li>
-
-
-
-
-    <li>&#1055;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1080; &#1032;&#1072;&#1079;&#1072;&#1074;&#1072;&#1094; (&#1077;&#1085;&#1075;. Privacy Badger) <a href="https://privacybadger.org/">https://privacybadger.org/</a></li>
-
-
-
-
-    <li>&#1061;&#1058;&#1058;&#1055;&#1057; &#1089;&#1074;&#1091;&#1076;&#1072; (&#1077;&#1085;&#1075;. HTTPS Everywhere) <a href="https://www.eff.org/https-everywhere">https://www.eff.org/https-everywhere</a></li>
-
-
-
-
-    <li>&#1032;&#1057;&#1082;&#1083;&#1086;&#1085;&#1080;&#1096;&#1090;&#1077; (&#1077;&#1085;&#1075;. JShelter) <a href="https://jshelter.org/">https://jshelter.org/</a></li>
-
-
-
-
-    <li>&#1055;&#1088;&#1077;&#1091;&#1089;&#1084;&#1077;&#1088;&#1080; &#1079;&#1072; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1086;&#1089;&#1090; (&#1077;&#1085;&#1075;. Privacy Redirect) <a href="https://addons.mozilla.org/en-US/firefox/addon/privacy-redirect/">https://addons.mozilla.org/en-US/firefox/addon/privacy-redirect/</a></li>
-
-
-
-
-    <li>&#1041;&#1083;&#1086;&#1082;&#1080;&#1088;&#1072;&#1114;&#1077; &#1079;&#1072;&#1093;&#1090;&#1077;&#1074;&#1072; &#1090;&#1088;&#1077;&#1115;&#1077; &#1089;&#1090;&#1088;&#1072;&#1085;&#1077; (&#1077;&#1085;&#1075;. Third-party Request Blocker Fork by polarisfm) <a href="https://addons.mozilla.org/en-US/firefox/addon/tprb-fork/">https://addons.mozilla.org/en-US/firefox/addon/tprb-fork/</a></li>
-
-
-
-
-  
-  
-  
-  
-  </ul>
-
-
-
-
-</ul>
-
-
-
-
-<h3>&#1055;&#1088;&#1077;&#1087;&#1086;&#1088;&#1091;&#1095;&#1077;&#1085;&#1080; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;</h3>
-
-
-
-
- <span style="font-weight: bold;">&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1080;&#1088;&#1072;&#1114;&#1077;:</span>
-<ul>
-
-
-
-
-  <li><span style="font-weight: bold;"></span>&#1055;&#1072;&#1112;&#1090;&#1086;&#1085; <a href="https://www.python.org/">https://www.python.org/</a></li>
-
-
-
-
-  <li>&#1062;&nbsp;<a href="https://gcc.gnu.org/">https://gcc.gnu.org/</a></li>
-
-
-
-
-  <li>&#1032;&#1091;&#1083;&#1080;&#1112;&#1072; <a href="https://julialang.org/">https://julialang.org/</a></li>
-
-
-
-
-  <li>&#1032;&#1072;&#1074;&#1072; <a href="https://openjdk.org/">https://openjdk.org/</a></li>
-
-
-
-
-  <li>&#1051;&#1080;&#1089;&#1087; <a href="https://common-lisp.net/">https://common-lisp.net/ </a>| <a href="https://clisp.sourceforge.io/">https://clisp.sourceforge.io/</a></li>
-
-
-
-
-  <li>&#1055;&#1088;&#1086;&#1083;&#1086;&#1075; <a href="https://www.swi-prolog.org/">https://www.swi-prolog.org/</a> | <a href="http://www.gprolog.org/">http://www.gprolog.org/</a></li>
-
-
-
-
-  <li>&#1041;&#1080;&#1073;&#1083;&#1080;&#1086;&#1090;&#1077;&#1082;&#1077; :</li>
-
-
-
-
-  
-  
-  
-  
-  <ul>
-
-
-
-
-    <li>&nbsp;<a href="https://www.gnu.org/software/gsl/">https://www.gnu.org/software/gsl/</a></li>
-
-
-
-
-    <li>&nbsp;<a href="https://numpy.org/">https://numpy.org/</a></li>
-
-
-
-
-    <li>&nbsp;<a href="https://scikit-learn.org/stable/">https://scikit-learn.org/stable/</a></li>
-
-
-
-
-    <li>&nbsp;<a href="https://pytorch.org/">https://pytorch.org/</a></li>
-
-
-
-
-    <li>&nbsp;<a href="https://matplotlib.org/">https://matplotlib.org/</a></li>
-
-
-
-
-  
-  
-  
-  
-  </ul>
-
-
-
-
-</ul>
-
-
-
-
-<span style="font-weight: bold;">&#1057;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;:</span>
-<ul>
-
-
-
-
-  <li><span style="font-weight: bold;"></span>&#1043;&#1053;&#1059; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; <a href="https://www.gnu.org/software/software.html">https://www.gnu.org/software/software.html</a></li>
-
-
-
-
-  <li>&#1052;&#1080;&#1085;&#1080;&#1084;&#1072;&#1083;&#1080;&#1089;&#1090;&#1080;&#1095;&#1082;&#1080; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; &#1082;&#1086;&#1112;&#1080; &#1087;&#1088;&#1072;&#1090;&#1080; &#1032;&#1091;&#1085;&#1080;&#1082;&#1089; &#1092;&#1080;&#1083;&#1086;&#1079;&#1086;&#1092;&#1080;&#1112;&#1091; <a href="https://suckless.org/">https://suckless.org/</a></li>
-
-
-
-
-  <li>&#1052;&#1080;&#1085;&#1080;&#1084;&#1072;&#1083;&#1080;&#1089;&#1090;&#1080;&#1095;&#1082;&#1080; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; <a href="https://www.gnu.org/software/free-software-for-education.en.html">https://www.gnu.org/software/free-software-for-education.en.html</a></li>
-
-
-
-
-  <li>&#1055;&#1088;&#1077;&#1087;&#1086;&#1088;&#1091;&#1082;&#1077; &#1084;&#1080;&#1085;&#1080;&#1084;&#1072;&#1083;&#1085;&#1086;&#1075; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;&#1072; <a href="https://suckless.org/rocks/">https://suckless.org/rocks/</a></li>
-
-
-
-
-  <li>&#1050;&#1077;&#1090;-&#1074; &#1096;&#1090;&#1077;&#1090;&#1072;&#1085; &#1080; &#1084;&#1072;&#1114;&#1077; &#1096;&#1090;&#1077;&#1090;&#1072;&#1085; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; <a href="https://harmful.cat-v.org/software/">https://harmful.cat-v.org/software/</a></li>
-
-
-
-
-</ul>
-
-
-
-
-<span style="font-weight: bold;"></span>
-<ul>
-
-
-
-
-
-
-</ul>
-
-
-
-
-
-<br>
-
-
-
-
-
-<br>
-
-
-
-
-
-<table style="text-align: left; background-color: rgb(255, 255, 255); width: 100%;" border="0" cellpadding="2" cellspacing="2">
-
-
-
-
-
-  <tbody>
-
-
-
-
-
-    <tr>
-
-
-
-
-
-      <td style="vertical-align: top; text-align: left; background-color: rgb(255, 255, 255);">&#1054;&#1089;&#1090;&#1072;&#1083;&#1080; &#1090;&#1077;&#1082;&#1089;&#1090;&#1086;&#1074;&#1080; &#1089;&#1077; &#1087;&#1088;&#1077;&#1074;&#1086;&#1076;&#1077; &#1080; &#1084;&#1086;&#1075;&#1091; &#1089;&#1077; &#1085;&#1072;&#1115;&#1080; &#1085;&#1072; &#1077;&#1085;&#1075;&#1083;&#1077;&#1089;&#1082;&#1086;&#1112; &#1074;&#1077;&#1088;&#1079;&#1080;&#1112;&#1080; &#1089;&#1072;&#1112;&#1090;&#1072; <big><a href="https://vukojicicmilic.github.io./websites/enindex.html">ENG</a></big><br>
-
-
-
-
-
-      <a href="https://www.gnu.org/software/free-software-for-education.html"><br>
-
-      </a></td>
-
-
-
-
-
-      <td align="left" valign="top"><span style="font-weight: bold;"></span><br>
-
-
-
-
-
-      <span style="font-weight: bold;"></span></td>
-
-
-
-
-
-    </tr>
-
-
-
-
-
-  
-  
-  
-  
-  
-  </tbody>
+<div id="outline-container-orga088f99" class="outline-2">
+<h2 id="orga088f99">Публикације</h2>
+<div class="outline-text-2" id="text-orga088f99">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Научне</th>
+<th scope="col" class="org-left">Есеји</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="https://www.researchgate.net/profile/Milic-Vukojicic">https://www.researchgate.net/profile/Milic-Vukojicic</a></td>
+<td class="org-left"><a href="https://vukojicicmilic.github.io/websites/mind.html">MIND and CONSCIOUSNESS</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://scholar.google.com/citations?user=fzqfqzwAAAAJ&amp;hl=sr&amp;oi=ao">https://scholar.google.com/citations?user=fzqfqzwAAAAJ&amp;hl=sr&amp;oi=ao</a></td>
+<td class="org-left"><a href="https://vukojicicmilic.github.io/websites/sentient.html">"Sentient" AI called LaMDA</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://vukojicicmilic.github.io/websites/slobodnisoftver2022.html">Slobodni softver u 2022. godini </a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
 </table>
 
 
-
-
-
-<br>
-
-
-
-
-
-
-<h3>&#1055;&#1088;&#1077;&#1087;&#1086;&#1088;&#1091;&#1082;&#1077;</h3>
-
-
-
-
-
-
-<ul>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1050;&#1072;&#1078;&#1080;&nbsp;<a href="https://www.gnu.org/philosophy/javascript-trap.html">&#1053;&#1045; &#1074;&#1083;&#1072;&#1089;&#1085;&#1080;&#1095;&#1082;&#1086;&#1084; &#1032;&#1072;&#1074;&#1072;&#1057;&#1082;&#1088;&#1080;&#1087;&#1090;&#1091;</a>!</li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1050;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080;&nbsp;<a href="https://www.gnu.org/software/librejs/">&#1057;&#1083;&#1086;&#1073;&#1086;&#1076;&#1085;&#1080;&#1032;&#1072;&#1074;&#1072;&#1057;&#1082;&#1088;&#1080;&#1087;&#1090;</a></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp;&nbsp;&#1054;&#1073;&#1072;&#1074;&#1077;&#1079;&#1085;&#1086; &#1082;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080;&#1090;&#1080; &#1089;&#1077;&#1083;&#1076;&#1077;&#1115;&#1077; &#1076;&#1086;&#1076;&#1072;&#1090;&#1082;&#1077;&nbsp;<a href="https://jshelter.org/">&#1032;&#1064;&#1090;&#1080;&#1090;</a> |&nbsp;<a href="https://www.eff.org/https-everywhere">&#1061;&#1058;&#1058;&#1057;&#1055; &#1089;&#1074;&#1091;&#1076;&#1072;</a> |&nbsp;<a href="https://privacybadger.org/">&#1055;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1080;&#1032;&#1072;&#1079;&#1072;&#1074;&#1072;&#1094;</a></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1050;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080; &#1057;&#1083;&#1086;&#1073;&#1086;&#1076;&#1085;&#1080; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; &#1091;&nbsp;<a href="https://www.gnu.org/software/free-software-for-education.html">&#1077;&#1076;&#1091;&#1082;&#1072;&#1094;&#1080;&#1112;&#1080;</a>.</li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1050;&#1086;&#1084;&#1091;&#1085;&#1080;&#1094;&#1080;&#1088;&#1072;&#1112; &#1073;&#1077;&#1079; &#1043;&#1091;&#1075;&#1083; &#1052;&#1080;&#1090;&#1072;, &#1047;&#1091;&#1084;&#1072;,
-&#1057;&#1082;&#1072;&#1112;&#1087;&#1072;, &#1042;&#1072;&#1112;&#1073;&#1077;&#1088;&#1072;, &#1042;&#1086;&#1094;&#1072;&#1087;&#1072;, &#1058;&#1077;&#1083;&#1077;&#1075;&#1088;&#1072;&#1084;&#1072;&hellip; &#1050;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080;&#1090;&#1080; &#1089;&#1080;&#1075;&#1091;&#1088;&#1085;&#1077;
-&#1072;&#1083;&#1090;&#1077;&#1088;&#1085;&#1072;&#1090;&#1080;&#1074;&#1077; &#1082;&#1072;&#1086;:&nbsp;<a href="https://meet.jit.si/">&#1039;&#1080;&#1090;&#1089;&#1080;</a> &#1080;&nbsp;<a href="https://jami.net/">&#1032;&#1072;&#1084;&#1080;</a></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1050;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080; &#1077;&#1085;&#1082;&#1088;&#1080;&#1087;&#1094;&#1080;&#1112;&#1091;&nbsp;<a href="https://gnupg.org/">&#1043;&#1053;&#1059;&#1055;&#1043;</a> | &#1040;&#1082;&#1086; &#1089;&#1080; &#1082;&#1086;&#1088;&#1080;&#1089;&#1085;&#1080;&#1082; &#1042;&#1080;&#1085;&#1076;&#1086;&#1074;&#1089;&#1072;:&nbsp;<a href="https://www.gpg4win.org/download.html">&#1043;&#1087;&#1075;&#1047;&#1072;&#1042;&#1080;&#1085;&#1076;&#1086;&#1074;&#1089;</a></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; &#1050;&#1086;&#1088;&#1080;&#1089;&#1090;&#1080; &#1086;&#1087;&#1077;&#1088;&#1072;&#1090;&#1080;&#1074;&#1085;&#1080; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084; &#1082;&#1086;&#1112;&#1080; &#1094;&#1077;&#1085;&#1080; &#1090;&#1074;&#1086;&#1112;&#1091; &#1089;&#1083;&#1086;&#1073;&#1086;&#1076;&#1091;:&nbsp;<a href="https://www.gnu.org/distros/free-distros.html">&#1043;&#1053;&#1059;&#1051;&#1080;&#1085;&#1091;&#1082;&#1089;&#1044;&#1080;&#1089;&#1090;&#1088;&#1080;&#1073;&#1091;&#1094;&#1080;&#1112;&#1077;</a> | &#1044;&#1080;&#1089;&#1090;&#1088;&#1080;&#1073;&#1091;&#1094;&#1080;&#1112;&#1077; &#1079;&#1072; &#1087;&#1086;&#1095;&#1077;&#1090;&#1085;&#1080;&#1082;&#1077;:&nbsp;<a href="https://trisquel.info/">&#1058;&#1088;&#1080;&#1089;&#1082;&#1091;&#1083;</a></li>
-
-
-
-
-
-
-</ul>
-
-
-
-
-
-
-<h3>&#1055;&#1091;&#1073;&#1083;&#1080;&#1082;&#1072;&#1094;&#1080;&#1112;&#1077;</h3>
-
-
-
-
-
-
-<ul>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.researchgate.net/profile/Milic-Vukojicic">&#1050;&#1072;&#1087;&#1080;&#1112;&#1072;&#1048;&#1089;&#1090;&#1088;&#1072;&#1078;&#1080;&#1074;&#1072;&#1114;&#1072;</a></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://scholar.google.com/citations?user=fzqfqzwAAAAJ&amp;hl=sr&amp;oi=ao">&#1043;&#1091;&#1075;&#1083;&#1057;&#1082;&#1086;&#1083;&#1072;&#1088;</a></li>
-
-
-
-
-
-
-</ul>
-
-
-
-
-
-
-<h3>&#1056;&#1072;&#1076;&#1086;&#1074;&#1080;</h3>
-
-
-
-
-
-
-<ol>
-
-
-
-
-
-
-  <li><a href="https://singipedia.singidunum.ac.rs/izdanje/43370-apparent-personality-analysis-based-on-aggregation-model">Apparent Personality Analysis Based on Aggregation Model</a></li>
-
-
-
-
-
-
-  <li><a href="https://conferences.ulbsibiu.ro/icdd/2021/abstracts.php">Apparent Personality Analysis Based on Robust Estimation</a></li>
-
-
-
-
-  <li><a href="https://www.researchgate.net/publication/366410307_Optimization_of_Multimodal_Trait_Prediction_Using_Particle_Swarm_Optimization">Optimization of Multimodal Trait Prediction Using Particle Swarm Optimization</a></li>
-
-
-
-
-
-
-</ol>
-
-
-
-
-
-
-<h3>&#1045;&#1089;&#1077;&#1112;&#1080;</h3>
-
-
-
-
-
-
-<ul>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; <a href="https://vukojicicmilic.github.io/websites/mind.html">MIND and CONSCIOUSNESS</a></li>
-
-
-
-
-
-
-  <li>&nbsp;&nbsp;&nbsp; <a href="https://vukojicicmilic.github.io/websites/sentient.html">"Sentient" AI called LaMDA</a></li>
-
-
-
-
-
-
-  <li>&nbsp; &nbsp; <a href="https://vukojicicmilic.github.io/websites/slobodnisoftver2022.html">Slobodni softver u 2022. godini</a></li>
-
-
-
-
-
-
-</ul>
-
-
-
-
-
-
-<h3>&#1048;&#1085;&#1090;&#1077;&#1088;&#1077;&#1089;&#1072;&#1085;&#1090;&#1085;&#1080; &#1073;&#1083;&#1086;&#1075;&#1086;&#1074;&#1080; &#1080; &#1089;&#1072;&#1112;&#1090;&#1086;&#1074;&#1080;</h3>
-
-&#1057;&#1090;&#1080;&#1074;&#1077;&#1085; &#1042;&#1091;&#1083;&#1092;&#1088;&#1072;&#1084; (Stephen Wolfram) &nbsp;&nbsp;&nbsp; <a href="https://blog.wolfram.com/">https://blog.wolfram.com/</a><br>
-
-
-
-
-
-
-&#1057;&#1082;&#1086;&#1090; &#1040;&#1088;&#1086;&#1085;&#1089;&#1086;&#1085; (Scott Aaronson) &nbsp;&nbsp;&nbsp; <a href="https://blog.wolfram.com/">https://scottaaronson.blog/</a> / <a href="https://www.scottaaronson.com/">https://www.scottaaronson.com/</a><br>
-
-
-
-
-
-
-&#1056;&#1080;&#1095;&#1072;&#1088;&#1076; &#1057;&#1090;&#1072;&#1083;&#1084;&#1072;&#1085; (Richard Stallman) &nbsp;&nbsp;&nbsp; <a href="https://stallman.org/">https://stallman.org/</a><br>
-
-
-
-
-
-
-&#1055;&#1080;&#1090;&#1077;&#1088; &#1053;&#1086;&#1088;&#1074;&#1080;&#1075; (Peter Norvig) &nbsp;&nbsp;&nbsp; <a href="https://norvig.com/">https://norvig.com/</a><br>
-
-
-
-
-
-
-&#1044;&#1086;&#1085;&#1072;&#1083;&#1076; &#1053;&#1091;&#1090; (Donald Knuth) &nbsp;&nbsp;&nbsp; <a href="https://www-cs-faculty.stanford.edu/%7Eknuth/">https://www-cs-faculty.stanford.edu/~knuth/</a><br>
-
-
-
-
-
-
-&#1048;&#1073;&#1077;&#1085; &#1052;&#1086;&#1075;&#1083;&#1077;&#1085; (Eben Moglen)&nbsp; <a href="http://moglen.law.columbia.edu/">http://moglen.law.columbia.edu/</a><br>
-
-
-
-
-
-
-<span class="style31"><span style=""><span class="style32">&#1046;&#1072;&#1088;&#1086;&#1085; &#1051;&#1072;&#1085;&#1080;&#1088; (Jaron Lanier)
-	&nbsp;<a href="http://www.jaronlanier.com/">http://www.jaronlanier.com/</a></span>
-	</span></span><span style=""><span class="style50"></span></span><br>
-
-
-
-
-
-
-<h3>&#1060;&#1086;&#1085;&#1076;&#1072;&#1094;&#1080;&#1112;&#1077;&nbsp;</h3>
-
-
-
-
-
-
-&nbsp;&nbsp;&nbsp; &#1060;&#1086;&#1085;&#1076;&#1072;&#1094;&#1080;&#1112;&#1072; &#1057;&#1083;&#1086;&#1073;&#1086;&#1076;&#1085;&#1086;&#1075; &#1057;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;&#1072; : <a href="https://www.fsf.org/">https://www.fsf.org/</a><br>
-
-
-
-
-
-
-<br>
-
-&#1057;&#1083;&#1086;&#1073;&#1086;&#1076;&#1085;&#1080; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; &#1076;&#1072;&#1112;&#1077; &#1082;&#1086;&#1088;&#1080;&#1089;&#1085;&#1080;&#1094;&#1080;&#1084;&#1072; &#1089;&#1083;&#1086;&#1073;&#1086;&#1076;&#1091; &#1076;&#1072; &#1082;&#1086;&#1088;&#1080;&#1089;&#1090;&#1077;, &#1091;&#1088;&#1077;&#1106;&#1091;&#1112;&#1091;, &#1076;&#1086;&#1087;&#1088;&#1080;&#1085;&#1086;&#1089;&#1077;, &#1080; &#1076;&#1077;&#1083;&#1077; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;. <br>
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-&nbsp;&nbsp;&nbsp; &#1060;&#1086;&#1085;&#1076;&#1072;&#1094;&#1080;&#1112;&#1072; &#1045;&#1083;&#1077;&#1082;&#1090;&#1088;&#1086;&#1085;&#1089;&#1082;&#1080;&#1093; &#1043;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072; : <a href="https://www.eff.org/">https://www.eff.org/</a><br>
-
-
-
-
-
-
-<br>
-
-&#1042;&#1086;&#1076;&#1077;&#1115;&#1072; &#1085;&#1077;&#1087;&#1088;&#1086;&#1092;&#1080;&#1090;&#1085;&#1072; &#1086;&#1088;&#1075;&#1072;&#1085;&#1080;&#1079;&#1072;&#1094;&#1080;&#1112;&#1072; &#1082;&#1086;&#1112;&#1072; &#1073;&#1088;&#1072;&#1085;&#1080; &#1076;&#1080;&#1075;&#1080;&#1090;&#1072;&#1083;&#1085;&#1091; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1086;&#1089;&#1090;, &#1089;&#1083;&#1086;&#1073;&#1086;&#1076;&#1091; &#1075;&#1086;&#1074;&#1086;&#1088;&#1072; &#1080; &#1080;&#1085;&#1086;&#1074;&#1072;&#1094;&#1080;&#1112;&#1077;.<br>
-
-
-
-
-
-
-<br>
-
-&#1055;&#1088;&#1074;&#1086; &#1087;&#1088;&#1086;&#1095;&#1080;&#1090;&#1072;&#1112; &ndash; &#1047;&#1072;&#1096;&#1090;&#1086; &#1057;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088; &#1086;&#1090;&#1074;&#1086;&#1088;&#1077;&#1085;&#1086;&#1075; &#1082;&#1086;&#1076;&#1072; &#1085;&#1080;&#1112;&#1077; &#1112;&#1077;&#1076;&#1085;&#1072;&#1082; &#1089;&#1072; &#1057;&#1083;&#1086;&#1073;&#1086;&#1076;&#1085;&#1080;&#1084; &#1089;&#1086;&#1092;&#1090;&#1074;&#1077;&#1088;&#1086;&#1084; (&#1085;&#1072;&#1115;&#1080; &#1085;&#1072; &#1089;&#1072;&#1112;&#1090;&#1091; &#1056;&#1080;&#1095;&#1072;&#1088;&#1076;&#1072; &#1057;&#1090;&#1072;&#1083;&#1084;&#1072;&#1085;&#1072;)<br>
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-&nbsp;&nbsp; &#1048;&#1085;&#1080;&#1094;&#1080;&#1112;&#1072;&#1090;&#1080;&#1074;&#1072; &#1054;&#1090;&#1074;&#1086;&#1088;&#1077;&#1085;&#1086;&#1075; &#1050;&#1086;&#1076;&#1072;: <a href="https://opensource.org/">https://opensource.org/</a><br>
-
-
-
-
-
-
-<br>
-
-&#1053;&#1077;&#1087;&#1088;&#1086;&#1092;&#1080;&#1090;&#1085;&#1072; &#1082;&#1086;&#1088;&#1087;&#1086;&#1088;&#1072;&#1094;&#1080;&#1112;&#1072; &#1089;&#1072; &#1075;&#1083;&#1086;&#1073;&#1072;&#1083;&#1085;&#1080;&#1084; &#1086;&#1087;&#1089;&#1077;&#1075;&#1086;&#1084; &#1092;&#1086;&#1088;&#1084;&#1080;&#1088;&#1072;&#1085;&#1072; &#1076;&#1072;&nbsp;&#1079;&#1072;&#1075;&#1086;&#1074;&#1072;&#1088;&#1072;
-&#1087;&#1088;&#1077;&#1076;&#1085;&#1086;&#1089;&#1090;&#1080; &#1086;&#1090;&#1074;&#1086;&#1088;&#1077;&#1085;&#1086;&#1075; &#1082;&#1086;&#1076;&#1072; &#1080; &#1076;&#1072; &#1080;&#1079;&#1075;&#1088;&#1072;&#1076;&#1080; &#1084;&#1086;&#1089;&#1090;&#1086;&#1074;&#1077; &#1080;&#1079;&#1084;&#1077;&#1106;&#1091; &#1088;&#1072;&#1079;&#1083;&#1080;&#1095;&#1080;&#1090;&#1080;&#1093; &#1075;&#1088;&#1091;&#1087;&#1072; &#1091;
-&#1079;&#1072;&#1112;&#1077;&#1076;&#1085;&#1080;&#1094;&#1080; &#1086;&#1090;&#1074;&#1086;&#1088;&#1077;&#1085;&#1086;&#1075; &#1082;&#1086;&#1076;&#1072;.<br>
-
-
-
-
-<br>
-
-
-
-
-&nbsp;&nbsp;&nbsp; &#1050;&#1088;&#1077;&#1072;&#1090;&#1080;&#1074;&#1085;&#1072; &#1079;&#1072;&#1112;&#1077;&#1076;&#1085;&#1080;&#1094;&#1072;: <a href="https://creativecommons.org/">https://creativecommons.org/</a><br>
-
-
-
-
-<br>
-
-&#1050;&#1088;&#1077;&#1072;&#1090;&#1080;&#1074;&#1085;&#1072; &#1079;&#1072;&#1112;&#1077;&#1076;&#1085;&#1080;&#1094;&#1072; &#1112;&#1077; &#1084;&#1077;&#1106;&#1091;&#1085;&#1072;&#1088;&#1086;&#1076;&#1085;&#1072; &#1085;&#1077;&#1087;&#1088;&#1086;&#1092;&#1080;&#1090;&#1085;&#1072; &#1086;&#1088;&#1075;&#1072;&#1085;&#1080;&#1079;&#1072;&#1094;&#1080;&#1112;&#1072; &#1082;&#1086;&#1112;&#1072;
-&#1086;&#1089;&#1085;&#1072;&#1078;&#1091;&#1112;&#1077; &#1113;&#1091;&#1076;&#1077; &#1076;&#1072; &#1088;&#1072;&#1089;&#1090;&#1091; &#1080; &#1086;&#1076;&#1088;&#1078;&#1077; &#1085;&#1072;&#1087;&#1088;&#1077;&#1076;&#1085;&#1072; &#1079;&#1072;&#1112;&#1077;&#1076;&#1085;&#1080;&#1095;&#1082;&#1072; &#1076;&#1086;&#1073;&#1088;&#1072; &#1079;&#1072;&#1112;&#1077;&#1076;&#1085;&#1080;&#1095;&#1082;&#1086;
-&#1079;&#1085;&#1072;&#1114;&#1077; &#1080; &#1082;&#1091;&#1083;&#1090;&#1091;&#1088;&#1091; &#1082;&#1086;&#1112;&#1072; &#1085;&#1072;&#1084; &#1112;&#1077; &#1087;&#1086;&#1090;&#1088;&#1077;&#1073;&#1085;&#1072; &#1076;&#1072; &#1073;&#1080;&#1089;&#1084;&#1086; &#1086;&#1076;&#1075;&#1086;&#1074;&#1086;&#1088;&#1080;&#1083;&#1080; &#1085;&#1072; &#1085;&#1072;&#1112;&#1093;&#1080;&#1090;&#1085;&#1080;&#1112;&#1077;
-&#1089;&#1074;&#1077;&#1090;&#1089;&#1082;&#1077; &#1080;&#1079;&#1072;&#1079;&#1086;&#1074;&#1077; &#1080; &#1089;&#1090;&#1074;&#1086;&#1088;&#1080;&#1083;&#1080; &#1089;&#1074;&#1077;&#1090;&#1083;&#1080;&#1112;&#1091; &#1073;&#1091;&#1076;&#1091;&#1115;&#1085;&#1086;&#1089;&#1090;.<br>
-
-
-
-
-
-
+<p>
+<br />
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Интернет претраживачи и додаци за претраживаче</th>
+<th scope="col" class="org-left">Препоручени софтвер</th>
+<th scope="col" class="org-left">Опште препоруке</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><b>Интернет претраживачи:</b></td>
+<td class="org-left"><b>Програмирање:</b></td>
+<td class="org-left">Кажи НЕ <a href="https://www.gnu.org/philosophy/javascript-trap.html">власничком ЈаваСкрипту!</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Ајскет (енг. IceCat) <a href="https://www.gnu.org/software/gnuzilla/">https://www.gnu.org/software/gnuzilla/</a></td>
+<td class="org-left">Пајтон <a href="https://www.python.org/">https://www.python.org/</a></td>
+<td class="org-left">Користи <a href="https://www.gnu.org/software/librejs/">СлободниЈаваСкрипт</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Тор претраживач (енг. Tor Browser) <a href="https://www.torproject.org/download/">https://www.torproject.org/download/</a></td>
+<td class="org-left">Ц <a href="https://gcc.gnu.org/">https://gcc.gnu.org/</a></td>
+<td class="org-left">Обавезно користити препоручене додатке</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Фајерфокс (енг. Mozila Firefox)  <a href="https://www.mozilla.org/en-US/firefox/new/">https://www.mozilla.org/en-US/firefox/new/</a></td>
+<td class="org-left">Јулија <a href="https://julialang.org/">https://julialang.org/</a></td>
+<td class="org-left">Користи Слободни софтвер у <a href="https://www.gnu.org/software/free-software-for-education.html">едукацији</a>.</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Због своје приватности увек користите ТОР!</td>
+<td class="org-left">Јава <a href="https://openjdk.org/">https://openjdk.org/</a></td>
+<td class="org-left">Комуницирај без Гугл Мита, Зума, Скајпа, Вајбера, Воцапа, Телеграма… Користити сигурне алтернативе као: <a href="https://meet.jit.si/">Џитси</a> и <a href="https://jami.net/">Јами</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>Додаци за претраживаче (поштују вашу риватност и сигурност):</b></td>
+<td class="org-left">Лисп <a href="https://common-lisp.net/">https://common-lisp.net/</a> , <a href="https://clisp.sourceforge.io/">https://clisp.sourceforge.io/</a></td>
+<td class="org-left">Ако си корисник Виндовса: <a href="https://www.gpg4win.org/download.html">ГпгЗаВиндовс</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Слобони Јаваскрипт (енг. LibreJS) <a href="https://www.gnu.org/software/librejs/">https://www.gnu.org/software/librejs/</a></td>
+<td class="org-left">Пролог <a href="https://www.swi-prolog.org/">https://www.swi-prolog.org/</a> , <a href="http://www.gprolog.org/">http://www.gprolog.org/</a></td>
+<td class="org-left">Користи енкрипцију <a href="https://gnupg.org/">ГНУПГ</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Приватни Јазавац (енг. Privacy Badger) <a href="https://privacybadger.org/">https://privacybadger.org/</a></td>
+<td class="org-left"><b>Софтвер:</b></td>
+<td class="org-left">Користи оперативни систем који цени твоју слободу: <a href="https://www.gnu.org/distros/free-distros.html">ГНУЛинуксДистрибуције</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ХТТПС свуда (енг. HTTPS Everywhere) <a href="https://www.eff.org/https-everywhere">https://www.eff.org/https-everywhere</a></td>
+<td class="org-left">ГНУ софтвер <a href="https://www.gnu.org/software/software.html">https://www.gnu.org/software/software.html</a></td>
+<td class="org-left">Дистрибуције за почетнике: <a href="https://trisquel.info/">Трискул</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ЈСклониште (енг. JShelter) <a href="https://jshelter.org/">https://jshelter.org/</a></td>
+<td class="org-left">Минималистички софтвер који прати Јуникс филозофију: <a href="https://suckless.org/">https://suckless.org/</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Преусмери за приватност (енг. Privacy Redirect):</td>
+<td class="org-left">Минималистички софтвер:</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://addons.mozilla.org/en-US/firefox/addon/privacy-redirect/">https://addons.mozilla.org/en-US/firefox/addon/privacy-redirect/</a></td>
+<td class="org-left"><a href="https://www.gnu.org/software/free-software-for-education.en.html">https://www.gnu.org/software/free-software-for-education.en.html</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Блокирање захтева треће стране (енг. Third-party Request Blocker Fork by polarisfm):</td>
+<td class="org-left">Препоруке минималног софтвера <a href="https://suckless.org/rocks/">https://suckless.org/rocks/</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://addons.mozilla.org/en-US/firefox/addon/tprb-fork/">https://addons.mozilla.org/en-US/firefox/addon/tprb-fork/</a></td>
+<td class="org-left">Кет-в штетан и мање штетан софтвер <a href="https://harmful.cat-v.org/software/">https://harmful.cat-v.org/software/</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<br />
+<br />
+</p>
 </div>
 
 
+<div id="outline-container-org872da07" class="outline-3">
+<h3 id="org872da07">Интересантни блогови и сајтови</h3>
+<div class="outline-text-3" id="text-org872da07">
+<ul class="org-ul">
+<li>Стивен Вулфрам (Stephen Wolfram)     <a href="https://blog.wolfram.com/">https://blog.wolfram.com/</a></li>
+<li>Скот Аронсон (Scott Aaronson)     <a href="https://scottaaronson.blog/">https://scottaaronson.blog/</a> / <a href="https://www.scottaaronson.com/">https://www.scottaaronson.com/</a></li>
+<li>Ричард Сталман (Richard Stallman)     <a href="https://stallman.org/">https://stallman.org/</a></li>
+<li>Питер Норвиг (Peter Norvig)     <a href="https://norvig.com/">https://norvig.com/</a></li>
+<li>Доналд Нут (Donald Knuth)     <a href="https://www-cs-faculty.stanford.edu/~knuth/">https://www-cs-faculty.stanford.edu/~knuth/</a></li>
+<li>Ибен Моглен (Eben Moglen)  <a href="http://moglen.law.columbia.edu/">http://moglen.law.columbia.edu/</a></li>
+<li>Жарон Ланир (Jaron Lanier)  <a href="http://www.jaronlanier.com/">http://www.jaronlanier.com/</a></li>
+</ul>
+</div>
+</div>
 
+<div id="outline-container-orge9bb563" class="outline-3">
+<h3 id="orge9bb563">Фондације</h3>
+<div class="outline-text-3" id="text-orge9bb563">
+<ul class="org-ul">
+<li>Фондација Слободног Софтвера : <a href="https://www.fsf.org/">https://www.fsf.org/</a></li>
+<li>Фондација Електронских Граница : <a href="https://www.eff.org/">https://www.eff.org/</a></li>
+<li>Иницијатива Отвореног Кода: <a href="https://opensource.org/">https://opensource.org/</a></li>
+<li>Креативна заједница: <a href="https://creativecommons.org/">https://creativecommons.org/</a></li>
+<li>Фондација ШЕР: <a href="https://www.sharefoundation.info/en/">https://www.sharefoundation.info/en/</a></li>
+</ul>
 
-
-
-<br>
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-<hr style="width: 100%; height: 2px; margin-left: 0px; margin-right: 0px;"><br>
-
-
-
-
-
-
-&#1040;&#1091;&#1090;&#1086;&#1088;&#1089;&#1082;&#1086; &#1087;&#1088;&#1072;&#1074;&#1086; &copy; 2022 &#1052;&#1080;&#1083;&#1080;&#1115; &#1042;&#1091;&#1082;&#1086;&#1112;&#1080;&#1095;&#1080;&#1115;<br>
-
-&#1057;&#1072;&#1074; &#1090;&#1077;&#1082;&#1089;&#1090; &#1112;&#1077; &#1086;&#1073;&#1112;&#1072;&#1074;&#1113;&#1077;&#1085; &#1087;&#1086;&#1076; &#1083;&#1080;&#1094;&#1077;&#1085;&#1094;&#1086;&#1084; CC-BY 4.0 &nbsp;&#1080; &#1089;&#1072;&#1074; &#1080;&#1079;&#1074;&#1086;&#1088;&#1085;&#1080; &#1082;&#1086;&#1076; &#1112;&#1077; &#1086;&#1073;&#1112;&#1072;&#1074;&#1113;&#1077;&#1085; &#1087;&#1086;&#1076; &nbsp;GNU General Public License v3.0.<br>
-
-
-
-
-
-
+<hr />
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0.</p>
+<p class="date">Created: 2023-04-07 пет 20:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
 </body>
 </html>
