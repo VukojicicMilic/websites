@@ -1,101 +1,69 @@
-#+AUTHOR: Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0.
-#+TITLE: ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА
+#+AUTHOR: Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0. / Copyright © 2022 Milić Vukojičić All text is released under CC-BY 4.0 license and all source code is released under GNU General Public License v3.0.
+#+TITLE: Милић Вукојичић / Milic Vukojicic
 
 
 #+BEGIN_CENTER
-[[https://www.милићвукојичић.од.срб/enindex.html][ENG]] | [[https://www.милићвукојичић.од.срб/index.html][СРБ]]
+
+[[https://www.милићвукојичић.од.срб][ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА / Milić Vukojičić's Personal Site]]
 
 Овај сајт садржи материјал за наставу, техничке папире,
 есеје, извештаје, софтверска решења, мишљења и дуге материјале креиране од стране Милића Вукојичића.
+
+This site contains teaching materials, technical papers,
+essays, reports, software, opinions and other materials by Milić Vukojičić.
+
 #+END_CENTER
 
 \\
 \\
 
-Ово је лични сајт Милића Вукојичића..
+Ово је лични сајт Милића Вукојичића.
 Ставови изнети овде су моји лични ставови, а не ставови фондације или ставови послодавца код ког радим.
 
-Ако желите да разговарате са мном, а да притом комуникација буде сигурна можете наћи мој мој кључ на [[https://vukojicicmilic.github.io/websites/gpg.html][gpg.html]].
-
-
-\\
-\\
-
-* Контакт информације
-+ [[https://rs.linkedin.com/in/mili%C4%87-vukoji%C4%8Di%C4%87-9b2124222?original_referer=][LinkedIn]] - Пре уласка на сајт морате знати да овај сајт не поштује вашу приватност и прати своје кориснике!
-+ Наставник рачунарских наука и Координатор информационих система [[https://www.international-school.edu.rs/][International School]] (сајт не поштује вашу приватност!)
-+ Мејл: (приватни) vukojicic.milic@gmail.com, (пословни) milic.vukojicic@iss.edu.rs
-+ Ако желите да комуницирате са мном сигурно користите ГПГ/ПГП кључ.
+This is the personal web site of Milić Vukojičić.
+The views expressed here are my personal views, not those of the any foundation or my employer.
+For the sake of separation, this site has always been hosted elsewhere and managed separately.
 
 \\
 \\
 
-* Текстови
------
-*AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!)*
+* Контакт информације / Contact Information
++ [[https://rs.linkedin.com/in/mili%C4%87-vukoji%C4%8Di%C4%87-9b2124222?original_referer=][LinkedIn]], [[https://www.researchgate.net/profile/Milic-Vukojicic][Researchgate]] 
++ Ако желите да комуницирате са мном сигурно користите [[https://www.милићвукојичић.од.срб/gpg.html][ГПГ/ПГП]] кључ / If you want to communicate with me in a safe way, please use my [[https://www.милићвукојичић.од.срб/gpg.html][GPG/PGP]] key.
 
-Футуре Оф Лифе https://futureoflife.org/open-letter/pause-giant-ai-experiments/ институт је пре извесног времена објавио отворено писмо, које су потписали неки од највећих и најбитнијих имена у домену вештачке интелигенције и истраживања, а односи се на успоравање прогеса у истраживању тј. тренирању АИ модела на 6 месеци како би се "човечанство припремило" на овакве системе.
+* [[http://милићвукојичић.од.срб/tekstovi.html][Tekstovi / Writings]]
 
-прочитај више на: https://www.милићвукојичић.од.срб/AIEthics.html
+* Публикације / Publications
+- https://www.researchgate.net/profile/Milic-Vukojicic
+- [[http:www/милићвукојичић.од.срб/mind.html][MIND and CONSCIOUSNESS]]
+- [[http:www/милићвукојичић.од.срб/sentient.html]["Sentient" AI called LaMDA]]
+- [[http:www/милићвукојичић.од.срб/slobodnisoftver2022.html][Slobodni softver u 2022. godini]]
 
------
-*Драге колеге едукатори схватите да ЧетГПТ и калкулатор нису исто!*
+* Препоруке / Recommendations
++ Кажи НЕ власничком ЈаваСкрипту! / Say NO to [[https://www.gnu.org/philosophy/javascript-trap.html][proprietary JS!]]
++ Користи СлободниЈаваСкрипт / Use [[https://www.gnu.org/software/librejs/][LibreJS]]
++ Сигурније претраживање интернета / Surfing on the internet can be a pleasant thing. But please be safe! [[https://jshelter.org/][JShelter]] | [[https://www.eff.org/https-everywhere][HTTPS Everywhere]] | [[https://privacybadger.org/][Privacy Badger]]
++ Користи Слободни софтвер у едукацији / Use FREE software in [[https://www.gnu.org/software/free-software-for-education.html][education]].
++ Комуницирај без Гугл Мита, Зума, Скајпа, Вајбера, Воцапа, Телеграма… Користити сигурне алтернативе / Communication without Google Meet, Zoom, Skype, Viber, Whatsapp, Telegram… Safe and ethical alternatives: [[https://meet.jit.si/][Jitsi]] and [[https://jami.net/][Jami]]
++ Користи енкрипцију / Encrypt and sign your data and communications [[https://gnupg.org/][GnuPG]] | Easy setup for Windows users: [[https://www.gpg4win.org/download.html][Gpg4win]]
++ Користи оперативни систем који цени твоју слободу / Operating systems that respects your FREEDOM: [[https://www.gnu.org/distros/free-distros.html][GNU/Linux distros]] | Easy to use: [[https://trisquel.info/][Trisquel]]
 
-У последње време доста едукатора, наставника, професора на друштвеним мрежама поставља чланак о томе “да су се математичари бунили ….. при увођењу калкулатора у образовање” и праве паралелу са тим што се неки од едукатора буне при увођењу ЛЛМ (енг. large language models) софтвера у образовање. Увођење ЧетГПТ софтвера и калкулатора се  драстично разликује и у овом тексту ћемо покушати да разумемо зашто ове две ствари нису једнаке (калкулатор и софтвер као што је ЧетГПТ).
+** Софтвер / Software
++ ГНУ софтвер / GNU Software https://www.gnu.org/software/software.html
++ Софтвер за едукацију / Software for Education https://www.gnu.org/software/free-software-for-education.en.html
++ Минималистички софтвер који прати Јуникс филозофију / Suckless software https://suckless.org/
++ Препоруке минималног софтвера / Suckless - Stuff that rocks https://suckless.org/rocks/
++ Кет-в штетан и мање штетан софтвер / Cat-v Harmful and Less Harmful software https://harmful.cat-v.org/software/
 
-...
+** Додаци за претраживаче (поштују вашу риватност и сигурност): / Browser plugins (respect your privacy and security):
++ Слобони Јаваскрипт / LibreJS: https://www.gnu.org/software/librejs/
++ Приватни Јазавац / Privacy Badger: https://privacybadger.org/
++ ХТТПС свуда / HTTPS Everywhere: https://www.eff.org/https-everywhere
++ ЈСклониште / JShelter: https://jshelter.org/
++ Преусмери за приватност / Privacy Redirect: https://addons.mozilla.org/en-US/firefox/addon/privacy-redirect/
++ Блокирање захтева треће стране / Third-party Request Blocker Fork by polarisfm: https://addons.mozilla.org/en-US/firefox/addon/tprb-fork/
 
-прочитај више на :[[https://www.милићвукојичић.од.срб/kalkulatorgpt.html][www.милићвукојичић.од.срб/kalkulatorgpt.html]]
-
------
-
-*Слободни софтвер 2022.*
-
-Идеја Слободног софтвера постоји још пре него што је Ричард Сталман 1985. године направио Фондацију за Слободан софтвер. Овај есеј има улогу да појасни зашто су ове идеје данас можда још битније него осамдесетих година и да упозна читаоце са концептом и идејама које стоје иза идеје “Слободног софтвера”. 
-
-...
-
-прочитај више на: [[https://www.милићвукојичић.од.срб/slobodnisoftver2022.html][https://www.милићвукојичић.од.срб/slobodnisoftver2022.html]]
-
-
-Остали текстови се преводе и могу се наћи на енглеској верзији сајта [[https://vukojicicmilic.github.io./websites/enindex.html][ENG]].
-
------
-
-* Публикације
-
-| Научне                                                             | Есеји                            |   |   |
-|--------------------------------------------------------------------+----------------------------------+---+---|
-| https://www.researchgate.net/profile/Milic-Vukojicic               | [[https://vukojicicmilic.github.io/websites/mind.html][MIND and CONSCIOUSNESS]]           |   |   |
-| https://scholar.google.com/citations?user=fzqfqzwAAAAJ&hl=sr&oi=ao | [[https://vukojicicmilic.github.io/websites/sentient.html]["Sentient" AI called LaMDA]]       |   |   |
-|                                                                    | [[https://vukojicicmilic.github.io/websites/slobodnisoftver2022.html][Slobodni softver u 2022. godini ]] |   |   |
-
-
-\\
-
-| Интернет претраживачи и додаци за претраживаче                                       | Препоручени софтвер                                                        | Опште препоруке                                                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|--------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
-| *Интернет претраживачи:*                                                             | *Програмирање:*                                                            | Кажи НЕ [[https://www.gnu.org/philosophy/javascript-trap.html][власничком ЈаваСкрипту!]]                                                                                |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Ајскет (енг. IceCat) https://www.gnu.org/software/gnuzilla/                          | Пајтон https://www.python.org/                                             | Користи [[https://www.gnu.org/software/librejs/][СлободниЈаваСкрипт]]                                                                                     |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Тор претраживач (енг. Tor Browser) https://www.torproject.org/download/              | Ц https://gcc.gnu.org/                                                     | Обавезно користити препоручене додатке                                                                               |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Фајерфокс (енг. Mozila Firefox)  https://www.mozilla.org/en-US/firefox/new/          | Јулија https://julialang.org/                                              | Користи Слободни софтвер у [[https://www.gnu.org/software/free-software-for-education.html][едукацији]].                                                                          |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Због своје приватности увек користите ТОР!                                           | Јава https://openjdk.org/                                                  | Комуницирај без Гугл Мита, Зума, Скајпа, Вајбера, Воцапа, Телеграма… Користити сигурне алтернативе као: [[https://meet.jit.si/][Џитси]] и [[https://jami.net/][Јами]] |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| *Додаци за претраживаче (поштују вашу риватност и сигурност):*                       | Лисп https://common-lisp.net/ , https://clisp.sourceforge.io/              | Ако си корисник Виндовса: [[https://www.gpg4win.org/download.html][ГпгЗаВиндовс]]                                                                         |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Слобони Јаваскрипт (енг. LibreJS) https://www.gnu.org/software/librejs/              | Пролог https://www.swi-prolog.org/ , http://www.gprolog.org/               | Користи енкрипцију [[https://gnupg.org/][ГНУПГ]]                                                                                       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Приватни Јазавац (енг. Privacy Badger) https://privacybadger.org/                    | *Софтвер:*                                                                 | Користи оперативни систем који цени твоју слободу: [[https://www.gnu.org/distros/free-distros.html][ГНУЛинуксДистрибуције]]                                       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| ХТТПС свуда (енг. HTTPS Everywhere) https://www.eff.org/https-everywhere             | ГНУ софтвер https://www.gnu.org/software/software.html                     | Дистрибуције за почетнике: [[https://trisquel.info/][Трискул]]                                                                             |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| ЈСклониште (енг. JShelter) https://jshelter.org/                                     | Минималистички софтвер који прати Јуникс филозофију: https://suckless.org/ |                                                                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Преусмери за приватност (енг. Privacy Redirect):                                     | Минималистички софтвер:                                                    |                                                                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| https://addons.mozilla.org/en-US/firefox/addon/privacy-redirect/                     | https://www.gnu.org/software/free-software-for-education.en.html           |                                                                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| Блокирање захтева треће стране (енг. Third-party Request Blocker Fork by polarisfm): | Препоруке минималног софтвера https://suckless.org/rocks/                  |                                                                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| https://addons.mozilla.org/en-US/firefox/addon/tprb-fork/                            | Кет-в штетан и мање штетан софтвер https://harmful.cat-v.org/software/     |                                                                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-
-
-\\
-\\
-
-
-** Интересантни блогови и сајтови
+* Интересантни блогови и сајтови / Interesting blogs and websites
 + Стивен Вулфрам (Stephen Wolfram)     https://blog.wolfram.com/
 + Скот Аронсон (Scott Aaronson)     https://scottaaronson.blog/ / https://www.scottaaronson.com/
 + Ричард Сталман (Richard Stallman)     https://stallman.org/
@@ -104,15 +72,15 @@
 + Ибен Моглен (Eben Moglen)  http://moglen.law.columbia.edu/
 + Жарон Ланир (Jaron Lanier)  http://www.jaronlanier.com/
 
-** Фондације 
-+ Фондација Слободног Софтвера : https://www.fsf.org/
-+ Фондација Електронских Граница : https://www.eff.org/
-+ Иницијатива Отвореног Кода: https://opensource.org/
-+ Креативна заједница: https://creativecommons.org/
-+ Фондација ШЕР: https://www.sharefoundation.info/en/
+* Фондације које подржавам / Foundations I support
++ Фондација Слободног Софтвера /  The Free Software Foundation (FSF) : https://www.fsf.org/
++ Фондација Електронских Граница /  Electronic Frontier Foundation : https://www.eff.org/
++ Иницијатива Отвореног Кода / Open Source Initiative: https://opensource.org/
++ Креативна заједница /  Creative Commons (CC) : https://creativecommons.org/
++ Фондација ШЕР / SHARE Foundation: https://www.sharefoundation.info/en/
+
 
 -----
-#+EMAIL: vukojicic.milic@gmail.com
+#+EMAIL:  vukojicic тачка milic знак "ет" google тачка com / vukojicic dot milic at gmail dot com
 #+OPTIONS: toc:nil   
 #+OPTIONS: num:nil
-

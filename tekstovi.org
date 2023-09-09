@@ -1,0 +1,166 @@
+#+AUTHOR: Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0.
+#+TITLE: Милић Вукојичић / Milic Vukojicic
+
+
+#+BEGIN_CENTER
+
+[[https://www.милићвукојичић.од.срб][ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА / Milić Vukojičić's Personal Site]]
+
+TEKSTOVI / WRITINGS
+
+Претражите текстове помоћу команде Ctrl+f / Search for texts using the command Ctrl+f
+
+#+END_CENTER
+
+1. Free Software as a teaching and learning norm
+2. Freedom of Though
+3. AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!
+4. Слободни софтвер 2022.
+5. New Green anarchism and the soup
+6. Problems with analog attack
+7. AI, Marx and capitalist economic development
+
+-----
+
+*Free Software as a teaching and learning norm*
+
+Source code is a part of human knowledge, so hiding the source code will be a crime against the learning process and humanity.
+
+Schools and teachers need to teach students not just how to use something but how to use it ethically, free software is also covering this category of teaching and learning.
+
+Proprietary software represents a secret that forbids users to learn about software that they are using.
+
+Proprietary software in school can do much harm:
+
+unauthorized access to students' data (images, essays, homework, video, etc...) ;
+constant monitoring of students (unnecessary monitoring) ;
+creating pressure on using proprietary software (if a school decides to use proprietary software it is pressuring students to use it also);
+using proprietary cloud services ("There is no cloud - only other people's computers");
+creating a workflow that supports only proprietary software ;
+and much much more...
+So, to prevent unjust, not ethical, and overall immoral pressure teachers and educators should use free software in the educational process and give their students the freedom that they deserve.
+
+Alternatives for proprietary software in education - https://www.gnu.org/software/free-software-for-education.html
+
+-----
+
+*Freedom of Thought*
+
+"Freedom of thought requires media that don't listen to and watch and surveil us as we use them. Media that consumes us in the end consumes freedom of thought." - Eben Moglen
+
+https://www.youtube.com/watch?v=1SKpRbvnx6g - re:publica 2019 - Eben Moglen: Why Freedom of Thought Requires Attention
+
+https://www.youtube.com/watch?v=sKOk4Y4inVY - re:publica 2012 - Eben Moglen - Freedom of Thought Requires Free Media
+
+http://moglen.law.columbia.edu/publications/dcm.html - The dotCommunist Manifesto
+
+
+-----
+
+*AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!)*
+
+Футуре Оф Лифе https://futureoflife.org/open-letter/pause-giant-ai-experiments/ институт је пре извесног времена објавио отворено писмо, које су потписали неки од највећих и најбитнијих имена у домену вештачке интелигенције и истраживања, а односи се на успоравање прогеса у истраживању тј. тренирању АИ модела на 6 месеци како би се "човечанство припремило" на овакве системе.
+
+прочитај више на: https://www.милићвукојичић.од.срб/AIEthics.html
+
+-----
+*Драге колеге едукатори схватите да ЧетГПТ и калкулатор нису исто!*
+
+У последње време доста едукатора, наставника, професора на друштвеним мрежама поставља чланак о томе “да су се математичари бунили ….. при увођењу калкулатора у образовање” и праве паралелу са тим што се неки од едукатора буне при увођењу ЛЛМ (енг. large language models) софтвера у образовање. Увођење ЧетГПТ софтвера и калкулатора се  драстично разликује и у овом тексту ћемо покушати да разумемо зашто ове две ствари нису једнаке (калкулатор и софтвер као што је ЧетГПТ).
+
+...
+
+прочитај више на :[[https://www.милићвукојичић.од.срб/kalkulatorgpt.html][www.милићвукојичић.од.срб/kalkulatorgpt.html]]
+
+-----
+
+*Слободни софтвер 2022.*
+
+Идеја Слободног софтвера постоји још пре него што је Ричард Сталман 1985. године направио Фондацију за Слободан софтвер. Овај есеј има улогу да појасни зашто су ове идеје данас можда још битније него осамдесетих година и да упозна читаоце са концептом и идејама које стоје иза идеје “Слободног софтвера”. 
+
+...
+
+прочитај више на: [[https://www.милићвукојичић.од.срб/slobodnisoftver2022.html][https://www.милићвукојичић.од.срб/slobodnisoftver2022.html]]
+
+-----
+
+*New Green anarchism and the soup*
+
+Is this kind of activism taking us to another Unabomber act?
+
+The activism that we had in the past months is growing rapidly throughout the entire world and everyone is trying to have a bite of this cake.
+
+Throwing soup at the problem: are radical climate protests helping or hurting the cause?
+
+https://www.theguardian.com/world/2022/nov/13/throwing-soup-at-the-problem-are-radical-climate-protests-helping-or-hurting-the-cause
+
+If you take a look at the videos that they are recording during this performance, some of the new "followers" have no idea why are they doing this kind of act. Also, I witness in Vienna when the activist glues them to the fossil directly.
+
+As much as I support them in the ideological protest against the climate crisis, I will never support the ideology of following somebody's ideas and acting like a brainwashed person without knowing why you are doing that in the first place.
+
+My idea is that this kind of behavior will eventually lead us to the creation of another Unabomber who will be so obsessed with the ideology that he/she/it proposed. Green anarchism is nothing new we have Industrial Society and Its Future, or the so-called "Unabomber Manifesto", where the essay contends that the Industrial Revolution began a harmful process of natural destruction brought about by technology.
+
+https://web.cs.ucdavis.edu/~rogaway/classes/188/materials/Industrial%20Society%20and%20Its%20Future.pdf
+
+Is this kind of activism that just follows the trend, taking us to another Unabomber idea?
+
+-----
+
+*Problems with analog attack*
+
+This small text is based on the publication "A2: Analog Malicious Hardware"
+
+Yang, K., Hicks, M., Dong, Q., Austin, T., & Sylvester, D. (2016, May). A2: Analog malicious hardware. In 2016 IEEE symposium on security and privacy (SP) (pp. 18-37). IEEE.
+
+You can find here - https://www.researchgate.net/profile/Kaiyuan-Yang-5/publication/306301849_A2_Analog_Malicious_Hardware/links/5cce6b53458515712e928b3e/A2-Analog-Malicious-Hardware.pdf
+
+The idea of freedom should also be present in the domain of the hardware itself. For decades we struggle with the idea of freedom in the terms of software that we are running on our hardware and this idea developed over the years with the Free Software Foundation, GNU project, people like Richard Stallman, Eben Moglen, Edward Snowden, etc. So, we can get freedom in the domain of software, from the bootloader, drivers, OS, application software, and online application.
+
+The main problem that we have now is that some corporations like Intel, AMD, Apple are making proprietary hardware that can harm the freedom of the end users. This can be a very big problem becose we cannot see what is inside of our hardware. Our hardware can do many thing from, having propriatery hardware in your machine can lead to many things like notn nowing if hardware itsels is communicating with someone, or if hardware like your camera is on constntly etc.
+
+Richard Stallman take on this ideas:
+
+To what extent do the ideas of free software extend to hardware? Is it a moral obligation to make our hardware designs free, just as it is to make our software free? Does maintaining our freedom require rejecting hardware made from nonfree designs?
+
+https://www.gnu.org/philosophy/free-hardware-designs.en.html
+
+Also we have other movements like Open Source Hardware Association:
+
+https://www.oshwa.org/
+
+If we can name all the proprietary software "Malicious software" we need to be able also to name all proprietary hardware "Malicious hardware". We need to free our hardware as well as we have freed our software !
+
+-----
+
+*AI, Marx and capitalist economic development*
+
+If we look at AI and Big Data we can all agree that we are not all equal players in this game. Some companies have more data and more power to train AI systems than the average person in their garage (You don't need research to deduct this information.). This means that workers or individuals cannot develop the same products and that the product of big companies will always be greater than the individual products of all employees from those companies (employees will not own the final product). Also, if a company opensource their AI systems they are often giving the source code of the model or pre-trained systems, this means that we can not change the AI system itself we can just use it (the foolish idea that we have/own the final product), it is already being trained on the data that the company owns (even if the company release the data we cannot train it on our machine we don't have the power (CPU/GPU) for the training itself).
+
+The problem that we have here is beyond the classical equation for the Surplus value:
+
+Surplus value (s) = Revenue - production costs (c+v)
+
+c = constant capital (machinery, materials, fixed costs...).
+
+v = variable capital (workers)
+
+s = surplus value (surplus of the entrepreneur)
+
+or even the exploitation of the working class (employees).
+
+The problem is that we are ideologically confused by the idea that we can "use/own" the final systems and that we can "train" the open-source systems by ourselves. And this is where Marx shine, we don't own the production machinery (materialistic view, we don't have the raw power of CPU/GPU or storage, hardware for the production). And by this ideology that we have everything that we need to produce the final value we cannot see the form of exploitation that big companies are using against all of us.
+
+The best way to convince the users that they have the the final product, is to give them the final product that they cannot create by themselves (recreate) even if they know how to create it and have all of the building parts.
+
+So, we can see that Marx is still relevant in the domain of AI and Big data.
+
+"AI is a tool of capitalism which transforms our societies within an environment of technological singularity that helps in the expansion of the capitalist model of economic development. Such a development process ensures the precarity of labour."
+
+"Nevertheless, the level automation of domestic and workplace tasks and the machine learning capabilities of the large platform companies will ensure that the neobourgeoisie will still wield power and influence despite any attempts by the regulators to reconfigure their value networks." [1]
+
+https://www.sciencedirect.com/science/article/abs/pii/S0040162521000081
+
+-----
+
+#+OPTIONS: toc:nil   
+#+OPTIONS: num:nil
