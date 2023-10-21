@@ -4,7 +4,7 @@
 
 #+BEGIN_CENTER
 
-[[https://www.милићвукојичић.од.срб][ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА / Milić Vukojičić's Personal Site]]
+[[https://www.милићвукојичић.од.срб][Лични сајт Милића Вукојичића / Milić Vukojičić's Personal Site]]
 
 Овај сајт садржи материјал за наставу, техничке папире,
 есеје, извештаје, софтверска решења, мишљења и дуге материјале креиране од стране Милића Вукојичића.
@@ -30,6 +30,12 @@ For the sake of separation, this site has always been hosted elsewhere and manag
 * Контакт информације / Contact Information
 + [[https://rs.linkedin.com/in/mili%C4%87-vukoji%C4%8Di%C4%87-9b2124222?original_referer=][LinkedIn]], [[https://www.researchgate.net/profile/Milic-Vukojicic][Researchgate]] 
 + Ако желите да комуницирате са мном сигурно користите [[https://www.милићвукојичић.од.срб/gpg.html][ГПГ/ПГП]] кључ / If you want to communicate with me in a safe way, please use my [[https://www.милићвукојичић.од.срб/gpg.html][GPG/PGP]] key.
+* Најновије политичке белешке и вести / Most recent Political Notes and News Items
++ Данијел Бернстин упозорава да НИСТ дозвољава НСА да "намерно" [[https://www.newscientist.com/article/2396510-mathematician-warns-us-spies-may-be-weakening-next-gen-encryption/][ослаби]] стандарде енкрипције. Да ли НИСТ има одговор сем "[[https://www.theregister.com/2013/09/11/nist_denies_that_the_nsa_weakened_its_encryption_standard/][Да ли мислите да би смо то урадили?]]", и да ли после Снодена треба веровати овим институцијама?  
++ "Када богати људи убеђују себе да су богати зато што су паметни уместо срећни и немилосрни, они погрешно користе свије таленте на области које су изван њихове стручности."(https://www.theguardian.com/commentisfree/2023/sep/12/elon-musk-spacex-twitter-x-russia-ukraine)
+Овако почиње вест коју Гардиан преноси. Добро знамо да већина тек милионера има "више среће него памети"(https://www.youtube.com/watch?v=sDIK-C6dGks), наравно овим се не оспорава да им њихов капитал даје огромну моћ, они и даље покушавају да свету наметну идеје које могу бити чак и назадне. 
++ Усвојена стратегија заштите података о личности. (https://www.sharefoundation.info/sr/usvojena-strategija-zastite-podataka-o-licnosti/) Можемо видети да је Србија на правом путу!
++ Како вршити процену ризика од сајбер претњи: https://www.sharefoundation.info/sr/procena-rizika-od-sajber-pretnji/
 
 * [[http://www.милићвукојичић.од.срб/tekstovi.html][Tekstovi / Writings]]
 * Публикације / Publications
@@ -46,7 +52,7 @@ For the sake of separation, this site has always been hosted elsewhere and manag
 + Комуницирај без Гугл Мита, Зума, Скајпа, Вајбера, Воцапа, Телеграма… Користити сигурне алтернативе / Communication without Google Meet, Zoom, Skype, Viber, Whatsapp, Telegram… Safe and ethical alternatives: [[https://meet.jit.si/][Jitsi]] and [[https://jami.net/][Jami]]
 + Користи енкрипцију / Encrypt and sign your data and communications [[https://gnupg.org/][GnuPG]] | Easy setup for Windows users: [[https://www.gpg4win.org/download.html][Gpg4win]]
 + Користи оперативни систем који цени твоју слободу / Operating systems that respects your FREEDOM: [[https://www.gnu.org/distros/free-distros.html][GNU/Linux distros]] | Easy to use: [[https://trisquel.info/][Trisquel]]
-
+  
 ** Софтвер / Software
 + ГНУ софтвер / GNU Software https://www.gnu.org/software/software.html
 + Софтвер за едукацију / Software for Education https://www.gnu.org/software/free-software-for-education.en.html
