@@ -32,6 +32,8 @@ For the sake of separation, this site has always been hosted elsewhere and manag
 + Ако желите да комуницирате са мном сигурно користите [[https://www.милићвукојичић.од.срб/gpg.html][ГПГ/ПГП]] кључ / If you want to communicate with me in a safe way, please use my [[https://www.милићвукојичић.од.срб/gpg.html][GPG/PGP]] key.
 * Најновије политичке белешке и вести / Most recent Political Notes and News Items
 \\
++ Одељење за образовање прати постове особља из Енглеске на друштвеним мрежама због критика њихове политике: https://www.theguardian.com/politics/2023/oct/21/uk-government-keeping-files-on-teaching-assistants-and-librarians-internet-activity
+\\
 + Данијел Бернстин упозорава да НИСТ дозвољава НСА да "намерно" [[https://www.newscientist.com/article/2396510-mathematician-warns-us-spies-may-be-weakening-next-gen-encryption/][ослаби]] стандарде енкрипције. Да ли НИСТ има одговор сем "[[https://www.theregister.com/2013/09/11/nist_denies_that_the_nsa_weakened_its_encryption_standard/][Да ли мислите да би то урадили?]]", и да ли после Снодена треба веровати овим институцијама?  
 \\
 + "Када богати људи убеђују себе да су богати зато што су паметни уместо срећни и немилосрни, они погрешно користе свије таленте на области које су изван њихове стручности."(https://www.theguardian.com/commentisfree/2023/sep/12/elon-musk-spacex-twitter-x-russia-ukraine)
