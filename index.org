@@ -32,6 +32,12 @@ For the sake of separation, this site has always been hosted elsewhere and manag
 + Ако желите да комуницирате са мном сигурно користите [[https://www.милићвукојичић.од.срб/gpg.html][ГПГ/ПГП]] кључ / If you want to communicate with me in a safe way, please use my [[https://www.милићвукојичић.од.срб/gpg.html][GPG/PGP]] key.
 * Најновије политичке белешке и вести / Most recent Political Notes and News Items
 \\
++ Да ли треба санкционисати и угасити сваки вид мишљења које није мејнстрим? : https://www.danas.rs/svet/slavoj-zizek-govor-sajam-knjiga-u-frankfurtu-autorski-tekst-za-danas/ 
+\\
++ Синдикати и радници протестују, које решење нуди Амазон : https://www.theguardian.com/technology/2023/oct/27/make-amazon-pay-black-friday-strikes-planned-in-30-countries-including-uk
+\\
++ Да ли постоји приватност у дигиталном свету? : https://getpocket.com/explore/item/silicon-valley-got-millions-to-let-siri-and-alexa-listen-in
+\\
 + Одељење за образовање прати постове особља из Енглеске на друштвеним мрежама због критика њихове политике: https://www.theguardian.com/politics/2023/oct/21/uk-government-keeping-files-on-teaching-assistants-and-librarians-internet-activity
 \\
 + Данијел Бернстин упозорава да НИСТ дозвољава НСА да "намерно" [[https://www.newscientist.com/article/2396510-mathematician-warns-us-spies-may-be-weakening-next-gen-encryption/][ослаби]] стандарде енкрипције. Да ли НИСТ има одговор сем "[[https://www.theregister.com/2013/09/11/nist_denies_that_the_nsa_weakened_its_encryption_standard/][Да ли мислите да би то урадили?]]", и да ли после Снодена треба веровати овим институцијама?  
@@ -46,9 +52,9 @@ For the sake of separation, this site has always been hosted elsewhere and manag
 * [[http://www.милићвукојичић.од.срб/tekstovi.html][Tekstovi / Writings]]
 * Публикације / Publications
 - https://www.researchgate.net/profile/Milic-Vukojicic
-- [[http:www/милићвукојичић.од.срб/mind.html][MIND and CONSCIOUSNESS]]
-- [[http:www/милићвукојичић.од.срб/sentient.html]["Sentient" AI called LaMDA]]
-- [[http:www/милићвукојичић.од.срб/slobodnisoftver2022.html][Slobodni softver u 2022. godini]]
+- [[http:www.милићвукојичић.од.срб/mind.html][MIND and CONSCIOUSNESS]]
+- [[http:www.милићвукојичић.од.срб/sentient.html]["Sentient" AI called LaMDA]]
+- [[http:www.милићвукојичић.од.срб/slobodnisoftver2022.html][Slobodni softver u 2022. godini]]
 
 * Препоруке / Recommendations
 + Кажи НЕ власничком ЈаваСкрипту! / Say NO to [[https://www.gnu.org/philosophy/javascript-trap.html][proprietary JS!]]
