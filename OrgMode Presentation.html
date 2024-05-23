@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Org Mode Presentation</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #282c34;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .slide h1, .slide h2, .slide h3 {
+            color: #00ff00;
+            text-align: left;
+        }
+        .slide ul {
+            list-style: none;
+            padding: 0;
+        }
+        .slide li {
+            color: #90EE90; /* Light green color */
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .slide li::before {
+            content: "+ ";
+            color: #90EE90; /* Light green color */
+        }
+        .slide p, .slide img, .slide video {
+            text-align: left;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #00ff00;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="file" id="fileInput" accept=".org">
+        <div id="slides"></div>
+        <div class="navigation hidden">
+            <button id="prev" class="button">Previous</button>
+            <button id="exit" class="button">Exit</button>
+            <button id="next" class="button">Next</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const orgContent = e.target.result;
+                    parseAndDisplayOrgContent(orgContent);
+                };
+                reader.readAsText(file);
+                document.getElementById('fileInput').classList.add('hidden');
+            }
+        });
+
+        const parseAndDisplayOrgContent = (orgContent) => {
+            const { slides, metadata } = parseOrg(orgContent);
+            createSlides(slides, metadata);
+        };
+
+        const parseOrg = (org) => {
+            const slides = [];
+            const lines = org.split('\n');
+            let currentSlide = null;
+            let metadata = {
+                title: '',
+                author: '',
+                email: '',
+                date: ''
+            };
+
+            for (let line of lines) {
+                if (line.startsWith('#+TITLE:')) {
+                    metadata.title = line.substring(8).trim();
+                } else if (line.startsWith('#+AUTHOR:')) {
+                    metadata.author = line.substring(9).trim();
+                } else if (line.startsWith('#+EMAIL:')) {
+                    metadata.email = line.substring(8).trim();
+                } else if (line.startsWith('#+DATE:')) {
+                    metadata.date = line.substring(7).trim();
+                } else if (line.startsWith('* ')) {
+                    if (currentSlide) slides.push(currentSlide);
+                    currentSlide = { title: line.substring(2), points: [] };
+                } else if (line.startsWith('** ')) {
+                    currentSlide.points.push({ type: 'subtitle', content: line.substring(3) });
+                } else if (line.startsWith('*** ')) {
+                    currentSlide.points.push({ type: 'subsubtitle', content: line.substring(4) });
+                } else if (line.startsWith('  - ') || line.startsWith('  + ') || line.match(/^\s*\d+\.\s/)) {
+                    currentSlide.points.push({ type: 'bullet', content: line.trim().substring(2) });
+                } else if (line.trim().startsWith('img:')) {
+                    currentSlide.points.push({ type: 'image', content: line.trim().substring(4) });
+                } else if (line.trim().startsWith('video:')) {
+                    currentSlide.points.push({ type: 'video', content: line.trim().substring(6) });
+                } else if (line.trim() !== '') {
+                    currentSlide.points.push({ type: 'text', content: line.trim() });
+                }
+            }
+
+            if (currentSlide) slides.push(currentSlide);
+            return { slides, metadata };
+        };
+
+        const createSlides = (slides, metadata) => {
+            const slidesContainer = document.getElementById('slides');
+            slidesContainer.innerHTML = '';
+
+            // First slide with metadata
+            const metaSlide = document.createElement('div');
+            metaSlide.classList.add('slide', 'active');
+            const metaTitle = document.createElement('h1');
+            metaTitle.textContent = metadata.title;
+            metaSlide.appendChild(metaTitle);
+            if (metadata.author) {
+                const metaAuthor = document.createElement('p');
+                metaAuthor.textContent = `Author: ${metadata.author}`;
+                metaSlide.appendChild(metaAuthor);
+            }
+            if (metadata.email) {
+                const metaEmail = document.createElement('p');
+                metaEmail.textContent = `Email: ${metadata.email}`;
+                metaSlide.appendChild(metaEmail);
+            }
+            if (metadata.date) {
+                const metaDate = document.createElement('p');
+                metaDate.textContent = `Date: ${metadata.date}`;
+                metaSlide.appendChild(metaDate);
+            }
+            slidesContainer.appendChild(metaSlide);
+
+            slides.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.classList.add('slide');
+
+                if (slide.title) {
+                    const slideTitle = document.createElement('h1');
+                    slideTitle.textContent = slide.title;
+                    slideDiv.appendChild(slideTitle);
+                }
+
+                const pointsList = document.createElement('ul');
+                slide.points.forEach(point => {
+                    if (point.type === 'subtitle') {
+                        const subtitle = document.createElement('h2');
+                        subtitle.textContent = point.content;
+                        pointsList.appendChild(subtitle);
+                    } else if (point.type === 'subsubtitle') {
+                        const subsubtitle = document.createElement('h3');
+                        subsubtitle.textContent = point.content;
+                        pointsList.appendChild(subsubtitle);
+                    } else if (point.type === 'bullet') {
+                        const pointItem = document.createElement('li');
+                        pointItem.textContent = point.content;
+                        pointsList.appendChild(pointItem);
+                    } else if (point.type === 'image') {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = point.content;
+                        imgElement.style.maxWidth = '100%';
+                        imgElement.style.display = 'block';
+                        imgElement.style.margin = '10px 0';
+                        pointsList.appendChild(imgElement);
+                    } else if (point.type === 'video') {
+                        const videoElement = document.createElement('iframe');
+                        videoElement.src = point.content.includes('youtube') ? point.content.replace('watch?v=', 'embed/') : point.content;
+                        videoElement.width = '100%';
+                        videoElement.height = '315';
+                        videoElement.allowFullscreen = true;
+                        videoElement.style.display = 'block';
+                        videoElement.style.margin = '10px 0';
+                        pointsList.appendChild(videoElement);
+                    } else if (point.type === 'text') {
+                        const textItem = document.createElement('p');
+                        textItem.textContent = point.content;
+                        pointsList.appendChild(textItem);
+                    }
+                });
+
+                slideDiv.appendChild(pointsList);
+                slidesContainer.appendChild(slideDiv);
+
+                // Center the first slide
+                if (index === 0) {
+                    slideDiv.style.textAlign = 'center';
+                }
+            });
+
+            // Show navigation
+            document.querySelector('.navigation').classList.remove('hidden');
+
+            let currentSlideIndex = 0;
+
+            const showSlide = (index) => {
+                const allSlides = document.querySelectorAll('.slide');
+                allSlides.forEach(slide => slide.classList.remove('active'));
+                allSlides[index].classList.add('active');
+            };
+
+            // Event listeners for navigation
+            document.getElementById('prev').addEventListener('click', () => {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    showSlide(currentSlideIndex);
+                }
+            });
+
+            document.getElementById('next').addEventListener('click', () => {
+                if (currentSlideIndex < document.querySelectorAll('.slide').length - 1) {
+                    currentSlideIndex++;
+                    showSlide(currentSlideIndex);
+                }
+            });
+
+            document.getElementById('exit').addEventListener('click', () => {
+                location.reload(); // Reload the page to exit the presentation
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowRight') {
+                    if (currentSlideIndex < document.querySelectorAll('.slide').length - 1) {
+                        currentSlideIndex++;
+                        showSlide(currentSlideIndex);
+                    }
+                } else if (event.key === 'ArrowLeft') {
+                    if (currentSlideIndex > 0) {
+                        currentSlideIndex--;
+                        showSlide(currentSlideIndex);
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
+
