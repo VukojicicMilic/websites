@@ -1,306 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<!-- 2023-04-07 пет 20:38 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Drage kolege edukatori shvatite da ChatGPT i kalkulator nisu isto!</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0." />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Milić Vukojičić's Personal Sites</title>
+  </head>
+  
+    <body>
+      <header class='header'>
+    <a class="logo" href="https://www.милићвукојичић.од.срб/">home</a>
+    <nav>
+      <a href="https://www.милићвукојичић.од.срб/tekstovi.html">writings</a>
+      <a href="https://www.милићвукојичић.од.срб/recommendations.html">recommendations</a>
+      <a href="https://www.милићвукојичић.од.срб/code.html">code</a>
+      <a href="https://www.милићвукојичић.од.срб/indexsr.html">serbian</a>
+    </nav>
+  </header>
+<h2 id="Drage%20kolege%20edukatori%20shvatite%20da%20ChatGPT%20i%20kalkulator%20nisu%20isto!">Drage kolege edukatori shvatite da ChatGPT i kalkulator nisu isto!</h2>
 
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
+<p>U poslednje vreme dosta edukatora, nastavnika, profesora na društvenim mrežama postavlja članak o tome “da su se matematičari bunili ….. pri uvođenju kalkulatora u obrazovanje” i prave paralelu sa tim što se neki od edukatora bune pri uvođenju LLM (eng. large language model) softvera u obrazovanje. Uvođenje ChatGPT softvera i kalkulatora se drastično razlikuje i u ovom tekstu ćemo pokušati da razumemo zašto ove dve stvari nisu jednake (kalkulator i softver kao što je ChatGPT).</p>
 
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
+<p>Kalkulator možemo definisati kao mašinu koja je dizajnirana kao mašina koja izvršava samo matematičke operacije, naravno postoje kalkulatori koji su bazirani na Fon Nojmanovoj arhitekturi [1] i koji se ponašaju kao računari, tj. mogu da izvršavaju instrukcije koje nisu samo matematičke.</p>
 
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+<p>ChatGPT predstavlja četbot sistem koji je nadograđen na sisteme GPT-3 i GPT-4 koji sami predstavljaju Velike jezičke modele (LLM) tj. specijalno dizajniranu neuronsku mrežu sa ogromnim brojem parametara koja se trenira pomoću velike količine teksta koja spada u unapred obučavane modele veštačke inteligencije [2] takođe baziranom na transformer arhitekturi [3].</p>
 
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
+<p>Sama definicija kalkulatora i ChatGPT modela nam govori da su ovo dve veoma različite stvari koje ne služe istim svrhama. Kalkulator služi za izračunavanja dok ChatGPT služi i dizajniran je kao četbot ili sredstvo za generisanje teksta (ali prvenstveno kao četbot).</p>
 
+<p>Druga stvar po kojoj želimo da poredimo ove dve stvari su rezultati. Kalkulator je napravljen kao mašina koja daje tačne rezultate tj. rezultati su uvek isti, bez obzira koliko puta vi uneli 2 + 2 on će uvek odgovoriti 4. ChatGPT nije napravljen kao “baza znanja” i ovakvi sistemi ne razumeju pojam “tačnih informacija” već je generisan kao sistem koji na osnovu unosa, i statističke “kalkulacije” generiše izlaz. Ovaj izlaz ne samo da nije baziran na tačnosti već ne mora biti uopšte istinit! Primer nečega ovakvog možemo videti na stranici Wolfram|Alpha as the Way to Bring Computational Knowledge Superpowers to ChatGPT [4]. Takođe edukatori moraju biti svesni da korišćenje ovakvih sistema u svrhu istraživanja ili odgovaranja na pitanja i pisanja eseja ne samo da nije dobar već taj generisan tekst nije zasnovan na činjenicama a u edukaciji činjenice su jedino što je važno.</p>
 
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
-</head>
-<body>
-<div id="content">
-<h1 class="title">Drage kolege edukatori shvatite da ChatGPT i kalkulator nisu isto!</h1>
-<p>
-U poslednje vreme dosta edukatora, nastavnika, profesora na društvenim mrežama postavlja članak o tome “da su se matematičari bunili ….. pri uvođenju kalkulatora u obrazovanje” i prave paralelu sa tim što se neki od edukatora bune pri uvođenju LLM (eng. large language model) softvera u obrazovanje. Uvođenje ChatGPT softvera i kalkulatora se  drastično razlikuje i u ovom tekstu ćemo pokušati da razumemo zašto ove dve stvari nisu jednake (kalkulator i softver kao što je ChatGPT).
-</p>
+<p>Treća i veoma važna stvar koje edukatori moraju biti svesni je da sistemi kao ChatGPT mogu da navedu ljude, kako profesore, nastavnike tako i studente da veruju generisanom tekstu [5] iako je generisani tekst samo niz nasumičnih reči. Izgleda da ako stavimo dovoljno majmuna u sobu i damo im pisaće mašine možda neki majmun ipak napravi nešto slično Šekspirovim delima. Edukatori moraju shvatiti da ChatGPT ne razume vaš unos, ne razume kontekst napisanih reči, ne razume generisani izlaz, i kao takav ne sme biti korišćen u svrhe istraživanja i pisanja.</p>
 
-<p>
-Kalkulator možemo definisati kao mašinu koja je dizajnirana kao mašina koja izvršava samo matematičke operacije, naravno postoje kalkulatori koji su bazirani na Fon Nojmanovoj arhitekturi [1] i koji se ponašaju kao računari, tj. mogu da izvršavaju instrukcije koje nisu samo matematičke. 
-</p>
+<p>Četvrto je pitanje da li će biti posledica koje se ne mogu sada videti a koje su direktno povezane sa LLM sistemima. Ovde ne pričamo o samom uticaju na posao [6] već i o uticaju koje pogrešan način istraživanja i pristup obrazovanju može imati na ove i naredne generacije, kao i formiranju učenika kao ličnosti i njihovih zdravih navika.</p>
 
-<p>
-ChatGPT predstavlja četbot sistem koji je nadograđen na sisteme GPT-3 i GPT-4 koji sami predstavljaju Velike jezičke modele (LLM) tj. specijalno dizajniranu neuronsku mrežu sa ogromnim brojem parametara koja se trenira pomoću velike količine teksta koja spada u unapred obučavane modele veštačke inteligencije [2] takođe baziranom na transformer arhitekturi [3]. 
-</p>
+<p>Takođe edukatori moraju biti svesni da prave učenike zavisnima. Kada učenik koristi ChatGPT ili kalkulator on postaje zavistan od same tehnologije. Ali postoji velika razlika u zavisnosti između kalkulatora i ChatGPT softvera. Učenik koji koristi kalkulator bilo da služi samo za matematičke operacije ili kao računar, on koristi računar koji poseduje i zna koje instrukcije je dao računaru i koje instrukcije računar izvršava. ChatGPT je softver koji nije slobodan a ni otvoren, ne znamo sa sigurnošću koji su podaci korišćeni za treniranje, a nemamo ni sam kod softvera. Takođe ChatGPT se koristi kao servis tj. instrukcije se ne izvršavaju na našim računarima već na serveru. Kako je sam ChatGPT baziran na tajni tj. na softveru i podacima koji nisu slobodni i dostupni svima, ne samo da je sam softver dizajniran kao pretnja slobodi i obrazovanju učenika, već postoji i realna opasnost koja može ugroziti samu privatnost učenika kao i same učenike. Dakle učenici ne smeju biti tretirani kao roba, a njihovi produkti kao podaci na kojima se nešto trenira, i ne sme se kod učenika podsticati zavisnost od tehnologije koja je sakrivena i nad kojom oni nemaju kontrolu, već se kod učenika treba promovisati timski rad, proizvodnja unikatnih ideja i ideje slobodarstva.</p>
 
-<p>
-Sama definicija kalkulatora i ChatGPT modela nam govori da su ovo dve veoma različite stvari koje ne služe istim svrhama. Kalkulator služi za izračunavanja dok ChatGPT služi i dizajniran je kao četbot ili sredstvo za generisanje teksta (ali prvenstveno kao četbot).
-</p>
+<p>Tako da kolege ostavimo ChatGPT da bude ono što jeste tj. samo običan četbot, generator teksta, ne budimo zavedeni pričom o nazadovanju i zlatnoj budućnosti već pokušajmo da se bavimo obrazovanjem baziranom na istini, činjenicama, etici i moralu i pokušajmo da razvijemo kod dece znatiželju ne praveći od njih samo generatore teksta koji nema smisao!</p>
 
-<p>
-Druga stvar po kojoj želimo da poredimo ove dve stvari su rezultati. Kalkulator je napravljen kao mašina koja daje tačne rezultate tj. rezultati su uvek isti, bez obzira koliko puta vi uneli 2 + 2 on će uvek odgovoriti 4. ChatGPT nije napravljen kao “baza znanja” i ovakvi sistemi ne razumeju pojam “tačnih informacija” već je generisan kao sistem koji na osnovu unosa, i statističke “kalkulacije” generiše izlaz. Ovaj izlaz ne samo da nije baziran na tačnosti već ne mora biti uopšte istinit! Primer nečega ovakvog možemo videti na stranici Wolfram|Alpha as the Way to Bring Computational Knowledge Superpowers to ChatGPT [4]. Takođe edukatori moraju biti svesni da korišćenje ovakvih sistema u svrhu istraživanja ili odgovaranja na pitanja i pisanja eseja ne samo da nije dobar već taj generisan tekst nije zasnovan na činjenicama a u edukaciji činjenice su jedino što je važno. 
-</p>
+<p> </p>
 
-<p>
-Treća i veoma važna stvar koje edukatori moraju biti svesni je da sistemi kao ChatGPT mogu da navedu ljude, kako profesore, nastavnike tako i studente da veruju generisanom tekstu [5] iako je generisani tekst samo niz nasumičnih reči. Izgleda da ako stavimo dovoljno majmuna u sobu i damo im pisaće mašine možda neki majmun ipak napravi nešto slično Šekspirovim delima. Edukatori moraju shvatiti da ChatGPT ne razume vaš unos, ne razume kontekst napisanih reči, ne razume generisani izlaz, i kao takav ne sme biti korišćen u svrhe istraživanja i pisanja. 
-</p>
+<p>Reference:</p>
 
-<p>
-Četvrto je pitanje da li će biti posledica koje se ne mogu sada videti a koje su direktno povezane sa LLM sistemima. Ovde ne pričamo o samom uticaju na posao [6] već i o uticaju koje pogrešan način istraživanja i pristup obrazovanju može imati na ove i naredne generacije, kao i formiranju učenika kao ličnosti i njihovih zdravih navika. 
-</p>
-
-<p>
-Takođe edukatori moraju biti svesni da prave učenike zavisnima. Kada učenik koristi ChatGPT ili kalkulator on postaje zavistan od same tehnologije. Ali postoji velika razlika u zavisnosti između kalkulatora i ChatGPT softvera. Učenik koji koristi kalkulator bilo da služi samo za matematičke operacije ili kao računar, on koristi računar koji poseduje i zna koje instrukcije je dao računaru i koje instrukcije računar izvršava. ChatGPT je softver koji nije slobodan a ni otvoren, ne znamo sa sigurnošću koji su podaci korišćeni za treniranje, a nemamo ni sam kod softvera. Takođe ChatGPT se koristi kao servis tj. instrukcije se ne izvršavaju na našim računarima već na serveru. Kako je sam ChatGPT baziran na tajni tj. na softveru i podacima koji nisu slobodni i dostupni svima, ne samo da je sam softver dizajniran kao pretnja slobodi i obrazovanju učenika, već postoji i realna opasnost koja može ugroziti samu privatnost učenika kao i same učenike. Dakle učenici ne smeju biti tretirani kao roba, a njihovi produkti kao podaci na kojima se nešto trenira, i ne sme se kod učenika podsticati zavisnost od tehnologije koja je sakrivena i nad kojom oni nemaju kontrolu, već se kod učenika treba promovisati timski rad, proizvodnja unikatnih ideja i ideje slobodarstva.
-</p>
-
-<p>
-Tako da kolege ostavimo ChatGPT da bude ono što jeste tj. samo običan četbot, generator teksta, ne budimo zavedeni pričom o nazadovanju i zlatnoj budućnosti već pokušajmo da se bavimo obrazovanjem baziranom na istini, činjenicama, etici i moralu i pokušajmo da razvijemo kod dece znatiželju ne praveći od njih samo generatore teksta koji nema smisao!  
-</p>
-
-<p>
-<br />
-</p>
-
-<p>
-Reference:
-</p>
-<ul class="org-ul">
-<li>[1] O’Regan, G., &amp; O’Regan, G. (2018). Von Neumann Architecture. The Innovation in Computing Companion: A Compendium of Select, Pivotal Inventions, 257-259.</li>
-<li>[2] Budzianowski, P., &amp; Vulić, I. (2019). Hello, it's GPT-2&#x2013;how can I help you? towards the use of pretrained language models for task-oriented dialogue systems. arXiv preprint arXiv:1907.05774.</li>
-<li>[3] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., &#x2026; &amp; Polosukhin, I. (2017). Attention is all you need. Advances in neural information processing systems, 30.</li>
-<li>[4] <a href="https://writings.stephenwolfram.com/2023/01/wolframalpha-as-the-way-to-bring-computational-knowledge-superpowers-to-chatgpt/">https://writings.stephenwolfram.com/2023/01/wolframalpha-as-the-way-to-bring-computational-knowledge-superpowers-to-chatgpt/</a></li>
-<li>[5] Bender, E. M., Gebru, T., McMillan-Major, A., &amp; Shmitchell, S. (2021, March). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?🦜. In Proceedings of the 2021 ACM conference on fairness, accountability, and transparency (pp. 610-623).</li>
-<li>[6] Eloundou, T., Manning, S., Mishkin, P., &amp; Rock, D. (2023). Gpts are gpts: An early look at the labor market impact potential of large language models. arXiv preprint arXiv:2303.10130.</li>
+<ul>
+<li>  [1] O’Regan, G., &#38; O’Regan, G. (2018). Von Neumann Architecture. The Innovation in Computing Companion: A Compendium of Select, Pivotal Inventions, 257-259.</li>
+<li>  [2] Budzianowski, P., &#38; Vulić, I. (2019). Hello, it&#8217;s GPT-2–how can I help you? towards the use of pretrained language models for task-oriented dialogue systems. arXiv preprint arXiv:1907.05774.</li>
+<li>  [3] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., … &#38; Polosukhin, I. (2017). Attention is all you need. Advances in neural information processing systems, 30.</li>
+<li>  [4] <a href="https://writings.stephenwolfram.com/2023/01/wolframalpha-as-the-way-to-bring-computational-knowledge-superpowers-to-chatgpt/">https:&#47;&#47;writings.stephenwolfram.com&#47;2023&#47;01&#47;wolframalpha-as-the-way-to-bring-computational-knowledge-superpowers-to-chatgpt&#47;</a></li>
+<li>  [5] Bender, E. M., Gebru, T., McMillan-Major, A., &#38; Shmitchell, S. (2021, March). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?🦜. In Proceedings of the 2021 ACM conference on fairness, accountability, and transparency (pp. 610-623).</li>
+<li>  [6] Eloundou, T., Manning, S., Mishkin, P., &#38; Rock, D. (2023). Gpts are gpts: An early look at the labor market impact potential of large language models. arXiv preprint arXiv:2303.10130.</li>
 </ul>
-
-<hr />
-</div>
-<div id="postamble" class="status">
-<p class="author">Author: Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0.</p>
-<p class="date">Created: 2023-04-07 пет 20:38</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
-</body>
-</html>
+<footer>
+    <hr>
+    <p>Copyright © 2022 Milić Vukojičić All text is released under CC-BY 4.0 license and all source code is released under GNU General Public License v3.0.</p>
+</footer> 
