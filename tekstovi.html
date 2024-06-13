@@ -1,540 +1,152 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<!-- 2023-09-09 Sat 10:41 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Милић Вукојичић / Milic Vukojicic</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0." />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Milić Vukojičić's Personal Sites</title>
+  </head>
+  
+    <body>
+      <header class='header'>
+    <a class="logo" href="https://www.милићвукојичић.од.срб/">home</a>
+    <nav>
+      <a href="https://www.милићвукојичић.од.срб/writings.html">writings</a>
+      <a href="https://www.милићвукојичић.од.срб/recommendations.html">recommendations</a>
+      <a href="https://www.милићвукојичић.од.срб/code.html">code</a>
+      <a href="https://www.милићвукојичић.од.срб/indexsr.html">serbian</a>
+    </nav>
+  </header>
+<h2 id="WRITINGS">WRITINGS</h2>
 
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
+<p>Search for texts using the command Ctrl+f</p>
 
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
-</head>
-<body>
-<div id="content">
-<h1 class="title">Милић Вукојичић / Milic Vukojicic</h1>
-<div class="org-center">
-<p>
-
-</p>
-
-<p>
-<a href="https://www.милићвукојичић.од.срб">ЛИЧНИ САЈТ МИЛИЋА ВУКОЈИЧИЋА / Milić Vukojičić's Personal Site</a>
-</p>
-
-<p>
-TEKSTOVI / WRITINGS
-</p>
-
-<p>
-Претражите текстове помоћу команде Ctrl+f / Search for texts using the command Ctrl+f
-</p>
-</div>
-
-<ol class="org-ol">
-<li>Free Software as a teaching and learning norm</li>
-<li>Freedom of Though</li>
-<li>AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!</li>
-<li>Слободни софтвер 2022.</li>
-<li>New Green anarchism and the soup</li>
-<li>Problems with analog attack</li>
-<li>AI, Marx and capitalist economic development</li>
+<ol>
+<li> Free Software as a teaching and learning norm</li>
+<li> Freedom of Though</li>
+<li> AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!</li>
+<li> Слободни софтвер 2022.</li>
+<li> New Green anarchism and the soup</li>
+<li> Problems with analog attack</li>
+<li> AI, Marx and capitalist economic development</li>
 </ol>
 
-<hr />
+<h3 id="%3Cstrong%3EFree%20Software%20as%20a%20teaching%20and%20learning%20norm%3C/strong%3E"><strong>Free Software as a teaching and learning norm</strong></h3>
 
-<p>
-<b>Free Software as a teaching and learning norm</b>
-</p>
+<p>Source code is a part of human knowledge, so hiding the source code will be a crime against the learning process and humanity.</p>
 
-<p>
-Source code is a part of human knowledge, so hiding the source code will be a crime against the learning process and humanity.
-</p>
+<p>Schools and teachers need to teach students not just how to use something but how to use it ethically, free software is also covering this category of teaching and learning.</p>
 
-<p>
-Schools and teachers need to teach students not just how to use something but how to use it ethically, free software is also covering this category of teaching and learning.
-</p>
+<p>Proprietary software represents a secret that forbids users to learn about software that they are using.</p>
 
-<p>
-Proprietary software represents a secret that forbids users to learn about software that they are using.
-</p>
+<p>Proprietary software in school can do much harm:</p>
 
-<p>
-Proprietary software in school can do much harm:
-</p>
+<p>unauthorized access to students&#8217; data (images, essays, homework, video, etc…) ; constant monitoring of students (unnecessary monitoring) ; creating pressure on using proprietary software (if a school decides to use proprietary software it is pressuring students to use it also); using proprietary cloud services (&#8220;There is no cloud - only other people&#8217;s computers&#8221;); creating a workflow that supports only proprietary software ; and much much more… So, to prevent unjust, not ethical, and overall immoral pressure teachers and educators should use free software in the educational process and give their students the freedom that they deserve.</p>
 
-<p>
-unauthorized access to students' data (images, essays, homework, video, etc&#x2026;) ;
-constant monitoring of students (unnecessary monitoring) ;
-creating pressure on using proprietary software (if a school decides to use proprietary software it is pressuring students to use it also);
-using proprietary cloud services ("There is no cloud - only other people's computers");
-creating a workflow that supports only proprietary software ;
-and much much more&#x2026;
-So, to prevent unjust, not ethical, and overall immoral pressure teachers and educators should use free software in the educational process and give their students the freedom that they deserve.
-</p>
+<p>Alternatives for proprietary software in education - <a href="https://www.gnu.org/software/free-software-for-education.html">https:&#47;&#47;www.gnu.org&#47;software&#47;free-software-for-education.html</a></p>
 
-<p>
-Alternatives for proprietary software in education - <a href="https://www.gnu.org/software/free-software-for-education.html">https://www.gnu.org/software/free-software-for-education.html</a>
-</p>
+<h3 id="%3Cstrong%3EFreedom%20of%20Thought%3C/strong%3E"><strong>Freedom of Thought</strong></h3>
 
-<hr />
+<p>&#8220;Freedom of thought requires media that don&#8217;t listen to and watch and surveil us as we use them. Media that consumes us in the end consumes freedom of thought.&#8221; - Eben Moglen</p>
 
-<p>
-<b>Freedom of Thought</b>
-</p>
+<p><a href="https://www.youtube.com/watch?v=1SKpRbvnx6g">https:&#47;&#47;www.youtube.com&#47;watch?v=1SKpRbvnx6g</a> - re:publica 2019 - Eben Moglen: Why Freedom of Thought Requires Attention</p>
 
-<p>
-"Freedom of thought requires media that don't listen to and watch and surveil us as we use them. Media that consumes us in the end consumes freedom of thought." - Eben Moglen
-</p>
+<p><a href="https://www.youtube.com/watch?v=sKOk4Y4inVY">https:&#47;&#47;www.youtube.com&#47;watch?v=sKOk4Y4inVY</a> - re:publica 2012 - Eben Moglen - Freedom of Thought Requires Free Media</p>
 
-<p>
-<a href="https://www.youtube.com/watch?v=1SKpRbvnx6g">https://www.youtube.com/watch?v=1SKpRbvnx6g</a> - re:publica 2019 - Eben Moglen: Why Freedom of Thought Requires Attention
-</p>
+<p><a href="http://moglen.law.columbia.edu/publications/dcm.html">http:&#47;&#47;moglen.law.columbia.edu&#47;publications&#47;dcm.html</a> - The dotCommunist Manifesto</p>
 
-<p>
-<a href="https://www.youtube.com/watch?v=sKOk4Y4inVY">https://www.youtube.com/watch?v=sKOk4Y4inVY</a> - re:publica 2012 - Eben Moglen - Freedom of Thought Requires Free Media
-</p>
+<h3 id="%3Cstrong%3EAI%20nau%C4%8Dnici%20podr%C5%BEavaju%20nenau%C4%8Dne%20metode%20(nau%C4%8Dnici%20vratimo%20se%20nauci!)%3C/strong%3E"><strong>AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!)</strong></h3>
 
-<p>
-<a href="http://moglen.law.columbia.edu/publications/dcm.html">http://moglen.law.columbia.edu/publications/dcm.html</a> - The dotCommunist Manifesto
-</p>
+<p>Футуре Оф Лифе <a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">https:&#47;&#47;futureoflife.org&#47;open-letter&#47;pause-giant-ai-experiments&#47;</a> институт је пре извесног времена објавио отворено писмо, које су потписали неки од највећих и најбитнијих имена у домену вештачке интелигенције и истраживања, а односи се на успоравање прогеса у истраживању тј. тренирању АИ модела на 6 месеци како би се &#8220;човечанство припремило&#8221; на овакве системе.</p>
 
+<p>прочитај више на: <a href="https://www.%D0%BC%D0%B8%D0%BB%D0%B8%D1%9B%D0%B2%D1%83%D0%BA%D0%BE%D1%98%D0%B8%D1%87%D0%B8%D1%9B.%D0%BE%D0%B4.%D1%81%D1%80%D0%B1/AIEthics.html">https:&#47;&#47;www.милићвукојичић.од.срб&#47;AIEthics.html</a></p>
 
-<hr />
+<h3 id="%3Cstrong%3E%D0%94%D1%80%D0%B0%D0%B3%D0%B5%20%D0%BA%D0%BE%D0%BB%D0%B5%D0%B3%D0%B5%20%D0%B5%D0%B4%D1%83%D0%BA%D0%B0%D1%82%D0%BE%D1%80%D0%B8%20%D1%81%D1%85%D0%B2%D0%B0%D1%82%D0%B8%D1%82%D0%B5%20%D0%B4%D0%B0%20%D0%A7%D0%B5%D1%82%D0%93%D0%9F%D0%A2%20%D0%B8%20%D0%BA%D0%B0%D0%BB%D0%BA%D1%83%D0%BB%D0%B0%D1%82%D0%BE%D1%80%20%D0%BD%D0%B8%D1%81%D1%83%20%D0%B8%D1%81%D1%82%D0%BE!%3C/strong%3E"><strong>Драге колеге едукатори схватите да ЧетГПТ и калкулатор нису исто!</strong></h3>
 
-<p>
-<b>AI naučnici podržavaju nenaučne metode (naučnici vratimo se nauci!)</b>
-</p>
+<p>У последње време доста едукатора, наставника, професора на друштвеним мрежама поставља чланак о томе “да су се математичари бунили ….. при увођењу калкулатора у образовање” и праве паралелу са тим што се неки од едукатора буне при увођењу ЛЛМ (енг. large language models) софтвера у образовање. Увођење ЧетГПТ софтвера и калкулатора се драстично разликује и у овом тексту ћемо покушати да разумемо зашто ове две ствари нису једнаке (калкулатор и софтвер као што је ЧетГПТ).</p>
 
-<p>
-Футуре Оф Лифе <a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">https://futureoflife.org/open-letter/pause-giant-ai-experiments/</a> институт је пре извесног времена објавио отворено писмо, које су потписали неки од највећих и најбитнијих имена у домену вештачке интелигенције и истраживања, а односи се на успоравање прогеса у истраживању тј. тренирању АИ модела на 6 месеци како би се "човечанство припремило" на овакве системе.
-</p>
+<p>…</p>
 
-<p>
-прочитај више на: <a href="https://www.милићвукојичић.од.срб/AIEthics.html">https://www.милићвукојичић.од.срб/AIEthics.html</a>
-</p>
+<p>прочитај више на :<a href="https://www.%D0%BC%D0%B8%D0%BB%D0%B8%D1%9B%D0%B2%D1%83%D0%BA%D0%BE%D1%98%D0%B8%D1%87%D0%B8%D1%9B.%D0%BE%D0%B4.%D1%81%D1%80%D0%B1/kalkulatorgpt.html">www.милићвукојичић.од.срб&#47;kalkulatorgpt.html</a></p>
 
-<hr />
-<p>
-<b>Драге колеге едукатори схватите да ЧетГПТ и калкулатор нису исто!</b>
-</p>
+<h3 id="%3Cstrong%3E%D0%A1%D0%BB%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%B8%20%D1%81%D0%BE%D1%84%D1%82%D0%B2%D0%B5%D1%80%202022.%3C/strong%3E"><strong>Слободни софтвер 2022.</strong></h3>
 
-<p>
-У последње време доста едукатора, наставника, професора на друштвеним мрежама поставља чланак о томе “да су се математичари бунили ….. при увођењу калкулатора у образовање” и праве паралелу са тим што се неки од едукатора буне при увођењу ЛЛМ (енг. large language models) софтвера у образовање. Увођење ЧетГПТ софтвера и калкулатора се  драстично разликује и у овом тексту ћемо покушати да разумемо зашто ове две ствари нису једнаке (калкулатор и софтвер као што је ЧетГПТ).
-</p>
+<p>Идеја Слободног софтвера постоји још пре него што је Ричард Сталман 1985. године направио Фондацију за Слободан софтвер. Овај есеј има улогу да појасни зашто су ове идеје данас можда још битније него осамдесетих година и да упозна читаоце са концептом и идејама које стоје иза идеје “Слободног софтвера”.</p>
 
-<p>
-&#x2026;
-</p>
+<p>…</p>
 
-<p>
-прочитај више на :<a href="https://www.милићвукојичић.од.срб/kalkulatorgpt.html">www.милићвукојичић.од.срб/kalkulatorgpt.html</a>
-</p>
+<p>прочитај више на: <a href="https://www.%D0%BC%D0%B8%D0%BB%D0%B8%D1%9B%D0%B2%D1%83%D0%BA%D0%BE%D1%98%D0%B8%D1%87%D0%B8%D1%9B.%D0%BE%D0%B4.%D1%81%D1%80%D0%B1/slobodnisoftver2022.html">https:&#47;&#47;www.милићвукојичић.од.срб&#47;slobodnisoftver2022.html</a></p>
 
-<hr />
+<h3 id="%3Cstrong%3ENew%20Green%20anarchism%20and%20the%20soup%3C/strong%3E"><strong>New Green anarchism and the soup</strong></h3>
 
-<p>
-<b>Слободни софтвер 2022.</b>
-</p>
+<p>Is this kind of activism taking us to another Unabomber act?</p>
 
-<p>
-Идеја Слободног софтвера постоји још пре него што је Ричард Сталман 1985. године направио Фондацију за Слободан софтвер. Овај есеј има улогу да појасни зашто су ове идеје данас можда још битније него осамдесетих година и да упозна читаоце са концептом и идејама које стоје иза идеје “Слободног софтвера”. 
-</p>
+<p>The activism that we had in the past months is growing rapidly throughout the entire world and everyone is trying to have a bite of this cake.</p>
 
-<p>
-&#x2026;
-</p>
+<p>Throwing soup at the problem: are radical climate protests helping or hurting the cause?</p>
 
-<p>
-прочитај више на: <a href="https://www.милићвукојичић.од.срб/slobodnisoftver2022.html">https://www.милићвукојичић.од.срб/slobodnisoftver2022.html</a>
-</p>
+<p><a href="https://www.theguardian.com/world/2022/nov/13/throwing-soup-at-the-problem-are-radical-climate-protests-helping-or-hurting-the-cause">https:&#47;&#47;www.theguardian.com&#47;world&#47;2022&#47;nov&#47;13&#47;throwing-soup-at-the-problem-are-radical-climate-protests-helping-or-hurting-the-cause</a></p>
 
-<hr />
+<p>If you take a look at the videos that they are recording during this performance, some of the new &#8220;followers&#8221; have no idea why are they doing this kind of act. Also, I witness in Vienna when the activist glues them to the fossil directly.</p>
 
-<p>
-<b>New Green anarchism and the soup</b>
-</p>
+<p>As much as I support them in the ideological protest against the climate crisis, I will never support the ideology of following somebody&#8217;s ideas and acting like a brainwashed person without knowing why you are doing that in the first place.</p>
 
-<p>
-Is this kind of activism taking us to another Unabomber act?
-</p>
+<p>My idea is that this kind of behavior will eventually lead us to the creation of another Unabomber who will be so obsessed with the ideology that he&#47;she&#47;it proposed. Green anarchism is nothing new we have Industrial Society and Its Future, or the so-called &#8220;Unabomber Manifesto&#8221;, where the essay contends that the Industrial Revolution began a harmful process of natural destruction brought about by technology.</p>
 
-<p>
-The activism that we had in the past months is growing rapidly throughout the entire world and everyone is trying to have a bite of this cake.
-</p>
+<p><a href="https://web.cs.ucdavis.edu/~rogaway/classes/188/materials/Industrial%20Society%20and%20Its%20Future.pdf">https:&#47;&#47;web.cs.ucdavis.edu&#47;~rogaway&#47;classes&#47;188&#47;materials&#47;Industrial%20Society%20and%20Its%20Future.pdf</a></p>
 
-<p>
-Throwing soup at the problem: are radical climate protests helping or hurting the cause?
-</p>
+<p>Is this kind of activism that just follows the trend, taking us to another Unabomber idea?</p>
 
-<p>
-<a href="https://www.theguardian.com/world/2022/nov/13/throwing-soup-at-the-problem-are-radical-climate-protests-helping-or-hurting-the-cause">https://www.theguardian.com/world/2022/nov/13/throwing-soup-at-the-problem-are-radical-climate-protests-helping-or-hurting-the-cause</a>
-</p>
+<h3 id="%3Cstrong%3EProblems%20with%20analog%20attack%3C/strong%3E"><strong>Problems with analog attack</strong></h3>
 
-<p>
-If you take a look at the videos that they are recording during this performance, some of the new "followers" have no idea why are they doing this kind of act. Also, I witness in Vienna when the activist glues them to the fossil directly.
-</p>
+<p>This small text is based on the publication &#8220;A2: Analog Malicious Hardware&#8221;</p>
 
-<p>
-As much as I support them in the ideological protest against the climate crisis, I will never support the ideology of following somebody's ideas and acting like a brainwashed person without knowing why you are doing that in the first place.
-</p>
+<p>Yang, K., Hicks, M., Dong, Q., Austin, T., &#38; Sylvester, D. (2016, May). A2: Analog malicious hardware. In 2016 IEEE symposium on security and privacy (SP) (pp. 18-37). IEEE.</p>
 
-<p>
-My idea is that this kind of behavior will eventually lead us to the creation of another Unabomber who will be so obsessed with the ideology that he/she/it proposed. Green anarchism is nothing new we have Industrial Society and Its Future, or the so-called "Unabomber Manifesto", where the essay contends that the Industrial Revolution began a harmful process of natural destruction brought about by technology.
-</p>
+<p>You can find here - <a href="https://www.researchgate.net/profile/Kaiyuan-Yang-5/publication/306301849_A2_Analog_Malicious_Hardware/links/5cce6b53458515712e928b3e/A2-Analog-Malicious-Hardware.pdf">https:&#47;&#47;www.researchgate.net&#47;profile&#47;Kaiyuan-Yang-5&#47;publication&#47;306301849<em>A2</em>Analog<em>Malicious</em>Hardware&#47;links&#47;5cce6b53458515712e928b3e&#47;A2-Analog-Malicious-Hardware.pdf</a></p>
 
-<p>
-<a href="https://web.cs.ucdavis.edu/~rogaway/classes/188/materials/Industrial%20Society%20and%20Its%20Future.pdf">https://web.cs.ucdavis.edu/~rogaway/classes/188/materials/Industrial%20Society%20and%20Its%20Future.pdf</a>
-</p>
+<p>The idea of freedom should also be present in the domain of the hardware itself. For decades we struggle with the idea of freedom in the terms of software that we are running on our hardware and this idea developed over the years with the Free Software Foundation, GNU project, people like Richard Stallman, Eben Moglen, Edward Snowden, etc. So, we can get freedom in the domain of software, from the bootloader, drivers, OS, application software, and online application.</p>
 
-<p>
-Is this kind of activism that just follows the trend, taking us to another Unabomber idea?
-</p>
+<p>The main problem that we have now is that some corporations like Intel, AMD, Apple are making proprietary hardware that can harm the freedom of the end users. This can be a very big problem becose we cannot see what is inside of our hardware. Our hardware can do many thing from, having propriatery hardware in your machine can lead to many things like notn nowing if hardware itsels is communicating with someone, or if hardware like your camera is on constntly etc.</p>
 
-<hr />
+<p>Richard Stallman take on this ideas:</p>
 
-<p>
-<b>Problems with analog attack</b>
-</p>
+<p>To what extent do the ideas of free software extend to hardware? Is it a moral obligation to make our hardware designs free, just as it is to make our software free? Does maintaining our freedom require rejecting hardware made from nonfree designs?</p>
 
-<p>
-This small text is based on the publication "A2: Analog Malicious Hardware"
-</p>
+<p><a href="https://www.gnu.org/philosophy/free-hardware-designs.en.html">https:&#47;&#47;www.gnu.org&#47;philosophy&#47;free-hardware-designs.en.html</a></p>
 
-<p>
-Yang, K., Hicks, M., Dong, Q., Austin, T., &amp; Sylvester, D. (2016, May). A2: Analog malicious hardware. In 2016 IEEE symposium on security and privacy (SP) (pp. 18-37). IEEE.
-</p>
+<p>Also we have other movements like Open Source Hardware Association:</p>
 
-<p>
-You can find here - <a href="https://www.researchgate.net/profile/Kaiyuan-Yang-5/publication/306301849_A2_Analog_Malicious_Hardware/links/5cce6b53458515712e928b3e/A2-Analog-Malicious-Hardware.pdf">https://www.researchgate.net/profile/Kaiyuan-Yang-5/publication/306301849_A2_Analog_Malicious_Hardware/links/5cce6b53458515712e928b3e/A2-Analog-Malicious-Hardware.pdf</a>
-</p>
-
-<p>
-The idea of freedom should also be present in the domain of the hardware itself. For decades we struggle with the idea of freedom in the terms of software that we are running on our hardware and this idea developed over the years with the Free Software Foundation, GNU project, people like Richard Stallman, Eben Moglen, Edward Snowden, etc. So, we can get freedom in the domain of software, from the bootloader, drivers, OS, application software, and online application.
-</p>
-
-<p>
-The main problem that we have now is that some corporations like Intel, AMD, Apple are making proprietary hardware that can harm the freedom of the end users. This can be a very big problem becose we cannot see what is inside of our hardware. Our hardware can do many thing from, having propriatery hardware in your machine can lead to many things like notn nowing if hardware itsels is communicating with someone, or if hardware like your camera is on constntly etc.
-</p>
-
-<p>
-Richard Stallman take on this ideas:
-</p>
-
-<p>
-To what extent do the ideas of free software extend to hardware? Is it a moral obligation to make our hardware designs free, just as it is to make our software free? Does maintaining our freedom require rejecting hardware made from nonfree designs?
-</p>
-
-<p>
-<a href="https://www.gnu.org/philosophy/free-hardware-designs.en.html">https://www.gnu.org/philosophy/free-hardware-designs.en.html</a>
-</p>
-
-<p>
-Also we have other movements like Open Source Hardware Association:
-</p>
-
-<p>
-<a href="https://www.oshwa.org/">https://www.oshwa.org/</a>
-</p>
-
-<p>
-If we can name all the proprietary software "Malicious software" we need to be able also to name all proprietary hardware "Malicious hardware". We need to free our hardware as well as we have freed our software !
-</p>
-
-<hr />
-
-<p>
-<b>AI, Marx and capitalist economic development</b>
-</p>
-
-<p>
-If we look at AI and Big Data we can all agree that we are not all equal players in this game. Some companies have more data and more power to train AI systems than the average person in their garage (You don't need research to deduct this information.). This means that workers or individuals cannot develop the same products and that the product of big companies will always be greater than the individual products of all employees from those companies (employees will not own the final product). Also, if a company opensource their AI systems they are often giving the source code of the model or pre-trained systems, this means that we can not change the AI system itself we can just use it (the foolish idea that we have/own the final product), it is already being trained on the data that the company owns (even if the company release the data we cannot train it on our machine we don't have the power (CPU/GPU) for the training itself).
-</p>
-
-<p>
-The problem that we have here is beyond the classical equation for the Surplus value:
-</p>
-
-<p>
-Surplus value (s) = Revenue - production costs (c+v)
-</p>
-
-<p>
-c = constant capital (machinery, materials, fixed costs&#x2026;).
-</p>
-
-<p>
-v = variable capital (workers)
-</p>
-
-<p>
-s = surplus value (surplus of the entrepreneur)
-</p>
-
-<p>
-or even the exploitation of the working class (employees).
-</p>
-
-<p>
-The problem is that we are ideologically confused by the idea that we can "use/own" the final systems and that we can "train" the open-source systems by ourselves. And this is where Marx shine, we don't own the production machinery (materialistic view, we don't have the raw power of CPU/GPU or storage, hardware for the production). And by this ideology that we have everything that we need to produce the final value we cannot see the form of exploitation that big companies are using against all of us.
-</p>
-
-<p>
-The best way to convince the users that they have the the final product, is to give them the final product that they cannot create by themselves (recreate) even if they know how to create it and have all of the building parts.
-</p>
-
-<p>
-So, we can see that Marx is still relevant in the domain of AI and Big data.
-</p>
-
-<p>
-"AI is a tool of capitalism which transforms our societies within an environment of technological singularity that helps in the expansion of the capitalist model of economic development. Such a development process ensures the precarity of labour."
-</p>
-
-<p>
-"Nevertheless, the level automation of domestic and workplace tasks and the machine learning capabilities of the large platform companies will ensure that the neobourgeoisie will still wield power and influence despite any attempts by the regulators to reconfigure their value networks." [1]
-</p>
-
-<p>
-<a href="https://www.sciencedirect.com/science/article/abs/pii/S0040162521000081">https://www.sciencedirect.com/science/article/abs/pii/S0040162521000081</a>
-</p>
-
-<hr />
-</div>
-<div id="postamble" class="status">
-<p class="author">Author: Милић Вукојичић Ауторско право © 2023 Милић Вукојичић Сав текст је објављен под лиценцом CC-BY 4.0  и сав изворни код је објављен под  GNU General Public License v3.0.</p>
-<p class="date">Created: 2023-09-09 Sat 10:41</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
-</body>
-</html>
+<p><a href="https://www.oshwa.org/">https:&#47;&#47;www.oshwa.org&#47;</a></p>
+
+<p>If we can name all the proprietary software &#8220;Malicious software&#8221; we need to be able also to name all proprietary hardware &#8220;Malicious hardware&#8221;. We need to free our hardware as well as we have freed our software !</p>
+
+<h3 id="%3Cstrong%3EAI,%20Marx%20and%20capitalist%20economic%20development%3C/strong%3E"><strong>AI, Marx and capitalist economic development</strong></h3>
+
+<p>If we look at AI and Big Data we can all agree that we are not all equal players in this game. Some companies have more data and more power to train AI systems than the average person in their garage (You don&#8217;t need research to deduct this information.). This means that workers or individuals cannot develop the same products and that the product of big companies will always be greater than the individual products of all employees from those companies (employees will not own the final product). Also, if a company opensource their AI systems they are often giving the source code of the model or pre-trained systems, this means that we can not change the AI system itself we can just use it (the foolish idea that we have&#47;own the final product), it is already being trained on the data that the company owns (even if the company release the data we cannot train it on our machine we don&#8217;t have the power (CPU&#47;GPU) for the training itself).</p>
+
+<p>The problem that we have here is beyond the classical equation for the Surplus value:</p>
+
+<p>Surplus value (s) = Revenue - production costs (c+v)</p>
+
+<p>c = constant capital (machinery, materials, fixed costs…).</p>
+
+<p>v = variable capital (workers)</p>
+
+<p>s = surplus value (surplus of the entrepreneur)</p>
+
+<p>or even the exploitation of the working class (employees).</p>
+
+<p>The problem is that we are ideologically confused by the idea that we can &#8220;use&#47;own&#8221; the final systems and that we can &#8220;train&#8221; the open-source systems by ourselves. And this is where Marx shine, we don&#8217;t own the production machinery (materialistic view, we don&#8217;t have the raw power of CPU&#47;GPU or storage, hardware for the production). And by this ideology that we have everything that we need to produce the final value we cannot see the form of exploitation that big companies are using against all of us.</p>
+
+<p>The best way to convince the users that they have the the final product, is to give them the final product that they cannot create by themselves (recreate) even if they know how to create it and have all of the building parts.</p>
+
+<p>So, we can see that Marx is still relevant in the domain of AI and Big data.</p>
+
+<p>&#8220;AI is a tool of capitalism which transforms our societies within an environment of technological singularity that helps in the expansion of the capitalist model of economic development. Such a development process ensures the precarity of labour.&#8221;</p>
+
+<p>&#8220;Nevertheless, the level automation of domestic and workplace tasks and the machine learning capabilities of the large platform companies will ensure that the neobourgeoisie will still wield power and influence despite any attempts by the regulators to reconfigure their value networks.&#8221; [1]</p>
+
+<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0040162521000081">https:&#47;&#47;www.sciencedirect.com&#47;science&#47;article&#47;abs&#47;pii&#47;S0040162521000081</a></p>
+<footer>
+    <hr>
+    <p>Copyright © 2022 Milić Vukojičić All text is released under CC-BY 4.0 license and all source code is released under GNU General Public License v3.0.</p>
+</footer> 
