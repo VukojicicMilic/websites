@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takahashi Method Presentation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        #presentation {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 5vw;
+            line-height: 1.5;
+            overflow: hidden;
+            position: relative;
+        }
+
+        iframe {
+            width: 60%;
+            height: 60%;
+            border: none;
+            pointer-events: none; /* Disable interaction with the iframe */
+        }
+
+        img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        #loadButton {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        #navigationButtons {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 3;
+        }
+
+        #navigationButtons button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        #navigationButtons button:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div id="presentation">
+    <div id="slide" class="slide"></div>
+</div>
+
+<div id="navigationButtons" style="display: none;">
+    <button onclick="showSlide(currentSlide - 1)">Previous</button>
+    <button onclick="showSlide(currentSlide + 1)">Next</button>
+</div>
+
+<input type="file" id="fileInput" style="display: none;" accept=".txt">
+<button id="loadButton">Load Presentation</button>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    let slides = [];
+    let currentSlide = 0;
+
+    document.getElementById('loadButton').addEventListener('click', function () {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file && file.type === "text/plain") {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                slides = e.target.result.split("\n\n");
+                currentSlide = 0;
+                showSlide(currentSlide);
+                document.getElementById('loadButton').style.display = 'none';
+                document.getElementById('navigationButtons').style.display = 'flex';
+            };
+            reader.readAsText(file);
+        } else {
+            alert("Please select a valid .txt file.");
+        }
+    });
+
+    function renderSlide(content) {
+        const slideElement = document.getElementById("slide");
+        slideElement.innerHTML = '';
+        if (content.startsWith('video:')) {
+            const videoUrl = content.substring(6).trim();
+            const videoId = getYouTubeVideoId(videoUrl);
+            if (videoId) {
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=0&controls=1&modestbranding=1&rel=0&showinfo=0`;
+                slideElement.appendChild(iframe);
+            }
+        } else if (content.startsWith('img:')) {
+            const imgPath = content.substring(4).trim();
+            const imgElement = document.createElement('img');
+            imgElement.src = imgPath;
+            imgElement.alt = "Image not found";
+            slideElement.appendChild(imgElement);
+        } else if (content.trim() !== "") {
+            const textElement = document.createElement('div');
+            textElement.innerHTML = content.replace(/\n/g, '<br>');
+            slideElement.appendChild(textElement);
+        }
+    }
+
+    function showSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        currentSlide = index;
+        renderSlide(slides[currentSlide]);
+    }
+
+    function getYouTubeVideoId(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    }
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            event.preventDefault();
+            showSlide(currentSlide + 1);
+        } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            showSlide(currentSlide - 1);
+        }
+    });
+
+    document.getElementById("presentation").addEventListener("click", function (event) {
+        showSlide(currentSlide + 1);
+    });
+</script>
+
+</body>
+</html>
+
