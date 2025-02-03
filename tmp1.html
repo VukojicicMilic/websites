@@ -18,21 +18,6 @@
             text-align: center;
             font-weight: bold;
             overflow: hidden;
-            flex-direction: column;
-        }
-
-        #colorControls {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 5;
-            display: flex;
-            gap: 15px;
-        }
-
-        #colorControls label {
-            color: black;
-            font-weight: normal;
         }
 
         #presentation {
@@ -56,7 +41,6 @@
             line-height: 1.5;
             overflow: hidden;
             position: relative;
-            padding: 10px;
         }
 
         iframe {
@@ -128,27 +112,15 @@
         }
 
         .textContent {
-            font-size: 5vw; /* Default font size */
+            font-size: 5vw;  /* Default font size */
             max-width: 90%; /* Prevent text from going beyond screen edges */
             word-wrap: break-word;
             text-align: center;
-            white-space: pre-wrap;
         }
 
     </style>
 </head>
 <body>
-
-<div id="colorControls">
-    <div>
-        <label for="textColor">Text Color:</label>
-        <input type="color" id="textColor" value="#000000">
-    </div>
-    <div>
-        <label for="bgColor">Background Color:</label>
-        <input type="color" id="bgColor" value="#ffffff">
-    </div>
-</div>
 
 <div id="presentation">
     <div id="slide" class="slide"></div>
@@ -174,18 +146,6 @@
     let player;
     let isPaused = false;
     let isMaximized = false;
-
-    // Initialize colors based on user selection
-    function updateColors() {
-        const textColor = document.getElementById('textColor').value;
-        const bgColor = document.getElementById('bgColor').value;
-        document.body.style.color = textColor;
-        document.body.style.backgroundColor = bgColor;
-    }
-
-    // Event listeners for color changes
-    document.getElementById('textColor').addEventListener('input', updateColors);
-    document.getElementById('bgColor').addEventListener('input', updateColors);
 
     document.getElementById('loadButton').addEventListener('click', function () {
         document.getElementById('fileInput').click();
@@ -241,7 +201,7 @@
     }
 
     function adjustTextSize(textElement) {
-        // Make sure the text fits within the window and prevent overflow
+        // Check the width of the text and adjust font size if it's too big
         const containerWidth = document.getElementById('slide').offsetWidth;
         let fontSize = parseFloat(window.getComputedStyle(textElement).fontSize);
         while (textElement.scrollWidth > containerWidth && fontSize > 10) {
