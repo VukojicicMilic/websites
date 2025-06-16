@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Coordinates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .hint {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter the Secrets</h1>
+        <input type="text" id="inputField" placeholder="Enter your secrets here...">
+        <div class="hint">Hint: Enter as "_________, _________, _________"</div>
+        <button id="submitButton">Show me your secrets</button>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const input = document.getElementById('inputField').value;
+            const secrets = ["Alan Turing", "The Beatles", "Iron Man"];
+            const inputArray = input.split(',').map(item => item.trim());
+
+            if (inputArray.length === secrets.length && inputArray.every((val, index) => val === secrets[index])) {
+                const latitudeInstructions = `
+                    You are planning a trip and need to calculate the exact coordinates of your destination. Follow the steps below to find the latitude and longitude:
+                    <br><br>
+                    + Start with the number 52.5. From this number, subtract 0.5.<br>
+                    + Take the result and multiply it by 2.<br>
+                    + Subtract 1.5 from the new result.<br>
+                    + Divide this result by 2.<br>
+                    + Finally, subtract the square root of 0.0841 from the last result to find the latitude.<br>
+                    <br>
+                    Now, for the longitude:<br>
+                    + Begin with -0.5. Multiply this number by 2.<br>
+                    + Add 1.5 to the result.<br>
+                    + Subtract the square root of 0.0648 from this new result.<br>
+                    + Finally, subtract 0.0012 to find the longitude.<br>
+                    <br>
+                    What are the final coordinates of your destination?
+                `;
+                document.getElementById('result').innerHTML = latitudeInstructions;
+            } else {
+                document.getElementById('result').innerHTML = "Error";
+            }
+        });
+    </script>
+</body>
+</html>
+
