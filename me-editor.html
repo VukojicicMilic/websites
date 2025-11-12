@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ME — My-Editor</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f8f6f2;
+    color: #2a2a2a;
+    font-family: "Source Serif Pro", Georgia, serif;
+  }
+
+  header {
+    background: #ffffff;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4em 0.8em;
+  }
+
+  header h1 {
+    font-size: 1.2em;
+    color: #a32638;
+    margin: 0;
+  }
+
+  #toolbar button {
+    background: #a32638;
+    border: none;
+    color: white;
+    margin-left: 0.3em;
+    padding: 0.4em 0.8em;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  #toolbar button:hover {
+    background: #c53e4b;
+  }
+
+  #editor {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    border: none;
+    outline: none;
+    resize: none;
+    background: #f8f6f2;
+    color: #2a2a2a;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+  }
+
+  #status {
+    background: #fff;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    padding: 0.4em 0.8em;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ME — My-Editor</h1>
+  <div id="toolbar">
+    <button onclick="newFile()">New</button>
+    <button onclick="loadFile()">Load</button>
+    <button onclick="saveFile()">Save</button>
+    <button onclick="loadPlugin()">Load Script</button>
+  </div>
+</header>
+
+<textarea id="editor" spellcheck="false">
+Welcome to ME (My-Editor)
+
+This is a clean text editor.
+Type normally, and use the buttons above to save or load files.
+You can also load JavaScript plugins to extend its behavior.
+</textarea>
+
+<div id="status">Ready.</div>
+
+<script>
+const ME = {
+  editor: document.getElementById("editor"),
+  status: document.getElementById("status"),
+  filename: "untitled.txt",
+};
+
+function setStatus(msg) {
+  ME.status.textContent = msg;
+}
+
+function newFile() {
+  if (confirm("Clear current buffer?")) {
+    ME.editor.value = "";
+    ME.filename = "untitled.txt";
+    setStatus("New file created.");
+  }
+}
+
+function saveFile() {
+  const filename = prompt("Enter file name to save as:", ME.filename);
+  if (!filename) {
+    setStatus("Save canceled.");
+    return;
+  }
+  ME.filename = filename;
+  const blob = new Blob([ME.editor.value], { type: "text/plain" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setStatus("Saved as: " + filename);
+}
+
+function loadFile() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "*/*";
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    ME.filename = file.name;
+    const reader = new FileReader();
+    reader.onload = evt => {
+      ME.editor.value = evt.target.result;
+      setStatus("Loaded: " + file.name);
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+function loadPlugin() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".js";
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = evt => {
+      try {
+        new Function("ME", evt.target.result)(ME);
+        setStatus("Plugin loaded: " + file.name);
+      } catch (err) {
+        setStatus("Plugin error: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+</script>
+
+</body>
+</html>
