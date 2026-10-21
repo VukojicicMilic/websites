@@ -361,7 +361,7 @@ editor.registerExtension({
     const SIZES = { landscape: [842, 595], portrait: [595, 842], letter: [792, 612], "letter-portrait": [612, 792] };
     function build(src) {
       const doc = parse(src), M = doc.meta; [PW, PH] = SIZES[(M.page || "landscape").toLowerCase()] || SIZES.landscape;
-      const mp = (M.palette || "multi").toLowerCase(), base = mp === "multi" ? null : colorOf(mp), pages = [], MG = 40;
+      const mp = (M.palette || "red").toLowerCase(), base = mp === "red" ? null : colorOf(mp), pages = [], MG = 40;
       const setPal = c => { const one = c || base; pal = one ? () => one : i => MULTI[i % 6]; };
       const cover = !!M.title && (M.cover || "yes").toLowerCase() !== "no";
       if (cover) {
