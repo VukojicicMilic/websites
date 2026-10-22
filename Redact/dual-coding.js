@@ -25,7 +25,18 @@
    @icons Title       a picture list of every built-in icon
    % comment lines are ignored.
    Limits: standard PDF fonts (Helvetica); letters outside Latin-1 are simplified (ć->c, đ->d); text is shrunk to fit
-   but very long lists may still become small; diagrams are one per page. */
+   but very long lists may still become small; diagrams are one per page.
+
+   RED TEMPLATE: put  template: red  in the front matter for 16:9 slides in the Redact red look (red square + rule
+   header, red title slide, red-and-grey palette), matching the PDF slide exporter.
+   PRESENTATION MODE (command "Export presentation as PDF"): mix text slides and diagrams in one document.
+     # Deck title (plain lines after it = subtitle)      ## Heading = new slide        --- = new slide without heading
+     - bullets (indent = sub-bullets)   > quote   ``` code ```   plain paragraphs   [icon] at the start of a bullet = icon bullet
+     key: one sentence                  highlighted "key idea" box with a bulb
+     visual: flow | cycle | timeline | pyramid | tree | mindmap | matrix | venn ...   draw this slide's bullets as that diagram
+     visual: flow+text                  bullets on the left, the diagram on the right
+     @flow Title ... (any diagram above) a full diagram slide
+     Front matter: agenda: yes (roadmap slide after the title)   recap: yes (mind map of all slide headings at the end) */
 editor.registerExtension({
   id: "dual-coding",
   name: "Dual Coding Organisers",
@@ -42,7 +53,7 @@ editor.registerExtension({
         "333 278 333 584 556 333 556 611 556 611 556 333 611 611 278 278 556 278 889 611 611 611 611 389 556 333 611 556 778 556 556 500 389 280 389 584").split(" ").map(Number)
     };
     WT.I = WT.R;
-    const cw = (ch, fnt) => { const c = ch.charCodeAt(0); return c >= 32 && c <= 126 ? WT[fnt === "B" ? "B" : "R"][c - 32] : 556; };
+    const cw = (ch, fnt) => { if (fnt === "M") return 600; const c = ch.charCodeAt(0); return c >= 32 && c <= 126 ? WT[fnt === "B" ? "B" : "R"][c - 32] : 556; };
     const sw = (s, size, fnt) => { let w = 0; for (const ch of s) w += cw(ch, fnt); return w * size / 1000; };
     const WIN = { "€": 128, "…": 133, "‘": 145, "’": 146, "“": 147, "”": 148, "•": 149, "–": 150, "—": 151, "š": 154, "Š": 138, "ž": 158, "Ž": 142 };
     const SIMPLE = { "đ": "d", "Đ": "D", "ł": "l", "Ł": "L" };
@@ -104,7 +115,7 @@ editor.registerExtension({
       const a = Math.atan2(y2 - y1, x2 - x1), hs = lw * 2.6 + 5;
       paint(seg(x1, y1, x2 - Math.cos(a) * hs * .8, y2 - Math.sin(a) * hs * .8), { stroke: c, lw }); head(x2, y2, a, hs, c);
     };
-    const FN = { R: "F1", B: "F2", I: "F3" };
+    const FN = { R: "F1", B: "F2", I: "F3", M: "F4" };
     const T = (s, fnt, size, x, y, col) => cmd("BT " + (col || INK) + " /" + FN[fnt] + " " + f(size) + " Tf " + f(x) + " " + f(y) + " Td (" + esc(s) + ") Tj ET");
     const TC = (s, fnt, size, cx, y, col) => T(s, fnt, size, cx - sw(s, size, fnt) / 2, y, col);
     const TV = (s, fnt, size, x, cy, col) => cmd("BT " + (col || INK) + " /" + FN[fnt] + " " + f(size) + " Tf 0 1 -1 0 " + f(x) + " " + f(cy - sw(s, size, fnt) / 2) + " Tm (" + esc(s) + ") Tj ET");
@@ -339,6 +350,13 @@ editor.registerExtension({
     const TYPES = { flow, cycle, timeline, venn, tree, mindmap, matrix, quadrant, cause, pyramid, frayer, icons: iconsPage };
 
     /* ---------- parsing ---------- */
+    function blockLine(cur, ln) {
+      let m; const t = ln.trim();
+      if ((m = t.match(/^note\s*:\s*(.*)$/i))) { cur.note = m[1]; return true; }
+      if ((m = t.match(/^color\s*:\s*(\S+)\s*$/i)) && colorOf(m[1])) { cur.color = colorOf(m[1]); return true; }
+      if (cur.type === "cycle" && (m = t.match(/^center\s*:\s*(.*)$/i))) { cur.center = m[1]; return true; }
+      return false;
+    }
     function parse(src) {
       const lines = src.replace(/\r\n?/g, "\n").split("\n"), meta = {}; let i = 0;
       if (/^---\s*$/.test(lines[0] || "")) { for (i = 1; i < lines.length && !/^---\s*$/.test(lines[i]); i++) { const m = lines[i].match(/^([a-z]+)\s*:\s*(.*)$/i); if (m) meta[m[1].toLowerCase()] = m[2].trim(); } i++; }
@@ -348,23 +366,140 @@ editor.registerExtension({
         if (/^\s*%/.test(ln)) continue;
         if ((m = ln.match(/^@(\w+)\s*(.*)$/))) { cur = { type: m[1].toLowerCase(), title: m[2].trim(), rest: [], note: "", color: null, center: "" }; blocks.push(cur); continue; }
         if (!cur || !ln.trim()) continue;
-        if ((m = ln.trim().match(/^note\s*:\s*(.*)$/i))) { cur.note = m[1]; continue; }
-        if ((m = ln.trim().match(/^color\s*:\s*(\S+)\s*$/i)) && colorOf(m[1])) { cur.color = colorOf(m[1]); continue; }
-        if (cur.type === "cycle" && (m = ln.trim().match(/^center\s*:\s*(.*)$/i))) { cur.center = m[1]; continue; }
+        if (blockLine(cur, ln)) continue;
         cur.rest.push(ln.replace(/\s+$/, ""));
       }
       blocks.forEach(b => { b.items = b.rest.map(l => parseItem(bullet(l))).filter(x => x.text); });
       return { meta, blocks };
     }
 
+    /* ---------- red template + presentation mode ---------- */
+    const REDSET = ["c41230", "444444", "e05468", "8a1a2b", "888888", "b8344a"], RED = "c41230", SX = 64;
+    function titlePage(title, subs) {
+      paint(rr(0, 0, 28, PH, 0), { fill: C(RED) });
+      let y = 330;
+      for (const l of wrap(title, 46, PW - 2 * SX - 40, "B")) { T(l, "B", 46, SX + 20, y, INK); y -= 56; }
+      paint(rr(SX + 20, y + 20, 120, 4, 0), { fill: C(RED) }); y -= 24;
+      (subs || []).filter(Boolean).forEach(s => { for (const l of wrap(s, 22, PW - 2 * SX - 40, "R")) { T(l, "R", 22, SX + 20, y, GREY); y -= 30; } });
+    }
+    function slideHeader(title, note) {
+      paint(rr(SX, PH - 52, 12, 12, 0), { fill: C(RED) });
+      let y = PH - 52;
+      if (title) {
+        for (const l of wrap(title, 28, PW - 2 * SX - 30, "B")) { y -= 34; T(l, "B", 28, SX + 24, y, INK); }
+        y -= 14; paint(rr(SX, y, PW - 2 * SX, 1.5, 0), { fill: C(RED) }); y -= 26;
+      } else y -= 16;
+      if (note) { drawFit(note, PW / 2, y - 2, PW - 2 * SX, 16, 12, "I", GREY); y -= 24; }
+      return { x0: SX, x1: PW - SX, y0: 56, y1: y };
+    }
+    function classicHeader(title, note, MG) {
+      paint(rr(MG, PH - 50, 11, 11, 2), { fill: C(pal(0)) });
+      let ts = 24; while (ts > 12 && sw(title, ts, "B") > PW - 2 * MG - 22) ts -= 1; T(title, "B", ts, MG + 20, PH - 50, INK);
+      paint(seg(MG, PH - 62, PW - MG, PH - 62), { stroke: C(pal(0)), lw: 1.6 });
+      let top = PH - 76; if (note) { drawFit(note, PW / 2, PH - 78, PW - 2 * MG, 16, 12, "I", GREY); top = PH - 94; }
+      return { x0: MG, x1: PW - MG, y0: 56, y1: top - 8 };
+    }
+    function parseDeck(src) {
+      const lines = src.replace(/\r\n?/g, "\n").split("\n"), meta = {}; let i = 0;
+      if (/^---\s*$/.test(lines[0] || "")) { for (i = 1; i < lines.length && !/^---\s*$/.test(lines[i]); i++) { const m = lines[i].match(/^([a-z]+)\s*:\s*(.*)$/i); if (m) meta[m[1].toLowerCase()] = m[2].trim(); } i++; }
+      const els = []; let cur = null, inCode = false;
+      const slide = t => { cur = { k: "slide", title: t, items: [], raw: [], visual: "", both: false, note: "", color: null }; els.push(cur); return cur; };
+      for (; i < lines.length; i++) {
+        const ln = lines[i]; let m;
+        if (inCode) { if (/^\s*```/.test(ln)) inCode = false; else cur.items.push({ t: "code", text: ln }); continue; }
+        if (/^\s*%/.test(ln)) continue;
+        if (/^\s*```/.test(ln)) { if (!cur || cur.k !== "slide") slide(""); inCode = true; continue; }
+        if ((m = ln.match(/^#\s+(.*)$/))) { cur = { k: "title", title: m[1].trim(), subs: [] }; els.push(cur); continue; }
+        if ((m = ln.match(/^#{2,6}\s+(.*)$/))) { slide(m[1].trim()); continue; }
+        if (/^---+\s*$/.test(ln)) { slide(""); continue; }
+        if ((m = ln.match(/^@(\w+)\s*(.*)$/))) { cur = { k: "diagram", type: m[1].toLowerCase(), title: m[2].trim(), rest: [], note: "", color: null, center: "" }; els.push(cur); continue; }
+        if (!ln.trim()) continue;
+        if (!cur) slide("");
+        if (cur.k === "title") { cur.subs.push(ln.trim()); continue; }
+        if (cur.k === "diagram") { if (!blockLine(cur, ln)) cur.rest.push(ln.replace(/\s+$/, "")); continue; }
+        if (blockLine(cur, ln)) continue;
+        if ((m = ln.match(/^\s*visual\s*:\s*([a-z]+)\s*(\+\s*text)?\s*$/i))) { cur.visual = m[1].toLowerCase(); cur.both = !!m[2]; continue; }
+        if ((m = ln.match(/^\s*key\s*:\s*(.*)$/i))) { cur.items.push({ t: "key", text: m[1].trim() }); continue; }
+        if ((m = ln.match(/^(\s*)[-*+]\s+(.*)$/))) { cur.items.push({ t: "li", ...parseItem(m[2].trim()), lvl: Math.floor(m[1].replace(/\t/g, "  ").length / 2) }); cur.raw.push(ln.replace(/\s+$/, "")); continue; }
+        if ((m = ln.match(/^>\s?(.*)$/))) { cur.items.push({ t: "q", text: m[1] }); continue; }
+        cur.items.push({ t: "p", text: ln.trim() });
+      }
+      return { meta, els };
+    }
+    function buildDeck(src, docName) {
+      const D = parseDeck(src), M = D.meta; PW = 960; PH = 540;
+      const name = M.title || docName || "Presentation", pages = [], yes = v => /^(yes|true|on)$/i.test(v || "");
+      const setP = c => { pal = c ? () => c : i => REDSET[i % 6]; };
+      const newPage = () => { P = []; pages.push(P); return P; };
+      const els = D.els.slice();
+      if (M.title && !(els[0] && els[0].k === "title")) els.unshift({ k: "title", title: M.title, subs: [M.author] });
+      else if (els[0] && els[0].k === "title" && M.author && !els[0].subs.length) els[0].subs.push(M.author);
+      const heads = els.filter(e => e.k !== "title" && e.title).map(e => e.title);
+      if (yes(M.agenda) && heads.length) els.splice(els[0] && els[0].k === "title" ? 1 : 0, 0, { k: "diagram", type: "flow", title: "Overview", rest: [], note: "Where we are going", color: null, center: "", items: heads.slice(0, 10).map(t => ({ icon: null, text: t })) });
+      if (yes(M.recap) && heads.length) {
+        const rest = [name];
+        D.els.filter(e => e.k === "slide" && e.title).slice(0, 6).forEach(e => { rest.push("  " + e.title); e.items.filter(x => x.t === "li" && x.lvl === 0).slice(0, 2).forEach(x => rest.push("    " + x.text.slice(0, 30))); });
+        els.push({ k: "diagram", type: "mindmap", title: "Recap", rest, note: "", color: null, center: "" });
+      }
+      if (!els.length) throw new Error("Nothing to export. Start with “# Title” and add “## Slide” headings.");
+      const fail = x => drawFit("Could not draw this diagram: " + x.message, PW / 2, PH / 2, PW - 160, 60, 14, "B", C(RED) + " rg");
+      function slideText(s) {
+        const A = slideHeader(s.title, s.note); let y = A.y1, ct = s.title;
+        const cont = () => { if (ct && !/\(cont\.\)$/.test(ct)) ct += " (cont.)"; newPage(); y = slideHeader(ct, "").y1; };
+        const need = h => { if (y - h < 56) cont(); };
+        const vis = s.visual && s.visual !== "icons" && TYPES[s.visual] ? s.visual : "";
+        for (const it of s.items) {
+          if (vis && it.t === "li") continue;
+          if (it.t === "p" || it.t === "q") { const xo = it.t === "q" ? 24 : 0; for (const l of wrap(it.text, 18, PW - 2 * SX - xo, "R")) { need(24); y -= 24; T(l, "R", 18, SX + xo, y, it.t === "q" ? GREY : INK); } y -= 6; }
+          else if (it.t === "li") {
+            const ind = SX + 20 + it.lvl * 24;
+            wrap(it.text, 18, PW - SX - ind, "R").forEach((l, k) => { need(24); y -= 24; if (k === 0) { if (it.icon) icon(it.icon, ind - 12, y + 6, 18, C(RED)); else paint(rr(ind - 16, y + 5, 6, 6, 0), { fill: C(RED) }); } T(l, "R", 18, ind, y, INK); });
+            y -= 4;
+          } else if (it.t === "code") { for (const l of wrap(it.text, 13, PW - 2 * SX - 12, "M")) { need(17); y -= 17; T(l, "M", 13, SX + 12, y, INK); } }
+          else if (it.t === "key") {
+            const L = wrap(it.text, 18, PW - 2 * SX - 76, "B"), hh = L.length * 24 + 20; need(hh + 12); y -= 10;
+            paint(rr(SX, y - hh, PW - 2 * SX, hh, 8), { fill: mix(RED, .9), stroke: C(RED), lw: 1.2 }); icon("bulb", SX + 30, y - hh / 2, 30, C(RED));
+            L.forEach((l, k) => T(l, "B", 18, SX + 60, y - 10 - (k + 1) * 24 + 6, INK)); y -= hh + 8;
+          }
+        }
+        if (vis) {
+          const lis = s.items.filter(t => t.t === "li"), AA = { x0: SX, x1: PW - SX, y0: 56, y1: y };
+          if (AA.y1 - AA.y0 < 140) { cont(); AA.y1 = y; }
+          const tree = vis === "tree" || vis === "mindmap", raw = tree ? [s.title || "Topic", ...s.raw.map(r => "  " + r)] : s.raw.map(bullet);
+          if (s.both) {
+            const tw = (PW - 2 * SX) * .36;
+            drawFit(lis.map(x => "  ".repeat(x.lvl) + "• " + x.text).join("\n"), SX + tw / 2, (AA.y0 + AA.y1) / 2, tw, AA.y1 - AA.y0, 18, "R", INK, "left");
+            paint(rr(SX + tw + 12, AA.y0, 1.5, AA.y1 - AA.y0, 0), { fill: C(RED) }); AA.x0 = SX + tw + 28;
+          }
+          try { TYPES[vis](AA, { type: vis, title: s.title, rest: raw, items: lis.filter(x => x.lvl === 0).map(x => ({ icon: x.icon, text: x.text })), color: s.color, center: s.title || "" }); } catch (x) { fail(x); }
+        }
+      }
+      els.forEach(e => {
+        if (e.k === "title") { newPage(); P.cover = true; setP(null); titlePage(e.title, e.subs); return; }
+        newPage(); setP(e.color);
+        if (e.k === "diagram") {
+          if (!e.items) e.items = e.rest.map(l => parseItem(bullet(l))).filter(x => x.text);
+          const A = slideHeader(e.title || e.type.toUpperCase(), e.note), fn = TYPES[e.type];
+          try { if (!fn) throw new Error("Unknown diagram type @" + e.type); fn(A, e); } catch (x) { fail(x); }
+          return;
+        }
+        slideText(e);
+      });
+      pages.forEach((p, k) => { P = p; if (p.cover) return; T(name, "R", 9, SX, 24, GREY); T(String(k + 1), "R", 10, PW - SX - 10, 24, GREY); });
+      return { parts: assemble(pages), pages: pages.length };
+    }
+    function savePdf(parts, name) { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(parts, { type: "application/pdf" })); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }
+
     /* ---------- build + PDF ---------- */
     const SIZES = { landscape: [842, 595], portrait: [595, 842], letter: [792, 612], "letter-portrait": [612, 792] };
     function build(src) {
-      const doc = parse(src), M = doc.meta; [PW, PH] = SIZES[(M.page || "landscape").toLowerCase()] || SIZES.landscape;
-      const mp = (M.palette || "red").toLowerCase(), base = mp === "red" ? null : colorOf(mp), pages = [], MG = 40;
-      const setPal = c => { const one = c || base; pal = one ? () => one : i => MULTI[i % 6]; };
+      const doc = parse(src), M = doc.meta, red = (M.template || "").toLowerCase() === "red";
+      if (red) { PW = 960; PH = 540; } else [PW, PH] = SIZES[(M.page || "landscape").toLowerCase()] || SIZES.landscape;
+      const mp = (M.palette || "multi").toLowerCase(), base = mp === "multi" ? null : colorOf(mp), pages = [], MG = 40;
+      const setPal = c => { const one = c || base; pal = one ? () => one : red ? i => REDSET[i % 6] : i => MULTI[i % 6]; };
       const cover = !!M.title && (M.cover || "yes").toLowerCase() !== "no";
-      if (cover) {
+      if (cover && red) { setPal(null); P = []; pages.push(P); P.cover = true; titlePage(M.title, [M.author]); }
+      else if (cover) {
         setPal(null); P = []; pages.push(P); P.cover = true; paint(rr(0, 0, 18, PH, 0), { fill: C(pal(0)) });
         drawFit(M.title, PW / 2, PH / 2 + 60, PW - 160, 120, 40, "B", INK);
         if (M.author) TC(M.author, "R", 16, PW / 2, PH / 2 - 10, GREY);
@@ -374,30 +509,26 @@ editor.registerExtension({
       if (!doc.blocks.length) throw new Error("No diagrams found. Start a diagram with a line such as “@flow My title”.");
       doc.blocks.forEach(b => {
         setPal(b.color); P = []; pages.push(P);
-        const c0 = pal(0), title = b.title || b.type.toUpperCase();
-        paint(rr(MG, PH - 50, 11, 11, 2), { fill: C(c0) });
-        let ts = 24; while (ts > 12 && sw(title, ts, "B") > PW - 2 * MG - 22) ts -= 1; T(title, "B", ts, MG + 20, PH - 50, INK);
-        paint(seg(MG, PH - 62, PW - MG, PH - 62), { stroke: C(c0), lw: 1.6 });
-        let top = PH - 76; if (b.note) { drawFit(b.note, PW / 2, PH - 78, PW - 2 * MG, 16, 12, "I", GREY); top = PH - 94; }
-        const A = { x0: MG, x1: PW - MG, y0: 56, y1: top - 8 };
+        const title = b.title || b.type.toUpperCase();
+        const A = red ? slideHeader(title, b.note) : classicHeader(title, b.note, MG);
         const fn = TYPES[b.type];
         try { if (!fn) throw new Error("Unknown diagram type @" + b.type); fn(A, b); }
         catch (e) { drawFit("Could not draw this diagram: " + e.message, PW / 2, PH / 2, PW - 160, 60, 14, "B", C("c41230") + " rg"); }
       });
-      pages.forEach((p, k) => { P = p; if (p.cover) return; T(M.footer || M.title || "Dual coding organisers", "R", 8, MG, 28, GREY); const s = (k + 1) + " / " + pages.length; T(s, "R", 8, PW - MG - sw(s, 8, "R"), 28, GREY); });
+      pages.forEach((p, k) => { P = p; if (p.cover) return; if (red) { T(M.footer || M.title || "Dual coding organisers", "R", 9, SX, 24, GREY); T(String(k + 1), "R", 10, PW - SX - 10, 24, GREY); return; } T(M.footer || M.title || "Dual coding organisers", "R", 8, MG, 28, GREY); const s = (k + 1) + " / " + pages.length; T(s, "R", 8, PW - MG - sw(s, 8, "R"), 28, GREY); });
       return { parts: assemble(pages), pages: pages.length };
     }
     function assemble(pages) {
       const parts = []; let len = 0; const offs = [];
       const put = s => { const b = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i) & 255; parts.push(b); len += b.length; };
       const obj = (id, body) => { offs[id] = len; put(id + " 0 obj\n" + body + "\nendobj\n"); };
-      let nid = 6; pages.forEach(p => { p.cid = nid++; p.pid = nid++; });
+      let nid = 7; pages.forEach(p => { p.cid = nid++; p.pid = nid++; });
       put("%PDF-1.4\n");
       const font = n => "<</Type/Font/Subtype/Type1/BaseFont/" + n + "/Encoding/WinAnsiEncoding>>";
-      obj(3, font("Helvetica")); obj(4, font("Helvetica-Bold")); obj(5, font("Helvetica-Oblique"));
+      obj(3, font("Helvetica")); obj(4, font("Helvetica-Bold")); obj(5, font("Helvetica-Oblique")); obj(6, font("Courier"));
       pages.forEach(p => {
         const s = p.join("\n"); obj(p.cid, "<</Length " + s.length + ">>\nstream\n" + s + "\nendstream");
-        obj(p.pid, "<</Type/Page/Parent 2 0 R/MediaBox [0 0 " + PW + " " + PH + "]/Resources<</Font<</F1 3 0 R/F2 4 0 R/F3 5 0 R>>/ExtGState<</GA<</ca 0.3/CA 0.3>>>>>>/Contents " + p.cid + " 0 R>>");
+        obj(p.pid, "<</Type/Page/Parent 2 0 R/MediaBox [0 0 " + PW + " " + PH + "]/Resources<</Font<</F1 3 0 R/F2 4 0 R/F3 5 0 R/F4 6 0 R>>/ExtGState<</GA<</ca 0.3/CA 0.3>>>>>>/Contents " + p.cid + " 0 R>>");
       });
       obj(1, "<</Type/Catalog/Pages 2 0 R>>"); obj(2, "<</Type/Pages/Kids [" + pages.map(p => p.pid + " 0 R").join(" ") + "]/Count " + pages.length + ">>");
       const xref = len; let x = "xref\n0 " + nid + "\n0000000000 65535 f \n"; for (let i = 1; i < nid; i++) x += String(offs[i]).padStart(10, "0") + " 00000 n \n";
@@ -507,6 +638,58 @@ non-examples: Respiration; Digestion
 
 @icons Built-in icons
 `;
+    const SAMPLE_DECK = `---
+title: How Plants Make Food
+author: Year 9 Science
+agenda: yes
+recap: yes
+---
+# How Plants Make Food
+A dual-coding presentation: words plus pictures
+
+## The big idea
+key: Plants use light, water and carbon dioxide to make glucose and oxygen.
+- [bulb] Happens inside the chloroplasts
+- [eye] Chlorophyll is the green pigment that absorbs light
+- [clock] It goes on all day, whenever there is light
+
+## Step by step
+visual: flow+text
+- [bulb] Leaves absorb light
+- [arrow] Roots draw up water
+- Carbon dioxide enters through the leaf
+- [star] Glucose and oxygen are made
+
+@matrix Inputs and outputs
+note: Compare what goes in and what comes out
+| | Goes in | Comes out
+Light | [tick] Yes | No
+Water | [tick] Yes | No
+Glucose | No | [tick] Yes
+Oxygen | No | [tick] Yes
+
+## Plant groups
+visual: tree
+- Flowering plants
+  - Grasses
+  - Trees
+- Non-flowering plants
+  - Ferns
+  - Mosses
+
+@venn Photosynthesis and respiration
+A = Photosynthesis
+B = Respiration
+A: stores energy
+A: needs light
+B: releases energy
+B: happens day and night
+AB: involves gases and glucose
+
+## Check yourself
+> If a plant is kept in the dark for a week, what happens, and why?
+- [question] Discuss with a partner for one minute
+`;
     const SNIP = {
       flow: "\n@flow Title\n[star] Step one\nStep two\nStep three\n[tick] Step four\n",
       cycle: "\n@cycle Title\ncenter: Centre\nStage one\nStage two\nStage three\nStage four\n",
@@ -533,6 +716,18 @@ non-examples: Respiration; Digestion
       }
     });
     api.registerCommand("new", { label: "New diagram sheet (sampler of every organiser)", category: "Dual coding", run() { api.openDoc("diagrams.md", SAMPLE); } });
+    api.registerCommand("exportDeck", {
+      label: "Export presentation as PDF (slides + dual coding)", category: "Dual coding", key: "alt+shift+s",
+      run() {
+        const d = api.doc(); if (!d.text.trim()) { api.notify("Nothing to export: the document is empty.", true); return; }
+        let r; try { r = buildDeck(d.text, d.name.replace(/\.[^.]+$/, "")); } catch (e) { api.notify("Could not build the presentation: " + e.message, true); return; }
+        const n = d.name.replace(/\.[^.]+$/, "") + "-slides.pdf"; savePdf(r.parts, n); api.notify("Downloaded " + n + " (" + r.pages + " slides).");
+      }
+    });
+    api.registerCommand("newDeck", { label: "New presentation (red template, dual coding)", category: "Dual coding", run() { api.openDoc("presentation-dual-coding.md", SAMPLE_DECK); } });
+    api.registerCommand("newRed", { label: "New diagram sheet (red template)", category: "Dual coding", run() { api.openDoc("diagrams-red.md", SAMPLE.replace("page: landscape", "template: red")); } });
+    api.registerCommand("insSlide", { label: "Insert slide with key idea and icon bullets", category: "Dual coding", run() { const [s, e] = api.editor.sel(); api.editor.replace(s, e, "\n## Slide title\nkey: The main idea in one sentence\n- [star] Point one\n- [bulb] Point two\n"); } });
+    api.registerCommand("insVisual", { label: "Insert slide shown as a diagram (visual:)", category: "Dual coding", run() { const [s, e] = api.editor.sel(); api.editor.replace(s, e, "\n## Slide title\nvisual: flow+text\n- [clock] Step one\n- Step two\n- Step three\n"); } });
     api.registerCommand("icons", { label: "List available icons", category: "Dual coding", run() { api.notify("Icons: " + ICONS.map(n => "[" + n + "]").join(" ") + "  (put one at the start of an item)"); } });
     api.registerCommand("guide", {
       label: "Which organiser should I use?", category: "Dual coding",
