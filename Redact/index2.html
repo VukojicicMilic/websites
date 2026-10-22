@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="editorial">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redact</title>
+<style>
+:root,[data-theme=editorial]{--bg:#fff;--ed:#fff;--tx:#202020;--mu:#777;--red:#c41230;--redd:#9e1028;--sel:#f8e3e7;--bd:#e5e5e5;--tb:#fafafa}
+[data-theme=midnight]{--bg:#15161a;--ed:#1a1b20;--tx:#e4e4e6;--mu:#8a8a92;--red:#ff5a70;--redd:#ff8093;--sel:#4a2530;--bd:#2c2d33;--tb:#1e1f24}
+[data-theme=paper]{--bg:#f4efe6;--ed:#f8f4ec;--tx:#3b342b;--mu:#7d7263;--red:#a8321f;--redd:#86281a;--sel:#ecd9cc;--bd:#ddd3c2;--tb:#efe9dd}
+[data-theme=contrast]{--bg:#000;--ed:#000;--tx:#fff;--mu:#e0e0e0;--red:#ff4d68;--redd:#ff8a9c;--sel:#6b1424;--bd:#fff;--tb:#000}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{display:flex;flex-direction:column;background:var(--bg);color:var(--tx);font:14px/1.4 "Source Sans 3","Segoe UI",system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:1px solid transparent;padding:4px 9px;cursor:pointer;border-radius:2px}
+button:hover{color:var(--red)}
+:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+header{display:flex;align-items:center;gap:6px;background:var(--tb);border-bottom:1px solid var(--bd);padding:0 8px;min-height:40px;flex-wrap:wrap}
+.brand{font:700 19px Georgia,serif;display:flex;align-items:center;gap:7px;margin-right:8px}
+.brand i{width:9px;height:9px;background:var(--red);display:inline-block}
+#tabs{display:flex;flex:1;overflow-x:auto;min-width:120px}
+.tab{display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap}
+.tab.on{border-color:var(--red);font-weight:600}
+.tab button{padding:9px 6px}.tab .x{color:var(--mu);padding:9px 4px}
+.dot{color:var(--red)}
+.acts{display:flex;flex-wrap:wrap}
+.acts button:hover{border-color:var(--bd)}
+main{flex:1;display:flex;min-height:0}
+aside{width:230px;border-right:1px solid var(--bd);background:var(--tb);overflow:auto;padding:10px;font-size:13px}
+aside h3{font:700 13px Georgia,serif;margin:12px 0 4px;color:var(--red)}
+aside a{display:block;padding:2px 4px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+aside a:hover,aside a.on{color:var(--red)}
+body.noside aside{display:none}
+#ws{flex:1;overflow:hidden;background:var(--ed);min-width:0}
+#pane{display:flex;height:100%;max-width:var(--w,none);margin:0 auto}
+#gut{margin:0;padding:12px 8px 12px 12px;text-align:right;color:var(--mu);overflow:hidden;user-select:none;font:var(--fs,15px)/var(--lh,1.6) var(--ff,monospace);white-space:pre}
+body.nogut #gut,body.wrap #gut{display:none}
+#ed{flex:1;border:0;resize:none;background:transparent;padding:12px 16px 12px 8px;font:var(--fs,15px)/var(--lh,1.6) var(--ff,monospace);caret-color:var(--red);tab-size:var(--tab,2);white-space:pre;overflow:auto;outline:0}
+body.wrap #ed{white-space:pre-wrap;overflow-wrap:break-word}
+#ed::selection{background:var(--sel)}
+#pv{width:42%;border-left:1px solid var(--bd);overflow:auto;padding:16px 24px;font:16px/1.6 Georgia,serif;background:var(--bg)}
+#pv h1,#pv h2,#pv h3{color:var(--red);font-family:Georgia,serif}#pv code,#pv pre{background:var(--tb);padding:1px 4px}#pv pre{padding:8px;overflow:auto}#pv blockquote{border-left:3px solid var(--red);margin:0;padding-left:12px;color:var(--mu)}#pv a{color:var(--red)}
+body:not(.prev) #pv{display:none}
+body.focus header,body.focus footer,body.focus aside{display:none}
+footer{display:flex;gap:16px;border-top:1px solid var(--bd);background:var(--tb);padding:3px 12px;color:var(--mu);font-size:12px;flex-wrap:wrap}
+footer .u{color:var(--red)}
+body.compact header{min-height:32px}body.compact .tab button{padding:5px 6px}
+#fb{display:none;gap:6px;padding:6px 10px;border-bottom:1px solid var(--bd);background:var(--tb);flex-wrap:wrap;align-items:center}
+#fb.on{display:flex}
+input[type=text],input[type=number],select{background:var(--ed);border:1px solid var(--bd);padding:4px 7px;border-radius:2px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:flex-start;justify-content:center;padding:8vh 10px;z-index:10;overflow:auto}
+.dlg{background:var(--bg);border:1px solid var(--bd);border-top:3px solid var(--red);width:min(640px,100%);max-height:84vh;overflow:auto;padding:14px 18px}
+.dlg h2{font:700 20px Georgia,serif;margin:0 0 10px;display:flex;justify-content:space-between}
+.dlg p{margin:6px 0}.row{display:flex;gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap}.row>label{min-width:130px}
+.btn{border:1px solid var(--bd)}.btn.p{background:var(--red);color:#fff;border-color:var(--red)}.btn.p:hover{background:var(--redd);color:#fff}
+.pi{width:100%;margin-bottom:6px;font-size:16px}
+.it{display:flex;justify-content:space-between;gap:10px;padding:5px 8px;cursor:pointer;border-left:3px solid transparent}
+.it.on{background:var(--sel);border-color:var(--red)}.it small{color:var(--mu)}
+.tag{font-size:11px;border:1px solid var(--red);color:var(--red);padding:0 5px}
+.err{color:var(--red)}
+#toasts{position:fixed;right:12px;bottom:36px;display:flex;flex-direction:column;gap:6px;z-index:20}
+.toast{background:var(--tx);color:var(--bg);padding:7px 12px;max-width:340px;border-left:4px solid var(--red)}
+kbd{border:1px solid var(--bd);padding:0 5px;font:12px monospace;background:var(--tb)}
+@media(max-width:700px){aside{display:none}#pv{position:absolute;inset:80px 0 24px 0;width:auto}.brand span{display:none}}
+@media(prefers-reduced-motion:no-preference){.toast{animation:f .2s}@keyframes f{from{opacity:0}}}
+#pv figure{margin:14px 0;text-align:center}#pv figcaption{color:var(--mu);font-size:13px;margin-top:4px}#pv img,#pv video{max-width:100%;height:auto}#pv .vid{position:relative;aspect-ratio:16/9;width:100%;background:#000}#pv .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}#pv table{border-collapse:collapse;margin:10px 0;font-size:15px}#pv td,#pv th{border:1px solid var(--bd);padding:4px 10px}#pv th{background:var(--tb)}#pv hr{border:0;border-top:1px solid var(--bd)}
+body.prevonly #ws{display:none}body.prevonly #pv{width:100%;border:0;padding:24px max(24px,10vw)}
+.pop{position:fixed;z-index:30;background:var(--bg);border:1px solid var(--bd);border-top:2px solid var(--red);min-width:230px;padding:4px 0}
+#ed.drop{outline:3px dashed var(--red);outline-offset:-6px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><i></i><span>Redact</span></div>
+  <nav id="tabs" aria-label="Open documents"></nav>
+  <div class="acts" id="acts"></div>
+</header>
+<div id="fb" role="search" aria-label="Find and replace"></div>
+<main>
+  <aside id="side" aria-label="Sidebar"></aside>
+  <div id="ws"><div id="pane"><pre id="gut" aria-hidden="true"></pre><textarea id="ed" spellcheck="false" aria-label="Editor" autocapitalize="off"></textarea></div></div>
+  <div id="pv" aria-label="Markdown preview"></div>
+</main>
+<footer id="sb" role="status"></footer>
+<div id="toasts" aria-live="polite"></div>
+<script>
+"use strict";
+/* ================= Utilities ================= */
+const h=(t,p={},...k)=>{const e=document.createElement(t);for(const[a,v]of Object.entries(p)){if(a==="class")e.className=v;else if(a==="value"||a==="checked")e[a]=v;else if(a.startsWith("on"))e.addEventListener(a.slice(2),v);else if(v!==false&&v!=null)e.setAttribute(a,v===true?"":v)}e.append(...k.flat().filter(x=>x!=null&&x!==false));return e};
+const $=s=>document.querySelector(s);
+const isMac=/Mac|iPhone|iPad/.test(navigator.platform);
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const debounce=(f,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>f(...a),ms)}};
+const keyLabel=c=>c?c.split("+").map(p=>p==="mod"?(isMac?"⌘":"Ctrl"):p==="shift"?"Shift":p==="alt"?(isMac?"⌥":"Alt"):p.length===1?p.toUpperCase():p[0].toUpperCase()+p.slice(1)).join(isMac?"":"+"):"";
+
+/* ================= StorageManager ================= */
+const Storage=(()=>{let warned=false;return{
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){if(!warned){warned=true;Notify.show("Browser storage unavailable or full: drafts will not survive a reload.",true)}return false}}
+}})();
+
+/* ================= NotificationManager ================= */
+const Notify={show(msg,err){const t=h("div",{class:"toast",role:err?"alert":null},msg);$("#toasts").append(t);setTimeout(()=>t.remove(),err?6000:3000)}};
+
+/* ================= EventBus (hooks) ================= */
+const Bus={m:new Map(),on(e,f){if(!this.m.has(e))this.m.set(e,new Set());this.m.get(e).add(f);return()=>this.m.get(e).delete(f)},
+  emit(e,a){(this.m.get(e)||[]).forEach(f=>{try{f(a)}catch(x){console.error("hook "+e,x);Notify.show("Hook error ("+e+"): "+x.message,true)}})}};
+
+/* ================= SettingsManager ================= */
+const Settings=(()=>{const D={theme:"editorial",fontSize:15,lineHeight:1.6,tab:2,spaces:true,wrap:false,lineNumbers:true,font:"mono",width:0,accent:"",compact:false,sidebar:true};
+  const FONTS={mono:'ui-monospace,"SF Mono",Consolas,"Liberation Mono",monospace',serif:'Georgia,"Times New Roman",serif',sans:'system-ui,"Segoe UI",sans-serif'};
+  let v={...D,...Storage.get("redact.settings",{})};
+  const api={get:k=>v[k],all:()=>({...v}),FONTS,
+    set(k,val){v[k]=val;Storage.set("redact.settings",v);api.apply()},replace(o){v={...D,...o};Storage.set("redact.settings",v);api.apply()},
+    apply(){const r=document.documentElement,b=document.body;r.dataset.theme=v.theme;const s=r.style;
+      s.setProperty("--fs",v.fontSize+"px");s.setProperty("--lh",v.lineHeight);s.setProperty("--ff",FONTS[v.font]||FONTS.mono);s.setProperty("--tab",v.tab);
+      v.width>0?s.setProperty("--w",v.width+"ch"):s.removeProperty("--w");
+      v.accent?s.setProperty("--red",v.accent):s.removeProperty("--red");
+      b.classList.toggle("wrap",v.wrap);b.classList.toggle("nogut",!v.lineNumbers);b.classList.toggle("compact",v.compact);b.classList.toggle("noside",!v.sidebar)}};
+  return api})();
+
+/* ================= ModalManager ================= */
+const Modal=(()=>{let stack=[];
+  const close=()=>{try{Keys.cancel()}catch(e){}const o=stack.pop();if(o){o.el.remove();o.onClose&&o.onClose();(stack.length?stack[stack.length-1].el.querySelector("input,button"):$("#ed"))?.focus()}return !!o};
+  return{close,any:()=>stack.length>0,
+    open(title,body,opts={}){const dlg=h("div",{class:"dlg",role:"dialog","aria-modal":"true","aria-label":title},
+        title?h("h2",{},title,h("button",{onclick:close,"aria-label":"Close"},"✕")):null,body);
+      const el=h("div",{class:"ov",onmousedown:e=>{if(e.target===el)close()}},dlg);document.body.append(el);stack.push({el,onClose:opts.onClose});
+      (dlg.querySelector("input[type=text],input,button.p")||dlg.querySelector("button"))?.focus();return el},
+    confirm(msg,okLabel="OK"){return new Promise(res=>{let done=false;const fin=v=>{if(!done){done=true;res(v)}};
+      const b=h("div",{},h("p",{},msg),h("div",{class:"row"},h("button",{class:"btn p",onclick:()=>{fin(true);close()}},okLabel),h("button",{class:"btn",onclick:()=>{fin(false);close()}},"Cancel")));
+      this.open("Confirm",b,{onClose:()=>fin(false)})})},
+    /* Minibuffer-style prompt: one input, resolves with string or null */
+    ask(label,def=""){return new Promise(res=>{let done=false;const fin=v=>{if(!done){done=true;res(v)}};
+      const i=h("input",{type:"text",class:"pi",value:def,"aria-label":label,onkeydown:e=>{if(e.key==="Enter"){fin(i.value);close()}}});
+      this.open(label,i,{onClose:()=>fin(null)});i.select()})}};
+})();
+
+/* ================= CommandRegistry + ShortcutManager ================= */
+const Commands=(()=>{const m=new Map();let recent=Storage.get("redact.recent",[]);
+  return{m,
+    add(id,spec,owner="core"){if(m.has(id))throw new Error("Command already registered: "+id);m.set(id,{id,category:"General",...spec,owner});return()=>m.delete(id)},
+    run(id,arg){const c=m.get(id);if(!c){Notify.show("Unknown command: "+id,true);return}
+      try{if(c.enabled&&!c.enabled()){Notify.show(c.label+" is not available right now.");return}
+        const r=c.run(arg);if(r&&r.catch)r.catch(e=>Notify.show(c.label+": "+e.message,true));
+        recent=[id,...recent.filter(x=>x!==id)].slice(0,8);Storage.set("redact.recent",recent);Bus.emit("command",id)}
+      catch(e){console.error(e);Notify.show(c.label+" failed: "+e.message,true)}},
+    recent:()=>recent};
+})();
+const Keys=(()=>{let over=Storage.get("redact.keys",{}),map=new Map(),recorder=null,rt=0;
+  const combo=e=>{if(["Control","Meta","Shift","Alt"].includes(e.key))return"";
+    let k=e.code.startsWith("Key")?e.code.slice(3).toLowerCase():e.code.startsWith("Digit")?e.code.slice(5):e.key.toLowerCase();
+    let shift=e.shiftKey;if(k==="+"||e.code==="Equal"||e.code==="NumpadAdd"){k="=";shift=false}if(e.code==="NumpadSubtract")k="-";if(k===" ")k="space";
+    return[(e.ctrlKey||e.metaKey)&&"mod",e.altKey&&"alt",shift&&"shift",k].filter(Boolean).join("+")};
+  const api={combo,
+    keyOf(id){return id in over?over[id]:Commands.m.get(id)?.key||null},
+    rebuild(){map.clear();for(const c of Commands.m.values()){const k=api.keyOf(c.id);if(k&&!map.has(k))map.set(k,c.id)}},
+    conflict(k,except){for(const c of Commands.m.values())if(c.id!==except&&api.keyOf(c.id)===k)return c;return null},
+    set(id,k){over[id]=k;Storage.set("redact.keys",over);api.rebuild()},
+    reset(){over={};Storage.set("redact.keys",over);api.rebuild()},
+    overrides:()=>over,setOverrides(o){over=o||{};Storage.set("redact.keys",over);api.rebuild()},
+    record(f){recorder=f;clearTimeout(rt);rt=setTimeout(()=>{recorder=null},8000)},cancel(){recorder=null},
+    init(){document.addEventListener("mousedown",()=>{recorder=null},true);window.addEventListener("keydown",e=>{if(e.isComposing||e.keyCode===229)return;const c=combo(e);if(!c)return;
+      if(recorder){e.preventDefault();e.stopPropagation();const r=recorder;recorder=null;r(c);return}
+      if(c==="escape"){if($("#pop")){$("#pop").remove();return}if(Modal.any()){e.preventDefault();Modal.close()}else if($("#fb").classList.contains("on")){Find.hide()}else if(document.body.classList.contains("prevonly")){document.body.classList.remove("prevonly")}else if(document.activeElement===Ed.ta){Ed.ta._rel=true}return}
+      const id=map.get(c);if(!id)return;e.preventDefault();Commands.run(id)},true)}};
+  return api})();
+
+/* ================= DocumentManager ================= */
+const Docs=(()=>{let list=[],cur=0,seq=1;
+  const mk=(name,text="",extra={})=>({id:"d"+Date.now()+(seq++),name,text,saved:text,disk:false,handle:null,...extra});
+  const WELCOME="# Welcome to Redact\n\nA small, extensible writing and code editor that runs from one HTML file.\n\n- Press "+(isMac?"⌘":"Ctrl+")+"Shift+P for the command palette: every feature is a command.\n- Open the Extensions manager to enable, remove, or install your own.\n- Drafts are kept in this browser. Use Save to write a real file.\n\nUse **Insert ▾** to add pictures (from a file, drag and drop, paste, or a web address) and videos (YouTube or Vimeo), then turn on **Preview** to see them.\n";
+  const st=Storage.get("redact.docs",null);
+  if(st&&st.docs?.length){list=st.docs.map(d=>({handle:null,...d}));cur=Math.min(st.cur||0,list.length-1)}else list=[mk("Welcome.md",WELCOME,{saved:WELCOME})];
+  const persist=debounce(()=>Storage.set("redact.docs",{cur,docs:list.map(({id,name,text,saved,disk})=>({id,name,text,saved,disk}))}),400);
+  const api={list:()=>list,get cur(){return list[cur]},index:()=>cur,persist,mk,
+    dirty:d=>d.text!==d.saved,
+    modeOf:d=>{const e=(d.name.split(".").pop()||"").toLowerCase();return{md:"Markdown",markdown:"Markdown",json:"JSON",js:"JavaScript",html:"HTML",css:"CSS"}[e]||"Text"},
+    add(name,text,extra){const d=mk(name,text,extra);list.push(d);api.switch(list.length-1);return d},
+    switch(i){if(i<0||i>=list.length)return;cur=i;UI.load();Bus.emit("switch",list[cur]);persist()},
+    async close(i){const d=list[i];if(api.dirty(d)&&!await Modal.confirm('"'+d.name+'" has unsaved changes. Discard them?',"Discard"))return;
+      list.splice(i,1);if(!list.length)list.push(mk("untitled.txt"));cur=Math.min(i<cur?cur-1:cur,list.length-1);UI.load();persist();Bus.emit("close",d)}};
+  return api})();
+
+/* ================= EditorCore ================= */
+const Ed=(()=>{const ta=$("#ed");
+  const api={ta,
+    text:()=>ta.value,sel:()=>[ta.selectionStart,ta.selectionEnd],
+    /* Edits go through execCommand so the browser's native undo stack stays intact */
+    replace(s,e,t){ta.focus();ta.setSelectionRange(s,e);let ok=false;try{ok=t===""?(s===e||document.execCommand("delete")):document.execCommand("insertText",false,t)}catch(x){}
+      if(!ok||ta.value.length!==ta._len-(e-s)+t.length&&false){}
+      if(!ok){ta.setRangeText(t,s,e,"end");ta.dispatchEvent(new Event("input",{bubbles:true}))}},
+    select(s,e){ta.setSelectionRange(s,e)},
+    selected(){return ta.value.slice(ta.selectionStart,ta.selectionEnd)},
+    lineBounds(s,e){const t=ta.value;let a=t.lastIndexOf("\n",s-1)+1,b=t.indexOf("\n",e);if(b<0)b=t.length;return[a,b]},
+    /* Apply fn to selection, or the whole document when nothing is selected */
+    transform(fn){let[s,e]=api.sel();if(s===e){s=0;e=ta.value.length}const out=fn(ta.value.slice(s,e));api.replace(s,e,out);api.select(s,s+out.length)},
+    indentUnit:()=>Settings.get("spaces")?" ".repeat(Settings.get("tab")):"\t",
+    indentLines(dir){const[s,e]=api.sel(),[a,b]=api.lineBounds(s,e),u=api.indentUnit(),re=new RegExp("^(\\t| {1,"+Settings.get("tab")+"})");
+      const out=ta.value.slice(a,b).split("\n").map(l=>dir>0?u+l:l.replace(re,"")).join("\n");api.replace(a,b,out);api.select(a,a+out.length)},
+    gotoLine(n,c=1){const L=ta.value.split("\n");n=Math.max(1,Math.min(n,L.length));let p=0;for(let i=0;i<n-1;i++)p+=L[i].length+1;p+=Math.min(c-1,L[n-1].length);ta.focus();ta.setSelectionRange(p,p);api.reveal(n-1)},
+    reveal(line){const lh=parseFloat(getComputedStyle(ta).lineHeight)||20;ta.scrollTop=Math.max(0,line*lh-ta.clientHeight/2)},
+    pos(){const p=ta.selectionStart,v=ta.value;let n=1,i=-1;while((i=v.indexOf("\n",i+1))>=0&&i<p)n++;const k=p?v.lastIndexOf("\n",p-1):-1;return[n,p-k]},
+    words:t=>(t.match(/\S+/g)||[]).length};
+  return api})();
+
+/* ================= UI (tabs, gutter, status, sidebar) ================= */
+const statusItems=new Map(),panels=new Map();
+const UI=(()=>{let lines=0;
+  const gut=$("#gut"),ta=Ed.ta;
+  const api={
+    load(){const d=Docs.cur;ta.value=d.text;lines=0;api.gutter();api.tabs();api.status();api.side();api.preview();ta.scrollTop=0;if(!document.activeElement||document.activeElement===document.body)ta.focus()},
+    gutter(){const n=ta.value.split("\n").length;if(n!==lines){lines=n;let s="";for(let i=1;i<=n;i++)s+=i+"\n";gut.textContent=s}gut.scrollTop=ta.scrollTop},
+    tabs(){const t=$("#tabs");t.replaceChildren(...Docs.list().map((d,i)=>h("div",{class:"tab"+(i===Docs.index()?" on":"")},
+        h("button",{onclick:()=>Docs.switch(i),"aria-current":i===Docs.index()?"true":null,title:d.name},d.name,Docs.dirty(d)?h("span",{class:"dot",title:"Unsaved changes"}," ●"):""),
+        h("button",{class:"x",onclick:()=>Docs.close(i),"aria-label":"Close "+d.name},"×"))));document.title=(Docs.dirty(Docs.cur)?"● ":"")+Docs.cur.name+" – Redact"},
+    status(){const d=Docs.cur,[l,c]=Ed.pos(),sb=$("#sb"),dirty=Docs.dirty(d);
+      const items=[h("span",{},"Ln "+l+", Col "+c),h("span",{},lines+" lines"),h("span",{},Docs.modeOf(d)),h("span",{},(Settings.get("spaces")?"Spaces: ":"Tab size: ")+Settings.get("tab")),h("span",{},"UTF-8")];
+      for(const[k,f]of statusItems){try{items.push(h("span",{title:k},f()))}catch(e){}}
+      items.push(h("span",{class:dirty?"u":""},dirty?"● Unsaved (draft in browser)":d.disk?"Saved to file":"Not saved to disk"));sb.replaceChildren(...items)},
+    side(){const s=$("#side");if(!Settings.get("sidebar"))return;const out=[h("h3",{},"Documents"),...Docs.list().map((d,i)=>h("a",{class:i===Docs.index()?"on":"",onclick:()=>Docs.switch(i)},d.name))];
+      for(const[,p]of panels){try{const box=h("div",{});p.render(box);out.push(h("h3",{},p.title),box)}catch(e){}}s.replaceChildren(...out)},
+    preview(){if(document.body.classList.contains("prev")){try{$("#pv").innerHTML=Markdown(ta.value)}catch(e){$("#pv").textContent="Preview error: "+e.message}}}};
+  { const now=api.status;let sp=0;api.status=()=>{if(sp)return;sp=1;requestAnimationFrame(()=>{sp=0;try{now()}catch(e){console.error(e)}})}; }
+  ta.addEventListener("scroll",()=>gut.scrollTop=ta.scrollTop);
+  const light=debounce(()=>{api.side();api.preview()},250);
+  ta.addEventListener("input",()=>{if(ta._comp)return;Docs.cur.text=ta.value;api.gutter();api.tabs();api.status();light();Docs.persist();Bus.emit("change",Docs.cur)});
+  ta.addEventListener("compositionstart",()=>ta._comp=1);ta.addEventListener("compositionend",()=>{ta._comp=0;ta.dispatchEvent(new Event("input"))});
+  document.addEventListener("selectionchange",()=>{if(document.activeElement===ta)api.status()});
+  /* Editor-local keys: Tab indent, Enter auto-indent */
+  ta.addEventListener("keydown",e=>{if(e.isComposing||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key!=="Tab"&&e.key!=="Escape")ta._rel=false;
+    if(e.key==="Tab"&&ta._rel){ta._rel=false;return}
+    if(e.key==="Tab"){e.preventDefault();const[s,t]=Ed.sel();if(e.shiftKey||ta.value.slice(s,t).includes("\n"))Ed.indentLines(e.shiftKey?-1:1);else Ed.replace(s,t,Ed.indentUnit())}
+    else if(e.key==="Enter"&&!e.shiftKey){const[s,t]=Ed.sel(),[a]=Ed.lineBounds(s,s),ind=ta.value.slice(a,s).match(/^[ \t]*/)[0];if(ind){e.preventDefault();Ed.replace(s,t,"\n"+ind)}}});
+  return api})();
+
+/* ================= Assets: pictures kept in IndexedDB, referenced in the text as asset:ID ================= */
+const Assets=(()=>{const cache=new Map(),urls=new Map();let db=null;
+  const open=()=>new Promise(res=>{try{const r=indexedDB.open("redact-assets",1);r.onupgradeneeded=()=>r.result.createObjectStore("a");r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);r.onblocked=()=>res(null)}catch(e){res(null)}});
+  const toUrl=d=>{try{const[hd,b]=d.split(",");const mime=(hd.match(/:(.*?);/)||[])[1]||"image/png",bin=atob(b),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type:mime}))}catch(e){return d}};
+  const tx=(mode,f)=>new Promise(res=>{try{const t=db.transaction("a",mode);f(t.objectStore("a"));t.oncomplete=()=>res(true);t.onerror=()=>res(false);t.onabort=()=>res(false)}catch(e){res(false)}});
+  return{cache,ok:()=>!!db,
+    async init(){db=await open();if(!db)return;await new Promise(res=>{try{const rq=db.transaction("a","readonly").objectStore("a").openCursor();rq.onsuccess=()=>{const c=rq.result;if(c){cache.set(c.key,c.value);c.continue()}else res()};rq.onerror=()=>res()}catch(e){res()}})},
+    url(id){if(!cache.has(id))return"";if(!urls.has(id))urls.set(id,toUrl(cache.get(id)));return urls.get(id)},
+    async put(d){const id="a"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);cache.set(id,d);if(db&&!await tx("readwrite",st=>st.put(d,id))){cache.delete(id);throw new Error("Could not store the image (browser storage is full or blocked)")}return id},
+    resolve(t){return typeof t==="string"&&t.includes("asset:")?t.replace(/asset:([a-z0-9]+)/g,(m,id)=>cache.get(id)||m):t},
+    async gc(used){let n=0;for(const id of[...cache.keys()]){if(used.has(id))continue;cache.delete(id);if(urls.has(id)){try{URL.revokeObjectURL(urls.get(id))}catch(e){}urls.delete(id)}if(db)await tx("readwrite",st=>st.delete(id));n++}return n}}})();
+
+/* ================= Markdown (escape first, then format; only safe URLs become images, links or embeds) ================= */
+function Markdown(src){
+  const vId=u=>{let m=u.match(/(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/i);if(m)return{k:"yt",id:m[1]};m=u.match(/vimeo\.com\/(?:video\/)?(\d+)/i);if(m)return{k:"vm",id:m[1]};if(/^https?:\/\/[^\s]+\.(mp4|webm|ogv|m4v|mov)(\?[^\s]*)?(#[^\s]*)?$/i.test(u))return{k:"file"};return null};
+  const IMG=/^(https?:\/\/[^\s"<>]+|data:image\/(?:png|jpe?g|gif|webp|svg\+xml);base64,[A-Za-z0-9+\/=]+|asset:[a-z0-9]+)$/i;
+  const imgSrc=u=>/^asset:/i.test(u)?Assets.url(u.slice(6)):u;
+  const fig=(alt,url)=>{const isVid=/^video\s*:/i.test(alt)||(/^https?:/i.test(url)&&vId(url)&&vId(url).k!=="file")||(vId(url)&&vId(url).k==="file"),cap=alt.replace(/^video\s*:\s*/i,"");
+    if(isVid){const v=vId(url);if(!v||!/^https?:/i.test(url))return null;let inner;
+      if(v.k==="yt")inner='<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'" title="'+esc(cap||"Video")+'" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe></div>';
+      else if(v.k==="vm")inner='<div class="vid"><iframe src="https://player.vimeo.com/video/'+v.id+'" title="'+esc(cap||"Video")+'" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe></div>';
+      else inner='<video controls preload="metadata" src="'+esc(url)+'"></video>';
+      return'<figure>'+inner+'<figcaption>'+(cap?esc(cap)+" · ":"")+'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Open video</a> (needs an internet connection)</figcaption></figure>'}
+    if(!IMG.test(url))return null;const s2=imgSrc(url);if(!s2)return'<figure><figcaption>[This image is still loading, or was removed]</figcaption></figure>';
+    return'<figure><img src="'+esc(s2)+'" alt="'+esc(cap)+'" loading="lazy" referrerpolicy="no-referrer">'+(cap?"<figcaption>"+esc(cap)+"</figcaption>":"")+"</figure>"};
+  const inl=s=>esc(s).replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,(m,a,u)=>{const raw=u.replace(/&amp;/g,"&");if(!IMG.test(raw)||vId(raw))return m;const s2=imgSrc(raw);return s2?'<img src="'+esc(s2)+'" alt="'+a+'" loading="lazy" referrerpolicy="no-referrer">':m}).replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/\*([^*]+)\*/g,"<i>$1</i>").replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  let out="",inCode=false,ul=false,ol=false,para=[];const fp=()=>{if(para.length)out+="<p>"+inl(para.join(" "))+"</p>";para=[]},fl=()=>{if(ul)out+="</ul>";if(ol)out+="</ol>";ul=ol=false};
+  const L=src.split("\n");
+  for(let i=0;i<L.length;i++){const l=L[i];
+    if(/^```/.test(l)){fp();fl();out+=inCode?"</pre>":"<pre>";inCode=!inCode;continue}
+    if(inCode){out+=esc(l)+"\n";continue}let m;
+    if((m=l.match(/^\s*!\[([^\]]*)\]\(([^)\s]+)\)\s*$/))){fp();fl();const f=fig(m[1],m[2]);out+=f||"<p>"+inl(l)+"</p>";continue}
+    if(/^\s*\|/.test(l)){fp();fl();const rows=[];while(i<L.length&&/^\s*\|/.test(L[i])){if(!/^\s*\|[\s:|-]+\|?\s*$/.test(L[i]))rows.push(L[i].trim().replace(/^\||\|$/g,"").split("|").map(c=>c.trim()));i++}i--;
+      out+="<table>"+rows.map((r,k)=>"<tr>"+r.map(c=>(k?"<td>":"<th>")+inl(c)+(k?"</td>":"</th>")).join("")+"</tr>").join("")+"</table>";continue}
+    if((m=l.match(/^(#{1,6})\s+(.*)/))){fp();fl();out+=`<h${m[1].length}>${inl(m[2])}</h${m[1].length}>`}
+    else if(/^\s*(---+|\*\*\*+|___+)\s*$/.test(l)){fp();fl();out+="<hr>"}
+    else if((m=l.match(/^\s*[-*]\s+(.*)/))){fp();if(ol){out+="</ol>";ol=false}if(!ul){out+="<ul>";ul=true}out+="<li>"+inl(m[1])+"</li>"}
+    else if((m=l.match(/^\s*\d+[.)]\s+(.*)/))){fp();if(ul){out+="</ul>";ul=false}if(!ol){out+="<ol>";ol=true}out+="<li>"+inl(m[1])+"</li>"}
+    else if((m=l.match(/^>\s?(.*)/))){fp();fl();out+="<blockquote>"+inl(m[1])+"</blockquote>"}
+    else if(!l.trim()){fp();fl()}else{fl();para.push(l)}}
+  fp();fl();if(inCode)out+="</pre>";return out}
+
+/* ================= File operations ================= */
+const Files=(()=>{const dl=(name,text)=>{const a=h("a",{href:URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"})),download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+  const api={
+    async open(){if(window.showOpenFilePicker){try{const[hd]=await showOpenFilePicker();const f=await hd.getFile();Docs.add(f.name,await f.text(),{handle:hd,disk:true});Docs.cur.saved=Docs.cur.text;UI.tabs();return}catch(e){if(e.name==="AbortError")return}}
+      const i=h("input",{type:"file",accept:".txt,.md,.markdown,.json,.js,.html,.css,text/*"});i.onchange=async()=>{const f=i.files[0];if(f){Docs.add(f.name,await f.text(),{disk:true});Docs.cur.saved=Docs.cur.text;UI.tabs()}};i.click()},
+    async save(as){const d=Docs.cur;if(d.handle&&!as){try{const w=await d.handle.createWritable();await w.write(Assets.resolve(d.text));await w.close();api.done(d,"Saved "+d.name);return}catch(e){Notify.show("Could not write file: "+e.message,true);return}}
+      if(window.showSaveFilePicker){try{const hd=await showSaveFilePicker({suggestedName:d.name});const w=await hd.createWritable();await w.write(Assets.resolve(d.text));await w.close();d.handle=hd;d.name=hd.name;api.done(d,"Saved "+d.name);return}catch(e){if(e.name==="AbortError")return;Notify.show("Save failed: "+e.message,true);return}}
+      const n=as||!d.disk?await Modal.ask("File name",d.name):d.name;if(!n)return;d.name=n;dl(n,Assets.resolve(d.text));api.done(d,"Downloaded "+n+" (this browser cannot overwrite files; check your downloads folder)")},
+    done(d,msg){d.saved=d.text;d.disk=true;UI.tabs();UI.status();Docs.persist();Bus.emit("save",d);Notify.show(msg)},
+    exportAs(ext){const d=Docs.cur;dl(d.name.replace(/\.[^.]+$/,"")+"."+ext,Assets.resolve(d.text));Notify.show("Exported "+ext+" download")},
+    download:dl};
+  return api})();
+
+/* ================= SearchController ================= */
+const Find=(()=>{const fb=$("#fb");let q,r,cs,ww,rx,info;
+  const build=()=>{q=h("input",{type:"text",placeholder:"Find","aria-label":"Find",oninput:()=>cnt(),onkeydown:e=>{if(e.key==="Enter"){e.preventDefault();step(e.shiftKey?-1:1)}}});
+    r=h("input",{type:"text",placeholder:"Replace","aria-label":"Replace",onkeydown:e=>{if(e.key==="Enter")repl()}});
+    const chk=(l,t)=>{const c=h("input",{type:"checkbox",onchange:count});fb.append(h("label",{title:t},c," "+l));return c};
+    info=h("span",{class:"mu",style:"color:var(--mu)"});
+    fb.append(q,r);cs=chk("Aa","Match case");ww=chk("Word","Whole word");rx=chk("Regex","Regular expression");
+    fb.append(h("button",{class:"btn",onclick:()=>step(-1)},"Prev"),h("button",{class:"btn",onclick:()=>step(1)},"Next"),h("button",{class:"btn",onclick:repl},"Replace"),h("button",{class:"btn",onclick:all},"Replace all"),info,h("button",{onclick:()=>api.hide(),"aria-label":"Close search"},"✕"))};
+  const re=()=>{if(!q.value)return null;if(rx.checked&&/\([^)]*[+*][^)]*\)[+*{]/.test(q.value)){info.textContent="This pattern could freeze the editor (nested repeats). Please simplify it.";return null}try{let s=rx.checked?q.value:q.value.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");if(ww.checked)s="\\b(?:"+s+")\\b";const x=new RegExp(s,"g"+(cs.checked?"":"i")+"m");info.textContent="";return x}catch(e){info.textContent="Invalid pattern: "+e.message;return null}};
+  const matches=()=>{const x=re();if(!x)return[];const t=Ed.text(),o=[];if(t.length>4e6){info.textContent="Document too large to search this way.";return[]}let m;while((m=x.exec(t))&&o.length<50000){o.push([m.index,m.index+m[0].length,m[0]]);if(!m[0].length)x.lastIndex++}return o};
+  const count=()=>{const x=re();if(x)info.textContent=matches().length+" matches"};const cnt=debounce(count,180);
+  const go=m=>{Ed.select(m[0],m[1]);Ed.ta.focus({preventScroll:true});Ed.reveal(Ed.text().slice(0,m[0]).split("\n").length-1);q.focus()};
+  const step=d=>{const ms=matches();if(!ms.length){info.textContent=re()?"No matches":info.textContent;return}const[s,e]=Ed.sel();
+    let m=d>0?ms.find(x=>x[0]>=e&&!(x[0]===s&&x[1]===e&&false))||ms[0]:[...ms].reverse().find(x=>x[1]<=s)||ms[ms.length-1];go(m);info.textContent=(ms.indexOf(m)+1)+" of "+ms.length};
+  const repl=()=>{const x=re();if(!x)return;const[s,e]=Ed.sel(),sel=Ed.text().slice(s,e);x.lastIndex=0;const m=x.exec(sel);if(m&&m[0]===sel&&sel){const out=rx.checked?sel.replace(new RegExp(x.source,x.flags.replace("g","")),r.value):r.value;Ed.replace(s,e,out);q.focus()}step(1)};
+  const all=()=>{const x=re();if(!x)return;const t=Ed.text(),n=matches().length;if(!n)return;Ed.replace(0,t.length,t.replace(x,rx.checked?r.value:()=>r.value));q.focus();info.textContent="Replaced "+n};
+  const api={show(withReplace){if(!q)build();fb.classList.add("on");const s=Ed.selected();if(s&&!s.includes("\n")){q.value=s;count()}q.focus();q.select()},hide(){fb.classList.remove("on");Ed.ta.focus()},step};
+  return api})();
+
+/* ================= Palette ================= */
+function palette(items,placeholder="Type a command"){const inp=h("input",{type:"text",class:"pi",placeholder,"aria-label":placeholder,role:"combobox","aria-expanded":"true"}),box=h("div",{role:"listbox"});let sel=0,shown=[];
+  const draw=()=>{const t=inp.value.toLowerCase().trim(),rec=Commands.recent();
+    shown=items.filter(i=>!t||(i.category+" "+i.label+" "+(i.desc||"")).toLowerCase().includes(t)).sort((a,b)=>{const ra=rec.indexOf(a.id),rb=rec.indexOf(b.id);return(ra<0?99:ra)-(rb<0?99:rb)||a.category.localeCompare(b.category)}).slice(0,80);
+    sel=Math.min(sel,Math.max(0,shown.length-1));
+    box.replaceChildren(...(shown.length?shown.map((i,n)=>h("div",{class:"it"+(n===sel?" on":""),role:"option",onclick:()=>run(i)},h("span",{},h("small",{},i.category+": "),i.label,i.desc?h("small",{}," – "+i.desc):""),h("small",{},keyLabel(i.key||""))))
+      :[h("p",{style:"color:var(--mu)"},"No matching commands. Try fewer words, or open Extensions to add more.")]))};
+  const run=i=>{Modal.close();setTimeout(()=>i.run(),0)};
+  inp.addEventListener("input",()=>{sel=0;draw()});
+  inp.addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();sel=Math.min(sel+1,shown.length-1);draw()}else if(e.key==="ArrowUp"){e.preventDefault();sel=Math.max(sel-1,0);draw()}else if(e.key==="Enter"&&shown[sel]){e.preventDefault();run(shown[sel])}});
+  draw();Modal.open("",h("div",{},inp,box))}
+const cmdItems=()=>[...Commands.m.values()].map(c=>({id:c.id,category:c.category,label:c.label,desc:c.desc,key:Keys.keyOf(c.id),run:()=>Commands.run(c.id)}));
+
+const docView=()=>new Proxy(Docs.cur,{get:(t,k)=>k==="text"?Assets.resolve(t.text):t[k],set:(t,k,v)=>{t[k]=v;return true}});
+/* ================= PluginManager ================= */
+const Plugins=(()=>{const ext=new Map();let st=Storage.get("redact.ext",{disabled:[],external:[]}),loading=null;
+  const save=()=>Storage.set("redact.ext",st);
+  const mkApi=(x)=>{const dis=x.disposers;const track=f=>{dis.push(f);return f};
+    return{
+      registerCommand(id,spec){const full=x.id+"."+id;track(Commands.add(full,{...spec,category:spec.category||x.def.name},x.id));
+        if(spec.key){const c=Keys.conflict(spec.key,full);if(c){Notify.show(x.def.name+": shortcut "+keyLabel(spec.key)+" is already used by \""+c.label+"\" and was not bound.",true);Commands.m.get(full).key=null}}Keys.rebuild();return full},
+      on:(e,f)=>track(Bus.on(e,f)),
+      addStatus(id,f){statusItems.set(x.id+"."+id,f);track(()=>statusItems.delete(x.id+"."+id));UI.status()},
+      addPanel(id,title,render){panels.set(x.id+"."+id,{title,render});track(()=>panels.delete(x.id+"."+id));UI.side()},
+      editor:Ed,settings:Settings,notify:Notify.show,prompt:(l,d)=>Modal.ask(l,d),confirm:(m)=>Modal.confirm(m),
+      doc:()=>docView(),docs:()=>Docs.list(),openDoc:(n,t)=>Docs.add(n,t)}};
+  const activate=x=>{x.error=null;x.disposers=[];try{x.def.activate&&x.def.activate(mkApi(x));x.enabled=true}catch(e){x.error="Activation failed: "+e.message;x.enabled=false;deact(x,true);console.error(e)}Keys.rebuild();UI.status();UI.side()};
+  const deact=(x,quiet)=>{try{!quiet&&x.def.deactivate&&x.def.deactivate()}catch(e){x.error="Deactivation error: "+e.message}x.disposers.splice(0).reverse().forEach(f=>{try{f()}catch(e){}});x.enabled=false;Keys.rebuild();UI.status();UI.side()};
+  const api={ext,st:()=>st,
+    register(def,origin){if(!def||!def.id||!def.name)throw new Error("Extension needs id and name");if(ext.has(def.id))throw new Error("Extension already registered: "+def.id);
+      const x={id:def.id,def:{version:"0.0.0",author:"unknown",description:"",...def},origin:origin||loading||{kind:"built-in"},disposers:[],enabled:false,error:null};ext.set(def.id,x);
+      if(loading)loading.ids.push(def.id);if(!st.disabled.includes(def.id))activate(x);return x},
+    toggle(id){const x=ext.get(id);if(!x)return;if(x.enabled){deact(x);if(!st.disabled.includes(id))st.disabled.push(id)}else{st.disabled=st.disabled.filter(i=>i!==id);activate(x)}save()},
+    remove(id){const x=ext.get(id);if(!x||x.origin.kind==="built-in")return;if(x.enabled)deact(x);ext.delete(id);st.external=st.external.filter(e=>!e.ids.includes(id));save()},
+    /* External code runs in the page context: NOT sandboxed. User must confirm. */
+    run(code,origin){const o={...origin,ids:[]};loading=o;try{new Function("editor",code)(window.editor)}finally{loading=null}return o},
+    async install(code,origin,label){if(!await Modal.confirm("Install extension from "+label+"?\n\nExtensions run with full access to this page and your documents. They are not sandboxed. Only install code you trust.","Install and run"))return;
+      try{const o=api.run(code,origin);if(!o.ids.length)throw new Error("The code did not call editor.registerExtension()");st.external.push({code,origin,ids:o.ids});save();Notify.show("Installed "+o.ids.join(", "));Plugins.manager()}catch(e){Notify.show("Install failed: "+e.message,true)}},
+    pause(){if(st.external.length){st.paused=true;save()}},
+    resume(){st.paused=false;save();for(const e of st.external){try{api.run(e.code,{...e.origin,ids:[]})}catch(x){Notify.show("Extension failed to load ("+(e.origin.name||"?")+"): "+x.message,true)}}},
+    removeAllExternal(){for(const x of[...ext.values()])if(x.origin.kind!=="built-in"){if(x.enabled)deact(x);ext.delete(x.id)}st.external=[];st.paused=false;save()},
+    startup(){if(st.paused){Notify.show("External extensions are paused because the last start did not finish. Open Extensions to resume or remove them.",true);return}for(const e of st.external){try{api.run(e.code,{...e.origin,ids:[]})}catch(x){Notify.show("Extension failed to load ("+(e.origin.name||"?")+"): "+x.message,true)}}},
+    manager(){const search=h("input",{type:"text",class:"pi",placeholder:"Search extensions","aria-label":"Search extensions"}),list=h("div",{});
+      const draw=()=>{const t=search.value.toLowerCase();list.replaceChildren(...[...ext.values()].filter(x=>!t||(x.def.name+x.def.description).toLowerCase().includes(t)).map(x=>
+        h("div",{style:"border-bottom:1px solid var(--bd);padding:6px 0"},h("div",{class:"row"},h("b",{},x.def.name),h("small",{},"v"+x.def.version+" · "+x.def.author),
+          h("span",{class:"tag"},x.origin.kind+(x.origin.name?": "+x.origin.name:"")),
+          h("button",{class:"btn",onclick:()=>{api.toggle(x.id);draw()}},x.enabled?"Disable":"Enable"),
+          x.origin.kind!=="built-in"?h("button",{class:"btn",onclick:()=>{api.remove(x.id);draw()}},"Remove"):null),
+          h("div",{},x.def.description),x.error?h("div",{class:"err"},x.error):null)));if(!list.children.length)list.append(h("p",{},"No extensions match."))};
+      search.oninput=draw;draw();
+      const paused=st.paused&&st.external.length?h("div",{style:"border:1px solid var(--red);padding:8px;margin-bottom:8px"},h("p",{},"Paused: "+st.external.length+" external extension(s) are not loaded because the last start did not finish (one of them may be faulty): "+st.external.map(e=>e.origin.name||"?").join(", ")),h("div",{class:"row"},h("button",{class:"btn p",onclick:()=>{api.resume();Modal.close();api.manager()}},"Load them now"),h("button",{class:"btn",onclick:async()=>{if(await Modal.confirm("Remove all external extensions? Your documents are not affected.","Remove all")){api.removeAllExternal();api.manager()}}},"Remove all external extensions"))):null;
+      Modal.open("Extensions",h("div",{},paused,search,list,h("div",{class:"row"},
+        h("button",{class:"btn",onclick:()=>{Modal.close();Commands.run("ext.installFile")}},"Install from file"),
+        h("button",{class:"btn",onclick:()=>{Modal.close();Commands.run("ext.installUrl")}},"Load from URL"),
+        h("button",{class:"btn",onclick:()=>{Modal.close();Commands.run("ext.template")}},"New from template")),
+        h("p",{style:"color:var(--mu);font-size:12px"},"Extensions are not sandboxed: they run in this page with access to your documents. There is no public marketplace; install only files you trust.")))}};
+  return api})();
+
+/* Public API for extensions */
+window.editor={registerExtension:d=>Plugins.register(d),registerCommand:(id,s)=>{Commands.add(id,s,"user");Keys.rebuild()},on:Bus.on.bind(Bus),api:{doc:()=>docView(),editor:Ed,notify:Notify.show}};
+
+/* ================= Insert: pictures and videos ================= */
+const Insert=(()=>{
+  const at=text=>{const[s,e]=Ed.sel(),t=Ed.text(),pre=s===0?"":t.slice(s-2,s)==="\n\n"?"":t[s-1]==="\n"?"\n":"\n\n";Ed.replace(s,e,pre+text+"\n\n")};
+  const shrink=f=>new Promise((res,rej)=>{
+    if(f.type==="image/svg+xml"){if(f.size>400000)return rej(new Error("SVG is larger than 400 KB"));const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=()=>rej(new Error("Could not read the file"));return fr.readAsDataURL(f)}
+    const u=URL.createObjectURL(f),im=new Image();
+    im.onload=()=>{URL.revokeObjectURL(u);const k=Math.min(1,1600/Math.max(im.naturalWidth,im.naturalHeight));
+      if(k===1&&f.size<400000&&/^image\/(png|jpeg|webp|gif)$/.test(f.type)){const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=()=>rej(new Error("Could not read the file"));return fr.readAsDataURL(f)}
+      const cv=document.createElement("canvas");cv.width=Math.max(1,Math.round(im.naturalWidth*k));cv.height=Math.max(1,Math.round(im.naturalHeight*k));cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);
+      try{res(cv.toDataURL(f.type==="image/jpeg"?"image/jpeg":"image/png",.86))}catch(e){rej(e)}};
+    im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("This file is not a readable image"))};im.src=u});
+  const safeUrl=u=>u.trim().replace(/ /g,"%20").replace(/\(/g,"%28").replace(/\)/g,"%29");
+  const normUrl=u=>{u=u.trim();return u&&!/^[a-z]+:/i.test(u)?"https://"+u:u};
+  const dialog=(title,fields,okLabel,onOk,extra)=>{const inputs=fields.map(([l,ph,def])=>h("input",{type:"text",class:"pi",placeholder:ph,"aria-label":l,value:def||"",onkeydown:e=>{if(e.key==="Enter"){e.preventDefault();go()}}}));
+    const msg=h("p",{style:"color:var(--mu);min-height:1.3em;margin:4px 0"}),go=()=>{const r=onOk(inputs.map(i=>i.value),msg);if(r)Modal.close()};
+    Modal.open(title,h("div",{},...fields.map((f,i)=>h("label",{},h("small",{},f[0]),inputs[i])),extra?extra(inputs,msg):null,msg,h("div",{class:"row"},h("button",{class:"btn p",onclick:go},okLabel),h("button",{class:"btn",onclick:()=>Modal.close()},"Cancel"))))};
+  const api={at,
+    async files(list){const imgs=[...list].filter(f=>/^image\//.test(f.type));if(!imgs.length)return false;const refs=[];
+      for(const f of imgs){try{const d=await shrink(f),alt=f.name.replace(/\.[^.]+$/,"").replace(/[\[\]()]/g," ").trim()||"image";refs.push("!["+alt+"]("+(Assets.ok()?"asset:"+await Assets.put(d):d)+")")}catch(e){Notify.show((f.name||"Image")+": "+e.message,true)}}
+      if(refs.length){at(refs.join("\n\n"));Notify.show(refs.length+" picture(s) added."+(Assets.ok()?"":" Browser storage for pictures is unavailable, so they were embedded in the text."))}return true},
+    fromFile(){const i=h("input",{type:"file",accept:"image/*",multiple:true});i.onchange=()=>api.files(i.files);i.click()},
+    fromUrl(){let prev;dialog("Insert picture from the web",[["Picture address","https://example.com/picture.jpg"],["Caption (optional)","Caption"]],"Insert",(v,msg)=>{const u=normUrl(v[0]);if(!/^https?:\/\/\S+$/i.test(u)){msg.textContent="Enter a web address that starts with http:// or https://";return false}at("!["+v[1].replace(/[\[\]]/g," ")+"]("+safeUrl(u)+")");return true},
+      (inp,msg)=>{prev=h("img",{style:"max-width:100%;max-height:160px;display:none;margin:6px 0",alt:"Preview",referrerpolicy:"no-referrer"});prev.onerror=()=>{prev.style.display="none";msg.textContent="Could not load a picture from that address. You can still insert it; some sites block hotlinking."};prev.onload=()=>{prev.style.display="block";msg.textContent=""};
+        inp[0].addEventListener("input",debounce(()=>{const u=normUrl(inp[0].value);if(/^https?:\/\/\S+$/i.test(u))prev.src=u},400));return prev})},
+    video(){dialog("Insert video",[["YouTube, Vimeo or video link","https://www.youtube.com/watch?v=…"],["Caption (optional)","Caption"]],"Insert",(v,msg)=>{const u=normUrl(v[0]);if(!/^https?:\/\/\S+$/i.test(u)||!(/(youtube\.com|youtu\.be|vimeo\.com)/i.test(u)||/\.(mp4|webm|ogv|m4v|mov)(\?|#|$)/i.test(u))){msg.textContent="Use a YouTube or Vimeo link, or a direct link to an .mp4 / .webm file.";return false}at("![video: "+v[1].replace(/[\[\]]/g," ")+"]("+safeUrl(u)+")");if(!document.body.classList.contains("prev")){Commands.run("view.preview")}return true},
+      ()=>h("p",{style:"color:var(--mu);font-size:12px"},"The video plays in the preview (and a link is kept in the text). Playing needs an internet connection."))},
+    menu(anchor){closePop();const r=anchor.getBoundingClientRect(),items=[["Picture from a file…","insert.imageFile"],["Picture from a web address…","insert.imageUrl"],["Video (YouTube, Vimeo, .mp4)…","insert.video"],["Link…","insert.link"],["Table","insert.table"],["Code block","insert.code"],["Horizontal line","insert.hr"]];
+      const el=h("div",{class:"pop",id:"pop",role:"menu",style:"left:"+Math.max(4,Math.min(r.left,innerWidth-240))+"px;top:"+(r.bottom+2)+"px"},items.map(([l,id])=>h("div",{class:"it",role:"menuitem",tabindex:"0",onclick:()=>{closePop();Commands.run(id)},onkeydown:e=>{if(e.key==="Enter")e.target.click()}},l)));document.body.append(el);el.querySelector(".it").focus()}};
+  const closePop=()=>{const p=$("#pop");if(p)p.remove()};document.addEventListener("mousedown",e=>{const p=$("#pop");if(p&&!p.contains(e.target))p.remove()},true);
+  return api})();
+
+/* ================= Core commands ================= */
+const C=(id,label,category,key,run,desc)=>Commands.add(id,{label,category,key,run,desc});
+C("file.new","New document","File","mod+n",()=>Docs.add("untitled.txt",""));
+C("file.open","Open file…","File","mod+o",()=>Files.open());
+C("file.save","Save","File","mod+s",()=>Files.save());
+C("file.saveAs","Save as…","File","mod+shift+s",()=>Files.save(true));
+C("file.exportTxt","Export as plain text","File",null,()=>Files.exportAs("txt"));
+C("file.exportMd","Export as Markdown","File",null,()=>Files.exportAs("md"));
+C("file.rename","Rename document","File",null,async()=>{const n=await Modal.ask("Rename document",Docs.cur.name);if(n){Docs.cur.name=n;UI.tabs();UI.status();Docs.persist()}});
+C("file.duplicate","Duplicate document","File",null,()=>Docs.add(Docs.cur.name.replace(/(\.[^.]*)?$/,"-copy$1"),Docs.cur.text));
+C("file.close","Close document","File",null,()=>Docs.close(Docs.index()));
+C("nav.palette","Command palette","View","mod+shift+p",()=>palette(cmdItems()));
+C("nav.find","Find","Search","mod+f",()=>Find.show());
+C("nav.replace","Find and replace","Search","mod+h",()=>Find.show(true));
+C("nav.goto","Go to line (line or line:column)","Search","mod+g",async()=>{const v=await Modal.ask("Go to line[:column]","");if(v){const[l,c]=v.split(":").map(Number);if(l>0)Ed.gotoLine(l,c||1);else Notify.show("Enter a line number, e.g. 42 or 42:7",true)}});
+C("view.sidebar","Toggle sidebar","View","mod+b",()=>{Settings.set("sidebar",!Settings.get("sidebar"));UI.side()});
+C("view.wrap","Toggle word wrap","View","alt+z",()=>Settings.set("wrap",!Settings.get("wrap")));
+C("view.lineNumbers","Toggle line numbers","View",null,()=>Settings.set("lineNumbers",!Settings.get("lineNumbers")),"Hidden automatically while word wrap is on");
+C("view.preview","Toggle Markdown preview","View","mod+shift+v",()=>{document.body.classList.toggle("prev");UI.preview()});
+C("view.focus","Toggle focus mode","View","mod+shift+enter",()=>document.body.classList.toggle("focus"));
+C("view.fontUp","Increase font size","View","mod+=",()=>Settings.set("fontSize",Math.min(40,Settings.get("fontSize")+1)));
+C("view.fontDown","Decrease font size","View","mod+-",()=>Settings.set("fontSize",Math.max(8,Settings.get("fontSize")-1)));
+C("view.fontReset","Reset font size","View","mod+0",()=>Settings.set("fontSize",15));
+C("insert.menu","Insert…","Insert",null,()=>{const b=[...document.querySelectorAll("#acts button")].find(x=>x.textContent==="Insert");Insert.menu(b||document.body)});
+C("insert.imageFile","Insert picture from a file…","Insert",null,()=>Insert.fromFile(),"Or drag a picture into the editor, or paste one");
+C("insert.imageUrl","Insert picture from a web address…","Insert",null,()=>Insert.fromUrl());
+C("insert.video","Insert video (YouTube, Vimeo or video link)…","Insert",null,()=>Insert.video());
+C("insert.link","Insert link…","Insert",null,async()=>{const u=await Modal.ask("Web address","https://");if(!u)return;const sel=Ed.selected(),t=sel||await Modal.ask("Link text","");const[s,e]=Ed.sel();Ed.replace(s,e,"["+(t||u)+"]("+u.trim()+")")});
+C("insert.table","Insert table","Insert",null,()=>Insert.at("| Column 1 | Column 2 | Column 3 |\n|---|---|---|\n|  |  |  |\n|  |  |  |"));
+C("insert.code","Insert code block","Insert",null,()=>Insert.at("```\ncode here\n```"));
+C("insert.hr","Insert horizontal line","Insert",null,()=>Insert.at("---"));
+C("view.previewOnly","Preview full screen (Esc to leave)","View",null,()=>{const on=!document.body.classList.contains("prevonly");document.body.classList.toggle("prevonly",on);if(on)document.body.classList.add("prev");UI.preview()});
+C("app.assets","Remove pictures no longer used in any document","Preferences",null,async()=>{const used=new Set();for(const d of Docs.list())for(const m of d.text.matchAll(/asset:([a-z0-9]+)/g))used.add(m[1]);const n=await Assets.gc(used);Notify.show(n?n+" unused picture(s) removed.":"No unused pictures found.")});
+C("app.reset","Reset Redact settings and extensions…","Preferences",null,async()=>{if(!await Modal.confirm("Reset all settings, shortcuts and installed extensions to their defaults? Your documents and pictures are kept.","Reset"))return;for(const k of["redact.settings","redact.keys","redact.ext","redact.recent","redact.boot","redact.spell"])try{localStorage.removeItem(k)}catch(e){}location.reload()});
+for(const[k,n]of[["editorial","Editorial Red"],["midnight","Midnight"],["paper","Paper"],["contrast","High Contrast"]])C("theme."+k,"Theme: "+n,"Theme",null,()=>Settings.set("theme",k));
+C("prefs.settings","Settings","Preferences",null,()=>settingsDialog());
+C("prefs.shortcuts","Keyboard shortcuts","Preferences",null,()=>shortcutsDialog());
+C("prefs.extensions","Extensions","Preferences",null,()=>Plugins.manager());
+C("prefs.help","Help","Preferences","f1",()=>helpDialog());
+C("prefs.history","Show recent commands","Preferences",null,()=>palette(cmdItems().filter(i=>Commands.recent().includes(i.id)),"Recent commands"));
+C("ext.installFile","Install extension from file…","Extensions",null,()=>{const i=h("input",{type:"file",accept:".js"});i.onchange=async()=>{const f=i.files[0];if(f)Plugins.install(await f.text(),{kind:"local",name:f.name},"local file "+f.name)};i.click()});
+C("ext.installUrl","Load extension from URL…","Extensions",null,async()=>{const u=await Modal.ask("Extension URL (https, must allow cross-origin requests)","https://");if(!u)return;try{const r=await fetch(u);if(!r.ok)throw new Error("HTTP "+r.status);Plugins.install(await r.text(),{kind:"remote",name:u},u)}catch(e){Notify.show("Could not fetch URL: "+e.message+" (browsers block this unless the server allows cross-origin requests)",true)}});
+C("ext.template","New extension from template","Extensions",null,()=>Docs.add("my-extension.js",`editor.registerExtension({
+  id: "my-extension", name: "My Extension", version: "1.0.0", author: "me",
+  description: "Adds a command that inserts a greeting.",
+  activate(api) {
+    api.registerCommand("hello", {
+      label: "Insert greeting", key: "alt+shift+h",
+      run() { const [s, e] = api.editor.sel(); api.editor.replace(s, e, "Hello!"); }
+    });
+    api.on("save", d => api.notify("Saved " + d.name));
+  },
+  deactivate() {}
+});
+`));
+C("ext.runDoc","Run current document as extension","Extensions",null,()=>Plugins.install(Docs.cur.text,{kind:"local",name:Docs.cur.name},"the current document \""+Docs.cur.name+"\""));
+C("config.export","Export settings, shortcuts and extension state","Preferences",null,()=>Files.download("redact-config.json",JSON.stringify({settings:Settings.all(),keys:Keys.overrides(),disabled:Plugins.st().disabled},null,2)));
+C("config.import","Import settings and shortcuts…","Preferences",null,()=>{const i=h("input",{type:"file",accept:".json"});i.onchange=async()=>{try{const c=JSON.parse(await i.files[0].text());Settings.replace(c.settings||{});Keys.setOverrides(c.keys);Plugins.st().disabled=c.disabled||[];Storage.set("redact.ext",Plugins.st());Notify.show("Imported. Reload to apply extension enable/disable changes.")}catch(e){Notify.show("Invalid config file: "+e.message,true)}};i.click()});
+
+/* ================= Dialogs ================= */
+function settingsDialog(){const S=Settings,f=[];
+  const row=(l,el)=>h("div",{class:"row"},h("label",{},l),el);
+  const num=(k,min,max,step=1)=>h("input",{type:"number",min,max,step,value:S.get(k),onchange:e=>S.set(k,Number(e.target.value))});
+  const chk=k=>h("input",{type:"checkbox",checked:S.get(k),onchange:e=>S.set(k,e.target.checked)});
+  const sel=(k,o)=>h("select",{onchange:e=>S.set(k,e.target.value)},o.map(([v,n])=>h("option",{value:v,selected:S.get(k)===v},n)));
+  Modal.open("Settings",h("div",{},
+    row("Theme",sel("theme",[["editorial","Editorial Red"],["midnight","Midnight"],["paper","Paper"],["contrast","High Contrast"]])),
+    row("Font",sel("font",[["mono","Monospace"],["serif","Serif"],["sans","Sans-serif"]])),
+    row("Font size",num("fontSize",8,40)),row("Line height",num("lineHeight",1,3,.1)),row("Tab size",num("tab",1,8)),
+    row("Editor width (ch, 0 = full)",num("width",0,200,10)),
+    row("Accent color",h("span",{},h("input",{type:"color",value:S.get("accent")||"#c41230",onchange:e=>S.set("accent",e.target.value)}),h("button",{class:"btn",onclick:()=>{S.set("accent","");Modal.close();settingsDialog()}},"Use theme default"))),
+    row("Insert spaces for Tab",chk("spaces")),row("Word wrap",chk("wrap")),row("Line numbers",chk("lineNumbers")),row("Compact interface",chk("compact")),
+    h("p",{style:"color:var(--mu);font-size:12px"},"Settings are stored in this browser and applied immediately.")))}
+function shortcutsDialog(){const q=h("input",{type:"text",class:"pi",placeholder:"Search by command or key","aria-label":"Search shortcuts"}),box=h("div",{}),msg=h("p",{class:"err"});
+  const draw=()=>{const t=q.value.toLowerCase();box.replaceChildren(...[...Commands.m.values()].filter(c=>!t||(c.label+" "+keyLabel(Keys.keyOf(c.id))).toLowerCase().includes(t)).map(c=>{const k=Keys.keyOf(c.id);
+    return h("div",{class:"row",style:"justify-content:space-between"},h("span",{},c.label),h("span",{},h("kbd",{},k?keyLabel(k):"none")," ",
+      h("button",{class:"btn",onclick:b=>{b.target.textContent="Press keys…";Keys.record(nk=>{if(nk==="escape"){draw();return}const o=Keys.conflict(nk,c.id);if(o){msg.textContent=keyLabel(nk)+" is already used by \""+o.label+"\". Remove it there first.";draw();return}msg.textContent="";Keys.set(c.id,nk);draw()})}},"Change"),
+      h("button",{class:"btn",onclick:()=>{Keys.set(c.id,null);draw()}},"Remove")))}))};
+  q.oninput=draw;draw();
+  Modal.open("Keyboard shortcuts",h("div",{},q,msg,box,h("div",{class:"row"},h("button",{class:"btn",onclick:()=>{Keys.reset();draw()}},"Restore defaults"),h("button",{class:"btn",onclick:()=>Commands.run("config.export")},"Export"),h("button",{class:"btn",onclick:()=>Commands.run("config.import")},"Import")),
+    h("p",{style:"color:var(--mu);font-size:12px"},"Browsers reserve some combinations (for example Ctrl+N, Ctrl+T, Ctrl+W); they may not reach the page.")))}
+function helpDialog(){Modal.open("Help",h("div",{},
+  h("p",{},"Redact is a single-file editor. Everything is a command: open the palette with ",h("kbd",{},keyLabel("mod+shift+p"))," and type what you want."),
+  h("p",{},"Shortcuts are conventional (",keyLabel("mod+s")," save, ",keyLabel("mod+f")," find, ",keyLabel("mod+h")," replace, ",keyLabel("mod+g")," go to line) and can be changed under Keyboard shortcuts."),
+  h("p",{},"Extensions: use editor.registerExtension({id,name,activate(api){…},deactivate(){…}}). api.registerCommand, api.on(\"change\"|\"save\"|\"switch\"|\"command\"), api.addStatus and api.addPanel are cleaned up automatically on disable. Use “New extension from template” to start."),
+  h("h3",{},"Pictures and video"),h("p",{},"Use Insert ▾ in the top bar, drag a picture into the editor, or paste one. Pictures from a file are stored in this browser and shown as asset: references; they are embedded when you save or export. Videos (YouTube, Vimeo, .mp4 links) play in the Preview and need an internet connection."),h("h3",{},"If Redact seems stuck"),h("p",{},"Press Esc to close dialogs. Add #safe to the address to start without external extensions, or run “Reset Redact settings and extensions”. Your documents are kept."),h("h3",{},"Limitations"),
+  h("p",{},"Extensions are not sandboxed. Drafts live in browser storage and are not files on disk until you save. Without the File System Access API (Firefox, Safari), Save downloads a copy. Line numbers hide while word wrap is on. There is no syntax highlighting, bracket matching or whitespace visualisation in this version; Markdown preview is a basic renderer.")))}
+
+/* ================= Built-in extensions ================= */
+const rd=(i,e,f)=>f(i,e);
+const fix=s=>s.replace(/\r\n?/g,"\n");
+editor.registerExtension({id:"word-counter",name:"Word Counter",version:"1.0.0",author:"Redact",description:"Live words, characters and reading time in the status bar.",
+  activate(api){let lt=null,lo="";api.addStatus("w",()=>{const t=api.editor.text();if(t!==lt){lt=t;const w=api.editor.words(t);lo=w+" words · "+t.length+" chars · "+Math.max(1,Math.round(w/230))+" min read"}return lo});
+    api.on("change",()=>UI.status());
+    api.registerCommand("stats",{label:"Show document statistics",run(){const t=api.editor.text();api.notify(t.length+" characters, "+api.editor.words(t)+" words, "+t.split("\n").length+" lines, "+(t.trim()?t.trim().split(/\n\s*\n/).length:0)+" paragraphs")}})}});
+editor.registerExtension({id:"text-tools",name:"Text and Line Tools",version:"1.0.0",author:"Redact",description:"Case changes, sorting, de-duplication, trimming and line operations.",
+  activate(api){const E=api.editor,T=(id,label,fn,key)=>api.registerCommand(id,{label,key,run:()=>E.transform(fn)});
+    T("upper","Uppercase",s=>s.toUpperCase());T("lower","Lowercase",s=>s.toLowerCase());
+    T("title","Title case",s=>s.toLowerCase().replace(/(^|\s)(\S)/g,(m,a,b)=>a+b.toUpperCase()));
+    T("trim","Trim trailing whitespace",s=>s.replace(/[ \t]+$/gm,""));T("sort","Sort lines",s=>s.split("\n").sort((a,b)=>a.localeCompare(b)).join("\n"));
+    T("dedupe","Remove duplicate lines",s=>[...new Set(s.split("\n"))].join("\n"));T("join","Join lines",s=>s.split("\n").map(x=>x.trim()).join(" "));
+    T("tabs2spaces","Convert tabs to spaces",s=>s.replace(/\t/g," ".repeat(Settings.get("tab"))));T("spaces2tabs","Convert leading spaces to tabs",s=>s.replace(new RegExp("^((?: {"+Settings.get("tab")+"})+)","gm"),m=>"\t".repeat(m.length/Settings.get("tab"))));
+    api.registerCommand("indent",{label:"Indent lines",run:()=>E.indentLines(1)});api.registerCommand("outdent",{label:"Outdent lines",run:()=>E.indentLines(-1)});
+    api.registerCommand("dup",{label:"Duplicate line",key:"mod+shift+d",run(){const[s,e]=E.sel(),[a,b]=E.lineBounds(s,e),blk=E.text().slice(a,b);E.replace(b,b,"\n"+blk);E.select(s+blk.length+1,e+blk.length+1)}});
+    api.registerCommand("del",{label:"Delete line",key:"mod+shift+k",run(){const[s,e]=E.sel(),[a,b]=E.lineBounds(s,e);E.replace(a,Math.min(b+1,E.text().length),"")}});
+    api.registerCommand("up",{label:"Move line up",key:"alt+arrowup",run(){const t=E.text(),[s,e]=E.sel(),[a,b]=E.lineBounds(s,e);if(!a)return;const p=t.lastIndexOf("\n",a-2)+1,blk=t.slice(a,b);E.replace(p,b,blk+"\n"+t.slice(p,a-1));E.select(p+(s-a),p+(e-a))}});
+    api.registerCommand("down",{label:"Move line down",key:"alt+arrowdown",run(){const t=E.text(),[s,e]=E.sel(),[a,b]=E.lineBounds(s,e);if(b>=t.length)return;let n=t.indexOf("\n",b+1);if(n<0)n=t.length;const nx=t.slice(b+1,n);E.replace(a,n,nx+"\n"+t.slice(a,b));E.select(a+nx.length+1+(s-a),a+nx.length+1+(e-a))}})}});
+editor.registerExtension({id:"json-tools",name:"JSON Formatter",version:"1.0.0",author:"Redact",description:"Format, minify and validate JSON in the selection or document.",
+  activate(api){const E=api.editor,J=(id,label,fn)=>api.registerCommand(id,{label,run(){try{E.transform(s=>fn(JSON.parse(s)))}catch(e){api.notify("Invalid JSON: "+e.message,true)}}});
+    J("format","Format JSON",o=>JSON.stringify(o,null,Settings.get("tab")));J("minify","Minify JSON",o=>JSON.stringify(o));
+    api.registerCommand("validate",{label:"Validate JSON",run(){try{JSON.parse(E.selected()||E.text());api.notify("Valid JSON")}catch(e){api.notify("Invalid JSON: "+e.message,true)}}})}});
+editor.registerExtension({id:"datetime",name:"Date and Time",version:"1.0.0",author:"Redact",description:"Insert dates and timestamps at the cursor.",
+  activate(api){const I=(id,l,f)=>api.registerCommand(id,{label:l,run(){const[s,e]=api.editor.sel();api.editor.replace(s,e,f(new Date()))}});
+    I("iso","Insert ISO date",d=>d.toISOString().slice(0,10));I("stamp","Insert date and time",d=>d.toLocaleString());I("utc","Insert UTC timestamp",d=>d.toISOString())}});
+editor.registerExtension({id:"outline",name:"Document Outline",version:"1.0.0",author:"Redact",description:"Sidebar list of Markdown headings; click to jump.",
+  activate(api){api.addPanel("o","Outline",box=>{const L=api.editor.text().split("\n");let any=false;L.forEach((l,i)=>{const m=l.match(/^(#{1,6})\s+(.*)/);if(m){any=true;box.append(h("a",{style:"padding-left:"+(m[1].length-1)*10+"px",onclick:()=>api.editor.gotoLine(i+1)},m[2]))}});if(!any)box.append(h("small",{style:"color:var(--mu)"},"No headings. Start a line with # to add one."))})}});
+editor.registerExtension({id:"find-docs",name:"Find in Documents",version:"1.0.0",author:"Redact",description:"Search text across all open documents.",
+  activate(api){api.registerCommand("find",{label:"Find in open documents",async run(){const q=await api.prompt("Search all open documents","");if(!q)return;const hits=[];
+      api.docs().forEach((d,i)=>d.text.split("\n").forEach((l,n)=>{if(l.toLowerCase().includes(q.toLowerCase())&&hits.length<200)hits.push({i,n,l,name:d.name})}));
+      Modal.open("Results for “"+q+"”",h("div",{},hits.length?hits.map(x=>h("div",{class:"it",onclick:()=>{Modal.close();Docs.switch(x.i);Ed.gotoLine(x.n+1)}},h("span",{},h("small",{},x.name+":"+(x.n+1)+"  "),x.l.trim().slice(0,90)))):h("p",{},"No matches in open documents.")))}})}});
+editor.registerExtension({id:"scratchpad",name:"Scratchpad",version:"1.0.0",author:"Redact",description:"A persistent scratch document for temporary notes.",
+  activate(api){api.registerCommand("open",{label:"Open scratch document",key:"mod+shift+j",run(){const i=api.docs().findIndex(d=>d.name==="*scratch*");i>=0?Docs.switch(i):api.openDoc("*scratch*","")}})}});
+editor.registerExtension({id:"dev-utils",name:"Developer Utilities",version:"1.0.0",author:"Redact",description:"Inspect the selection: length, lines, code points.",
+  activate(api){api.registerCommand("inspect",{label:"Inspect selection",run(){const s=api.editor.selected();api.notify(s?s.length+" chars, "+[...s].length+" code points, "+s.split("\n").length+" lines, "+api.editor.words(s)+" words":"Nothing selected")}})}});
+
+/* ================= Boot ================= */
+(function init(){
+  const bar=$("#acts");
+  [["New","file.new"],["Open","file.open"],["Save","file.save"],["Insert","insert.menu"],["Find","nav.find"],["Preview","view.preview"],["Commands","nav.palette"],["Extensions","prefs.extensions"],["Settings","prefs.settings"],["Help","prefs.help"]]
+    .forEach(([l,id])=>bar.append(h("button",{onclick:e=>id==="insert.menu"?Insert.menu(e.currentTarget):Commands.run(id),title:Commands.m.get(id).label+(Commands.m.get(id).key?" ("+keyLabel(Commands.m.get(id).key)+")":"")},l)));
+  const ts=h("select",{"aria-label":"Theme",onchange:e=>Settings.set("theme",e.target.value)},[["editorial","Editorial Red"],["midnight","Midnight"],["paper","Paper"],["contrast","High Contrast"]].map(([v,n])=>h("option",{value:v,selected:Settings.get("theme")===v},n)));
+  bar.append(ts);
+  /* Safe start: if the previous start never finished (or the address ends with #safe), external extensions are paused so a faulty one cannot lock the editor. */
+  let safe=false;try{safe=/[#?&]safe\b/.test(location.hash+location.search)}catch(e){}
+  const unfinished=Number(Storage.get("redact.boot",0));
+  if(safe||unfinished){Plugins.pause()}
+  Storage.set("redact.boot",Date.now());
+  window.addEventListener("error",e=>{if(e&&e.message&&!/ResizeObserver/.test(e.message))Notify.show("Something went wrong: "+e.message,true)});
+  window.addEventListener("unhandledrejection",e=>Notify.show("Something went wrong: "+((e.reason&&e.reason.message)||e.reason),true));
+  Settings.apply();Plugins.startup();Keys.rebuild();Keys.init();UI.load();
+  Assets.init().then(()=>UI.preview()).catch(()=>{});
+  setTimeout(()=>Storage.set("redact.boot",0),2500);
+  { const ta=Ed.ta;
+    ta.addEventListener("paste",e=>{const f=[...(e.clipboardData&&e.clipboardData.files||[])];if(f.some(x=>/^image\//.test(x.type))){e.preventDefault();Insert.files(f)}});
+    ta.addEventListener("dragover",e=>{if(e.dataTransfer&&[...e.dataTransfer.types].includes("Files")){e.preventDefault();ta.classList.add("drop")}});
+    ta.addEventListener("dragleave",()=>ta.classList.remove("drop"));
+    ta.addEventListener("drop",async e=>{ta.classList.remove("drop");const f=[...(e.dataTransfer&&e.dataTransfer.files||[])];if(!f.length)return;e.preventDefault();
+      const imgs=f.filter(x=>/^image\//.test(x.type));if(imgs.length)Insert.files(imgs);
+      for(const x of f.filter(x=>!/^image\//.test(x.type))){try{if(x.size>5e6)throw new Error("file is larger than 5 MB");Docs.add(x.name,await x.text(),{disk:true});Docs.cur.saved=Docs.cur.text;UI.tabs()}catch(err){Notify.show(x.name+": "+err.message,true)}}});
+  }
+  window.addEventListener("beforeunload",e=>{if(Docs.list().some(Docs.dirty)){e.preventDefault();e.returnValue=""}});
+  if(!Storage.set("redact.probe",1))Notify.show("Storage is unavailable: nothing will be restored after reload.",true);
+})();
+</script>
+</body>
+</html>
