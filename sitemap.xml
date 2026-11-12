@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
-xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>as/teaching.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/pnni.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/slobodnisoftver2022.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/recommendations.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/sentient.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/index.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/kalkulatorgpt.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/tekstovi.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/mind.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/AIEthics.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/art.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/indexsr.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/writings.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/code.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
-<url><loc>as/enindex.html</loc><lastmod>2024-12-30</lastmod><priority>1.0</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.xn--b1alabakegx2c7b8m8ai.xn--d1at.xn--90a3ac/enindex.html</loc>
+  </url>
 </urlset>
