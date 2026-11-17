@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PDF Presenter</title>
+<style>
+:root{--bg:#f4f4f2;--panel:#fff;--text:#1d1d1b;--muted:#6b6b66;--line:#d8d8d2;--accent:#2f5bea;--accent-t:#fff;--danger:#c0392b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161616;--panel:#222;--text:#eee;--muted:#9a9a94;--line:#3a3a36;--accent:#6c8cff;--accent-t:#0b0b0b;--danger:#ff7a6b}}
+:root[data-theme="dark"]{--bg:#161616;--panel:#222;--text:#eee;--muted:#9a9a94;--line:#3a3a36;--accent:#6c8cff;--accent-t:#0b0b0b;--danger:#ff7a6b}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--panel);border-bottom:1px solid var(--line)}
+button,select,input[type=number]{font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:var(--accent-t);border-color:var(--accent);font-weight:600}
+button:disabled{opacity:.4;cursor:default}
+input[type=number]{width:70px;cursor:text}
+.sep{flex:1}
+main{flex:1;display:flex;min-height:0}
+#stage{flex:1;overflow:auto;padding:16px;display:flex;justify-content:center;align-items:flex-start;position:relative}
+#wrap{position:relative;box-shadow:0 2px 14px rgba(0,0,0,.25);background:#fff;touch-action:none;line-height:0}
+#overlay{position:absolute;inset:0;cursor:crosshair}
+.box{position:absolute;border:2px solid var(--accent);background:rgba(47,91,234,.12);pointer-events:none}
+.box.pending{border-style:dashed;border-color:#e67e22;background:rgba(230,126,34,.18)}
+.box span{position:absolute;top:-1px;left:-1px;background:var(--accent);color:var(--accent-t);font:600 11px/1 system-ui;padding:3px 5px;border-radius:0 0 4px 0}
+aside{width:260px;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;min-height:0}
+aside h2{margin:0;padding:10px 12px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--line)}
+#list{flex:1;overflow:auto;padding:6px}
+.item{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+.item:hover{border-color:var(--line)}
+.item.cur{background:var(--bg);border-color:var(--accent)}
+.item .n{font-weight:700;width:26px;color:var(--accent)}
+.item .t{flex:1;font-size:13px}
+.item button{padding:2px 6px;font-size:12px}
+.hint{padding:10px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+#empty{position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--muted)}
+#empty h1{color:var(--text);margin:0;font-size:22px}
+#empty.drag{outline:3px dashed var(--accent);outline-offset:-12px}
+#pres{position:fixed;inset:0;background:#000;z-index:100;display:none;align-items:center;justify-content:center;cursor:none}
+#pres.on{display:flex}
+#pres canvas{background:#fff}
+#pbar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.15)}
+#pbar i{display:block;height:100%;background:#6c8cff;width:0}
+#pcount{position:fixed;right:14px;bottom:12px;color:#888;font:12px system-ui;opacity:0;transition:opacity .3s}
+#pres.show #pcount{opacity:1}
+@media (max-width:760px){main{flex-direction:column}aside{width:auto;height:30%;border-left:0;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<header>
+  <button class="primary" id="openBtn">Open PDF</button>
+  <input type="file" id="file" accept="application/pdf" hidden>
+  <select id="docsel" hidden title="Switch between opened PDFs"></select>
+  <button id="prev" disabled>◀</button>
+  <input type="number" id="pg" min="1" value="1" disabled>
+  <span id="total" style="color:var(--muted)">/ –</span>
+  <button id="next" disabled>▶</button>
+  <button id="add" disabled title="Enter">+ Add selection as slide</button>
+  <select id="split" disabled title="Split the whole page into equal bands">
+    <option value="">Split page…</option>
+    <option value="2">Into 2 bands</option>
+    <option value="3">Into 3 bands</option>
+    <option value="4">Into 4 bands</option>
+  </select>
+  <span class="sep"></span>
+  <button id="clear" disabled>Clear slides</button>
+  <button id="dl" disabled title="Export the slides as a 16:9 PDF">⬇ Download PDF</button>
+  <button class="primary" id="present" disabled>▶ Present</button>
+</header>
+<main>
+  <div id="stage">
+    <div id="wrap" hidden><canvas id="cv"></canvas><div id="overlay"></div></div>
+    <div id="empty">
+      <h1>Turn any PDF into a presentation</h1>
+      <div>Open your book, drag a box over the part of a page you want, and add it as a slide.<br>Present the slides full screen — only the parts you picked.</div>
+      <button class="primary" id="openBtn2">Open PDF</button>
+      <div style="font-size:12px">or drop a PDF file here</div>
+    </div>
+  </div>
+  <aside>
+    <h2>Slides (<span id="count">0</span>)</h2>
+    <div id="list"></div>
+    <div class="hint">Drag on the page to select a region. <b>Enter</b> adds it · <b>←/→</b> changes page · <b>P</b> presents. Slides from all PDFs you open stay together and are saved in this browser. After a refresh, reopen a PDF (⚠) to use its slides again.</div>
+  </aside>
+</main>
+<div id="pres"><canvas id="pc"></canvas><div id="pbar"><i></i></div><div id="pcount"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+var $=function(id){return document.getElementById(id)};
+var S={pdf:null,n:0,page:1,slides:[],pending:null,doc:"",docs:{},tok:0,cur:-1};
+var cv=$("cv"),ov=$("overlay"),wrap=$("wrap");
+
+function save(){try{localStorage.setItem("pdfslides:deck",JSON.stringify(S.slides))}catch(e){}}
+function load(){try{var v=localStorage.getItem("pdfslides:deck");return v?JSON.parse(v):[]}catch(e){return[]}}
+
+function enable(on){["prev","next","pg","add","split","clear","dl","present"].forEach(function(i){$(i).disabled=!on})}
+
+async function openFile(f){
+  if(!f)return;
+  try{
+    var buf=await f.arrayBuffer();
+    var pdf=await pdfjsLib.getDocument({data:buf}).promise;
+  }catch(e){alert("Couldn’t open that PDF.");return}
+  var key=f.name+":"+f.size;S.docs[key]={pdf:pdf,n:pdf.numPages,name:f.name};S.cur=-1;
+  try{var old=localStorage.getItem("pdfslides:"+key);if(old){JSON.parse(old).forEach(function(s){s.d=key;s.dn=f.name;S.slides.push(s)});localStorage.removeItem("pdfslides:"+key);save()}}catch(e){}
+  updateDocSel();
+  $("empty").style.display="none";wrap.hidden=false;enable(true);
+  selectDoc(key);
+}
+
+function updateDocSel(){
+  var s=$("docsel");s.innerHTML="";
+  Object.keys(S.docs).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=S.docs[k].name;s.appendChild(o)});
+  s.hidden=Object.keys(S.docs).length<2;
+}
+function selectDoc(key,page){
+  var d=S.docs[key];S.doc=key;S.pdf=d.pdf;S.n=d.n;S.page=page||1;S.pending=null;
+  $("pg").max=S.n;$("total").textContent="/ "+S.n;$("docsel").value=key;
+  renderPage();renderList();
+}
+
+async function renderPage(){
+  var t=++S.tok;
+  $("pg").value=S.page;
+  var pg=await S.pdf.getPage(S.page);
+  if(t!==S.tok)return;
+  var v1=pg.getViewport({scale:1});
+  var stage=$("stage");
+  var w=Math.min(stage.clientWidth-32,1100);
+  var scale=w/v1.width,dpr=window.devicePixelRatio||1;
+  var vp=pg.getViewport({scale:scale*dpr});
+  cv.width=vp.width;cv.height=vp.height;
+  cv.style.width=(v1.width*scale)+"px";cv.style.height=(v1.height*scale)+"px";
+  await pg.render({canvasContext:cv.getContext("2d"),viewport:vp}).promise;
+  drawBoxes();
+}
+
+function drawBoxes(){
+  ov.innerHTML="";
+  S.slides.forEach(function(s,i){if(s.d===S.doc&&s.p===S.page)box(s,String(i+1),false)});
+  if(S.pending)box(S.pending,"",true);
+}
+function box(r,label,pend){
+  var d=document.createElement("div");d.className="box"+(pend?" pending":"");
+  d.style.left=r.x*100+"%";d.style.top=r.y*100+"%";d.style.width=r.w*100+"%";d.style.height=r.h*100+"%";
+  if(label){var s=document.createElement("span");s.textContent=label;d.appendChild(s)}
+  ov.appendChild(d);
+}
+
+function renderList(){
+  var l=$("list");l.innerHTML="";$("count").textContent=S.slides.length;
+  S.slides.forEach(function(s,i){
+    var d=document.createElement("div");d.className="item"+(i===S.cur?" cur":"");
+    d.innerHTML='<span class="n">'+(i+1)+'</span><span class="t"></span>';
+    var D=S.docs[s.d],nm=(s.dn||"PDF").replace(/\.pdf$/i,"");
+    if(nm.length>22)nm=nm.slice(0,21)+"…";
+    d.lastChild.textContent=(D?"":"⚠ ")+nm+" · p."+s.p;
+    if(!D)d.style.opacity=".6";
+    ["↑","↓","✕"].forEach(function(sym,k){
+      var b=document.createElement("button");b.textContent=sym;if(k===2)b.style.color="var(--danger)";
+      b.onclick=function(e){e.stopPropagation();
+        if(k===0&&i>0){var t=S.slides[i-1];S.slides[i-1]=S.slides[i];S.slides[i]=t}
+        if(k===1&&i<S.slides.length-1){var t2=S.slides[i+1];S.slides[i+1]=S.slides[i];S.slides[i]=t2}
+        if(k===2)S.slides.splice(i,1);
+        save();renderList();drawBoxes();};
+      d.appendChild(b);
+    });
+    d.onclick=function(){
+      if(!S.docs[s.d]){alert("Reopen “"+(s.dn||"that PDF")+"” with Open PDF to use this slide.");return}
+      S.cur=i;selectDoc(s.d,s.p);
+    };
+    l.appendChild(d);
+  });
+}
+
+// selection
+var drag=null;
+ov.addEventListener("pointerdown",function(e){
+  var r=ov.getBoundingClientRect();
+  drag={x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};
+  ov.setPointerCapture(e.pointerId);
+});
+ov.addEventListener("pointermove",function(e){
+  if(!drag)return;
+  var r=ov.getBoundingClientRect();
+  var x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),y=Math.min(1,Math.max(0,(e.clientY-r.top)/r.height));
+  S.pending={x:Math.min(drag.x,x),y:Math.min(drag.y,y),w:Math.abs(x-drag.x),h:Math.abs(y-drag.y)};
+  drawBoxes();
+});
+ov.addEventListener("pointerup",function(){
+  if(S.pending&&(S.pending.w<0.02||S.pending.h<0.02))S.pending=null;
+  drag=null;drawBoxes();
+});
+
+function addSlide(){
+  var r=S.pending||{x:0,y:0,w:1,h:1};
+  S.slides.push({d:S.doc,dn:S.docs[S.doc].name,p:S.page,x:r.x,y:r.y,w:r.w,h:r.h});
+  S.pending=null;S.cur=S.slides.length-1;save();renderList();drawBoxes();
+}
+function go(d){var p=Math.min(S.n,Math.max(1,S.page+d));if(p!==S.page){S.page=p;S.pending=null;renderPage()}}
+
+$("openBtn").onclick=$("openBtn2").onclick=function(){$("file").click()};
+$("file").onchange=function(e){openFile(e.target.files[0]);e.target.value=""};
+$("prev").onclick=function(){go(-1)};$("next").onclick=function(){go(1)};
+$("pg").onchange=function(){var p=parseInt(this.value,10);if(p>=1&&p<=S.n){S.page=p;S.pending=null;renderPage()}};
+$("add").onclick=addSlide;
+$("split").onchange=function(){
+  var n=parseInt(this.value,10);this.value="";if(!n)return;
+  for(var i=0;i<n;i++)S.slides.push({d:S.doc,dn:S.docs[S.doc].name,p:S.page,x:0,y:i/n,w:1,h:1/n});
+  S.pending=null;save();renderList();drawBoxes();
+};
+$("clear").onclick=function(){if(S.slides.length&&confirm("Remove all slides?")){S.slides=[];S.cur=-1;save();renderList();drawBoxes()}};
+$("present").onclick=function(){startPresent()};
+
+// export slides as PDF (one 16:9 page per slide)
+var DL=null;
+try{if(window.claude&&claude.use)claude.use("downloads").then(function(d){DL=d}).catch(function(){})}catch(e){}
+$("dl").onclick=async function(){
+  if(!S.slides.length){alert("Add at least one slide first.");return}
+  var miss=S.slides.filter(function(s){return!S.docs[s.d]}).map(function(s){return s.dn||"PDF"});
+  if(miss.length){alert("Some slides come from PDFs that aren’t open right now. Reopen these first:\n"+miss.filter(function(v,k){return miss.indexOf(v)===k}).join("\n"));return}
+  var btn=this,orig=btn.textContent;btn.disabled=true;
+  try{
+    var PW=297,PH=297*9/16,M=6,n=S.slides.length;
+    var doc=new window.jspdf.jsPDF({orientation:"landscape",unit:"mm",format:[PW,PH]});
+    var c=document.createElement("canvas");
+    for(var i=0;i<n;i++){
+      btn.textContent="Building "+(i+1)+" / "+n+"…";
+      await drawSlide(i,c,1920,1080,1.5);
+      var r=c.width/c.height,w=PW-2*M,h=w/r;
+      if(h>PH-2*M){h=PH-2*M;w=h*r}
+      if(i>0)doc.addPage([PW,PH],"landscape");
+      doc.addImage(c.toDataURL("image/jpeg",0.92),"JPEG",(PW-w)/2,(PH-h)/2,w,h,undefined,"FAST");
+    }
+    var blob=doc.output("blob");
+    if(DL){await DL.save({filename:"presentation.pdf",data:blob})}
+    else{var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="presentation.pdf";document.body.appendChild(a);a.click();a.remove()}
+  }catch(e){
+    if(!(e&&e.code==="declined"))alert("Couldn’t create the PDF"+(e&&e.message?": "+e.message:"."));
+  }finally{btn.textContent=orig;btn.disabled=false}
+};
+
+// drag & drop
+var em=$("empty");
+["dragover","dragenter"].forEach(function(t){document.addEventListener(t,function(e){e.preventDefault();em.classList.add("drag")})});
+["dragleave","drop"].forEach(function(t){document.addEventListener(t,function(e){e.preventDefault();em.classList.remove("drag")})});
+document.addEventListener("drop",function(e){var f=e.dataTransfer.files[0];if(f&&f.type==="application/pdf")openFile(f)});
+
+// presentation
+var P={on:false,i:0,tok:0,hide:null};
+var pc=$("pc"),pres=$("pres");
+async function drawSlide(i,canvas,W,H,q){
+  var s=S.slides[i],D=S.docs[s.d];
+  if(!D){
+    var mw=Math.min(W,H*16/9);
+    canvas.width=1280;canvas.height=720;canvas.style.width=mw+"px";canvas.style.height=(mw*9/16)+"px";
+    var g=canvas.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,1280,720);
+    g.fillStyle="#333";g.font="32px system-ui,sans-serif";g.textAlign="center";
+    g.fillText("Reopen “"+(s.dn||"the PDF")+"” to show this slide",640,360);
+    return;
+  }
+  var pg=await D.pdf.getPage(s.p);
+  var v1=pg.getViewport({scale:1});
+  var cw=s.w*v1.width,ch=s.h*v1.height,dpr=q||window.devicePixelRatio||1;
+  var fit=Math.min(W/cw,H/ch);
+  var sc=Math.min(fit*dpr,8);
+  canvas.width=Math.max(1,Math.round(cw*sc));canvas.height=Math.max(1,Math.round(ch*sc));
+  canvas.style.width=(cw*fit)+"px";canvas.style.height=(ch*fit)+"px";
+  var vp=pg.getViewport({scale:sc,offsetX:-s.x*v1.width*sc,offsetY:-s.y*v1.height*sc});
+  await pg.render({canvasContext:canvas.getContext("2d"),viewport:vp}).promise;
+}
+async function showSlide(i){
+  if(!S.slides.length)return;
+  P.i=Math.min(S.slides.length-1,Math.max(0,i));
+  var t=++P.tok;
+  await drawSlide(P.i,pc,window.innerWidth,window.innerHeight);
+  if(t!==P.tok)return;
+  $("pbar").firstElementChild.style.width=((P.i+1)/S.slides.length*100)+"%";
+  $("pcount").textContent=(P.i+1)+" / "+S.slides.length;
+  pres.classList.add("show");clearTimeout(P.hide);P.hide=setTimeout(function(){pres.classList.remove("show")},1500);
+}
+function startPresent(){
+  if(!S.slides.length){alert("Add at least one slide first (drag a box on the page, then press Enter).");return}
+  P.on=true;pres.classList.add("on");
+  try{if(pres.requestFullscreen)pres.requestFullscreen()}catch(e){}
+  showSlide(Math.max(0,S.cur));
+}
+function stopPresent(){
+  P.on=false;pres.classList.remove("on");
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+}
+pres.addEventListener("click",function(e){showSlide(P.i+(e.clientX<window.innerWidth/3?-1:1))});
+document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&P.on)stopPresent()});
+window.addEventListener("resize",function(){if(P.on)showSlide(P.i);else if(S.pdf)renderPage()});
+
+document.addEventListener("keydown",function(e){
+  if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT")return;
+  if(P.on){
+    if(["ArrowRight","ArrowDown"," ","PageDown","Enter"].indexOf(e.key)>-1){e.preventDefault();showSlide(P.i+1)}
+    else if(["ArrowLeft","ArrowUp","PageUp","Backspace"].indexOf(e.key)>-1){e.preventDefault();showSlide(P.i-1)}
+    else if(e.key==="Home")showSlide(0);
+    else if(e.key==="End")showSlide(S.slides.length-1);
+    else if(e.key==="Escape")stopPresent();
+    return;
+  }
+  if(!S.pdf)return;
+  if(e.key==="Enter")addSlide();
+  else if(e.key==="ArrowRight")go(1);
+  else if(e.key==="ArrowLeft")go(-1);
+  else if(e.key==="Escape"){S.pending=null;drawBoxes()}
+  else if(e.key==="p"||e.key==="P")startPresent();
+});
+$("docsel").onchange=function(){selectDoc(this.value)};
+S.slides=load();renderList();
+})();
+</script>
+</body>
+</html>
