@@ -61,6 +61,8 @@ footer input{flex:1;accent-color:var(--acc)}
 #pop input[type=text]{width:150px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 6px}
 .srch{display:flex;gap:4px;margin-bottom:8px}.srch input{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:5px 8px}
 .empty{color:var(--mute);padding:6px 4px}
+#hlm{position:fixed;display:none;gap:6px;align-items:center;padding:6px 8px;background:var(--panel);border:1px solid var(--acc);border-radius:8px;z-index:20;box-shadow:0 4px 14px #0004;max-width:320px}
+#hlnote{color:var(--mute);font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:700px){aside{position:absolute;inset:0 auto 0 0;z-index:15}}
 </style>
 </head>
@@ -93,6 +95,7 @@ footer input{flex:1;accent-color:var(--acc)}
   </div>
 </main>
 <footer><span id="pg">–</span><input type="range" id="prog" min="0" max="1000" value="0" disabled><span id="pct">0%</span></footer>
+<div id="hlm"><span id="hlnote"></span><button id="hlrm">Remove highlight</button><button id="hlx">Keep</button></div>
 <div id="pop"><button data-c="#ffe14d">Yellow</button><button data-c="#7ee08a">Green</button><button data-c="#ff9fb5">Pink</button><input type="text" id="note" placeholder="Add a note"><button id="savenote">Save</button></div>
 
 <script>
@@ -214,14 +217,21 @@ function onSelect(cfi,contents){
  p.style.left=Math.max(8,Math.min(innerWidth-330,f.left+r.left*z))+'px';p.style.top=Math.max(8,f.top+r.bottom*z+8)+'px';
 }
 function addHl(h){rend.annotations.remove(h.cfi,'highlight');
- rend.annotations.highlight(h.cfi,{id:h.id},()=>{},'hl-'+h.id,{fill:h.color,'fill-opacity':'0.4','mix-blend-mode':'multiply'})}
+ rend.annotations.highlight(h.cfi,{id:h.id},e=>hlMenu(h,e),'hl-'+h.id,{fill:h.color,'fill-opacity':'0.4','mix-blend-mode':'multiply'})}
 function commit(color){if(!pendingSel)return;
  const h={id:Date.now().toString(36),cfi:pendingSel.cfi,text:pendingSel.text,color,note:$('#note').value.trim()};
+ data.hl=data.hl.filter(x=>{if(x.cfi===h.cfi){rend.annotations.remove(x.cfi,'highlight');return false}return true});
  data.hl.push(h);addHl(h);save();renderMarks();
  try{pendingSel.contents.window.getSelection().removeAllRanges()}catch(e){}
  $('#note').value='';$('#pop').style.display='none';pendingSel=null}
 document.querySelectorAll('#pop [data-c]').forEach(b=>b.onclick=()=>commit(b.dataset.c));
 $('#savenote').onclick=()=>commit('#ffe14d');
+let hlSel=null;
+function hlMenu(h,e){hlSel=h;const m=$('#hlm');$('#hlnote').textContent=h.note?'Note: '+h.note:h.text.slice(0,40);m.style.display='flex';
+ m.style.left=Math.max(8,Math.min(innerWidth-330,e.clientX))+'px';m.style.top=Math.max(8,e.clientY+12)+'px'}
+$('#hlrm').onclick=()=>{if(hlSel){rend.annotations.remove(hlSel.cfi,'highlight');data.hl=data.hl.filter(x=>x!==hlSel);save();renderMarks()}hlSel=null;$('#hlm').style.display='none'};
+$('#hlx').onclick=()=>{hlSel=null;$('#hlm').style.display='none'};
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('#hlm'))$('#hlm').style.display='none'});
 $('#bm').onclick=()=>{if(!rend)return;const i=data.bm.findIndex(b=>b.page===curKey);
  if(i>=0)data.bm.splice(i,1);else{const l=rend.currentLocation().start;data.bm.push({page:curKey,cfi:l.cfi,label:'Page '+l.displayed.page+' ('+$('#pct').textContent+')'})}
  save();renderMarks();$('#bm').classList.toggle('on',i<0)};
